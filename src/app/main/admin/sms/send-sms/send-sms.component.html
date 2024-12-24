@@ -1,0 +1,180 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+  
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+       <!-- User List -->
+       <section class="users-list-wrapper">
+        <!-- users filter start -->
+        <div class="card">
+          <h5 class="card-header">{{'المستخدمين'|translate}}</h5>
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-md-7">
+                    <fieldset class="form-group">
+                      <!-- <ng-select [items]="selectRole" [(ngModel)]="selectedRole" name="selectedRole" bindLabel="name"
+                        placeholder="اختر مستخدم " (change)="filterByRole($event)"></ng-select> -->
+
+                        <ng-select [items]="allUsersForFilter"  bindLabel="userNameAr" bindValue="phoneNumber" [(ngModel)]="userPhone"
+                        name="userId" placeholder="اختر المستخدم">
+                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                          <span class="ng-value-label"> {{ item.userNameAr }}</span>
+                          <!-- <span class="ng-value-icon right" aria-hidden="true" (click)="clear(item);getAllNotifications()">×</span> -->
+                        </ng-template>
+            
+                        <ng-template ng-option-tmp let-item="item">
+                          {{ item.userNameAr }}
+                        </ng-template>
+                      </ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <fieldset class="form-group">
+                      <button type="button" class="btn btn-primary" (click)="showSmsForUser()"> عرض الرسائل</button>
+                    </fieldset>
+                  </div>
+                
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- users filter end -->
+  
+        <div class="card">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <label class="d-flex align-items-center">عرض
+                  <select class="form-control mx-25" [(ngModel)]="ItemsPerpage" (change)="filterByPage()">
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                 بيانات</label>
+              </div>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end search_sec">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                <label class="d-flex align-items-center ml-1 ml-md-0"> <span class="m-end"> بحث
+                  </span><input [(ngModel)]="searchValue" name="searchValue" type="search"
+                    class="form-control ml-25" /></label>
+                <a (click)="OpenModal()" class="btn btn-primary ml-1" rippleEffect>
+                  <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                    class="d-none d-sm-inline-block">ارسال رساله</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <app-custom-table 
+            [searchValue]="searchValue"
+          [searchFilterKey]="['msg','number','createdOn']" 
+          [small_columns]="small_columns"
+          [coloumns]="Table_Coloumns" [rows]="allSms" (DeleteRowEvent)="deleteUser($event.id)"
+          (SendSms)="opeSmsModal($event)"
+          [SelectedRows]="selections" [AddNewBtn]="AddNewBtn">
+  
+          </app-custom-table>
+          
+        </div>
+      </section>
+      <!--/ User List -->
+      </div>
+      </div>
+
+
+
+
+      <ng-template #SendSmsModal>
+
+        <app-modal-content [options]="sendNotifactionsOptoinsModal">
+          <div slot="content">
+            <form [formGroup]="SmsForm">
+              <div class="form-group">
+                <label for=""> المستخدم </label>
+                <!-- <ng-select [items]="allUsers" (change)="selectUser($event)" [multiple]="true" bindLabel="username" bindValue="id" formControlName="userId"
+                  name="userId" placeholder="اختر المستخدم">
+                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-label"> {{ item.username }}</span>
+                    <span class="ng-value-icon right" aria-hidden="true" (click)="clear(item)">×</span>
+                  </ng-template>
+      
+                  <ng-template ng-option-tmp let-item="item">
+                    {{ item.username }}
+                  </ng-template>
+                </ng-select> -->
+
+                <ng-select [items]="allUsers" (change)="selectUser($event)"   [multiple]="true"  bindLabel="userNameAr" bindValue="id" class=""
+                formControlName="userId" placeholder="اختر المستخدم"
+                name="userId"></ng-select>
+
+
+              </div>
+              <!-- <div class="form-group">
+                <label for=""> هاتف المحمول </label>
+                <input type="text"
+                  class="form-control" formControlName="phoneNumber" name="phoneNumber" id="" aria-describedby="helpId"
+                  placeholder="الجوال">
+               
+              </div> -->
+            
+             
+         <div class="form-group">
+           <label for="">محتوي الرساله </label>
+           <textarea 
+           [ngClass]="{ 'is-invalid':(submitted && SmsFormControls.body.errors) 
+           ||(SmsFormControls.body.errors?.['invalidArabicInput'])
+           ||(SmsFormControls.body.touched && SmsFormControls.body.invalid) }"
+           
+           formControlName="body" class="form-control" name="body" id="" rows="3"></textarea>
+
+           <div
+           *ngIf="(submitted && SmsFormControls.body.errors) || (SmsFormControls.body.touched && SmsFormControls.body.invalid)"
+           class="invalid-feedback">
+           <div *ngIf="SmsFormControls.body.errors.required">
+             برجاء ادخال محتوي الرساله</div>
+         </div>
+         </div>
+
+
+      
+
+       
+
+<!-- 
+         <div class="form-group"  *ngIf="submitted && SmsForm.invalid">
+                      
+          <div class=" p-3 alert alert-danger alert-dismissible fade show">
+              <strong>
+                ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+              </strong>
+              <button
+                type="button"
+                (click)="closeMessageErrors()"
+                class="close h-10"
+              >
+                <span><i class="fa fa-close" style="color: brown"></i></span>
+              </button>
+            </div>
+            
+      </div> -->
+
+
+      
+              <a 
+               [disabled]="loading" type="submit" class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" (click)="SendSms()"><span
+                  *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> ارسال</a>
+
+                  <a class="btn btn-icon btn-danger ml-25 mr-25 cancel btn-lg"
+                  type="button" rippleEffect (click)="closeModal()">
+                  <span>الغاء</span></a>
+                </form>
+          </div>
+        </app-modal-content>
+      </ng-template>
+
+

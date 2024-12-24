@@ -1,0 +1,91 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <!-- User List -->
+        <section class="users-list-wrapper">
+            <!-- users filter start -->
+             <div class="card">
+                <h5 class="card-header">رتب العربات حسب</h5>
+                <div class="card-body">
+                    <div class="users-list-filter">
+                        <form>
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <fieldset class="form-group">
+                                        <ng-select [items]="allCities" [(ngModel)]="selectedCityID" name="selectedCityID"
+                                            bindLabel="cityName" bindValue="id" placeholder="حدد المدينه"
+                                            ></ng-select>
+                                            <!-- (change)="filterByCity()" -->
+                                    </fieldset>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <fieldset class="form-group">
+                                        <ng-select [items]="AllbusinessTypes" bindValue="id" [(ngModel)]="BusinessTypeId" name="BusinessTypeId"
+                                            bindLabel="businessName" placeholder="حدد نوع النشاط"
+                                            ></ng-select>
+                                            <!-- (change)="filterByBussinesType()" -->
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <fieldset class="form-group">
+                                       <button class="btn btn-primary" (click)="filterByBussinesTypeAndCity()">ابحث</button>
+                                    </fieldset>
+                                </div>
+                                <!-- <div class="col-12 col-md-4">
+                                    <fieldset class="form-group">
+                                        <ng-select [items]="selectStatus" [(ngModel)]="selectedStatus"
+                                            name="selectedStatus" bindLabel="name" placeholder="حدد الحالة"
+                                            (change)="filterByStatus($event)"></ng-select>
+                                    </fieldset>
+                                </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- users filter end -->
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                            <label class="d-flex align-items-center">عرض
+                                <select class="form-control mx-25" [(ngModel)]="ItemsPerpage" (change)="filterByPage()" >
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                البيانات</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end search_sec">
+                        <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                            <label class="d-flex align-items-center ml-1 ml-md-0"> <span class="m-end">
+                                    ابحث </span><input  name="searchValue"
+                                    type="search" class="form-control ml-25" [(ngModel)]="searchValue"
+                                     /></label>
+                            <a [routerLink]="['/admin/Trucks/Add']"  class="btn btn-primary ml-1" rippleEffect>
+                                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                                    class="d-none d-sm-inline-block">اضافة تراك</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <app-custom-table  [coloumns]="Table_Coloumns"
+                [small_columns]="small_columns"
+                [rows]="allTrucks"
+                (ViewRowEvent)="goToTrucks($event)"
+                (changCheckBoxRowEvent)="changCheckBoxISApproved($event)"
+                     [searchValue]="searchValue"
+                     [searchFilterKey]="arrfillter"
+                    (DeleteRowEvent)="deleteTrack($event.id)" [SelectedRows]="selections" [AddNewBtn]="AddNewBtn">
+
+                </app-custom-table>
+
+            </div>
+        </section>
+        <!--/ User List -->
+    </div>
+</div>

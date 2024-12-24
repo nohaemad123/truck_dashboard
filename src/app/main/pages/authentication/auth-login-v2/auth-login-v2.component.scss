@@ -1,0 +1,24 @@
+@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '@core/scss/base/pages/page-auth.scss';
+
+.auth-help-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+
+
+
+@media (min-width: 992px){
+  .pl-lg-5, .px-lg-5 {
+    padding-left: 4rem !important;
+}
+}
+
+@media (min-width: 992px){
+  .pr-lg-5, .px-lg-5 {
+    padding-right: 8rem !important;
+}
+}

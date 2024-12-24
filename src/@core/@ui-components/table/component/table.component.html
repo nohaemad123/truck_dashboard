@@ -1,0 +1,451 @@
+<!-- <div class="d-flex mb-2 ">
+  <div class="d-flex align-items-center justify-content-end  pb-md-0">
+      <label class="d-flex align-items-center"> <span class="m-end m-end mx-1 ">
+              ابحث </span><input  name="searchValue"
+              type="search" class="form-control ml-25" style="width: 400px;" (keyup)="filterUpdate($event)"
+              /></label>
+    
+  </div>
+</div> -->
+
+
+<div class="card">
+
+
+  <!-- [limit]="30" to change table pagnation number -->
+<ng-container *ngIf="largScreens;else smallScreens">
+
+  
+     <ngx-datatable  #tableRowDetails
+  class="bootstrap core-bootstrap" [rows]="rows|filter:searchValue:searchFilterKey" [columnMode]="'force'" [headerHeight]="40"
+    [footerHeight]="50" [rowHeight]="58" [limit]="30" [selected]="SelectedRows"
+   
+    [scrollbarH]="true" 
+    [selectionType]="SelectionType.checkbox" (select)="onSelect($event)" >
+ 
+    <ng-container *ngFor="let col of displayedColumns;let colIndex=index;let odd=odd">
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" 
+        prop="{{col.data?.prop?col.data.prop:''}}"
+        name="{{col.title|translate}}" *ngIf="col.type =='index'">
+        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{col.data?.prop?row[col.data.prop]:rowIndex+1}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='selection'">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn">
+          <div class="custom-control custom-control-primary custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [checked]="allRowsSelected"
+              (change)="selectFn(!allRowsSelected)" id="headerCustomChkbxRef" />
+            <label class="custom-control-label" for="headerCustomChkbxRef"></label>
+          </div>
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-isSelected="isSelected"
+          let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <div class="custom-control custom-control-primary custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [checked]="isSelected"
+              (change)="onCheckboxChangeFn($event)" id="rowCustomChkbxRef{{ rowIndex }}" />
+            <label class="custom-control-label" for="rowCustomChkbxRef{{ rowIndex }}"></label>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column class="textColumn" [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='text'">   
+        
+        <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+              <span [innerHTML]="row[col.data.prop]" >
+              
+              </span>
+              <span>
+                {{col.data.concatText}}
+
+              </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      
+      
+   
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+      [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+      name="{{col.title|translate}}" *ngIf="col.type =='rate'">
+      <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+        <div class="rating ng-template rating-sm">
+          <ngb-rating
+            [(rate)]="row[col.data.prop]"
+            [readonly]="true"
+            [max]="5"
+            class="outline-none"
+          >
+          <ng-template #t let-fill="fill" let-index="index"
+          ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+        ></ng-template></ngb-rating>
+        </div>
+       
+      </ng-template>
+    </ngx-datatable-column>
+   
+    <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+    [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+    name="{{col.title|translate}}" *ngIf="col.type =='status'">
+    <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+      <div class="badge {{getStatus(row[col.data.prop])?.class}}">  {{getStatus(row[col.data.prop])?.name}}</div>    
+    </ng-template>
+  </ngx-datatable-column>
+
+
+
+
+
+
+
+  <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+  [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+  name="{{col.title|translate}}" *ngIf="col.type =='checkBox'">
+  <ng-template let-row="row"  let-rowIndex="rowIndex"  ngx-datatable-cell-template>
+    <!-- [checked]="row[col.data.prop]" -->
+      
+
+     <div class="custom-control custom-control-primary custom-checkbox">
+      <input type="checkbox" #ch class="custom-control-input" name="test_{{rowIndex}}"
+      [checked]="row[col.data.prop]"
+      (change)="changCheckBox(ch.checked,row)"
+       id="test_{{rowIndex}}" />
+      <label class="custom-control-label" for="test_{{rowIndex}}"></label>
+    </div>
+
+
+  </ng-template>
+</ngx-datatable-column>
+
+
+
+
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='image'">
+        <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+          <div class="d-flex align-items-center">
+            <div *ngIf="row[col.data.src]?.length > 0; else customAvatar1">
+              <img class="mr-1" (error)="changeSource($event)" [src]="imageBaseUrl+row[col.data.prop]" height="32" width="32" alt="datatable-avatar" />
+            </div>
+            <ng-template #customAvatar1>
+              <div class="avatar mr-1 ml-0 bg-light-info">
+                <div class="avatar-content">img</div>
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='avatar'">
+
+        <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+          <div class="d-flex align-items-center {{clickable()?'clickable-avatar':''}}" (click)="getViewClick(row)">
+            <!-- {{imageBaseUrl+row[col.data.src]}} -->
+            <ng-container *ngIf="row[col.data.src]?.length>0 else customAvatar">
+              <img class="avatar rounded mr-1" (error)="changeSource($event)" [src]="imageBaseUrl+row[col.data.src]" height="32" width="32" alt="datatable-avatar" />
+            </ng-container>
+            <ng-template #customAvatar>
+              <div class="avatar mr-1 ml-0 bg-light-info">
+                <div class="avatar-content">{{ row[col.data.prop] | initials }}</div>
+              </div>
+            </ng-template>
+            <div class="cell-line-height" style="margin-inline-end: 0.5em;
+            margin-inline-start: 0.5em;">
+              <p class="font-medium-1 line-height-1 mb-0">{{ row[col.data.prop] }}</p>
+              <span class="text-muted font-small-2" [innerHTML]="row[col.data.description]"> </span>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='date'">
+        <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+          <!-- {{row[col.data.prop]| date: 'dd/MM/yyyy hh:mm a'}} -->
+          {{row[col.data.prop]| date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'|| !getIsMobileView"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" name="{{col.title|translate}}"
+        *ngIf="col.type =='actions'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="d-flex align-items-center col-actions">
+            <span *ngFor="let action of getNotCollapsedActions(col);" >
+              <!-- row[action.propCondation]!=null && -->
+              <!-- {{getOptionIcon(action.name)}} -->
+              <a class="mr-1" href="javascript:void(0);" container="body"
+                *ngIf="getOptionIcon(action.name)!='eye'" [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+              (click)="actionClicked(action,row[action.id],row)"
+             placement="top" [ngbTooltip]="action.iconTitle"><i size="18"  [data-feather]="getOptionIcon(action.name)"></i></a>
+           
+             <span *ngIf="getOptionIcon(action.name)=='eye'">
+              
+               <a class="mr-1" href="javascript:void(0);" container="body" *ngIf="!row[action.propCondation]?.includes('Not Found')||action.Show"   [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+               (click)="actionClicked(action,row[action.id],row)"
+              placement="top" [ngbTooltip]="action.iconTitle"><i size="18"  [data-feather]="getOptionIcon(action.name)"></i></a>
+             </span>
+             
+            </span>
+            
+            <div ngbDropdown container="body" *ngIf="getCollapsedActions(col).length>0">
+              <a ngbDropdownToggle href="javascript:void(0);" class="hide-arrow" id="dropdownBrowserState"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i data-feather="more-vertical" class="text-primary cursor-pointer mr-50"></i>
+              </a>
+              <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownBrowserState">
+
+                <span *ngFor="let action of getCollapsedActions(col);" >
+                  <a class="mr-1" href="javascript:void(0);" container="body"  [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+                  (click)="actionClicked(action,row[action.id],row)"
+                 placement="top" ngbTooltip=""><i size="18"  [data-feather]="getOptionIcon(action.name)"></i></a>
+                </span>
+
+              
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ng-container>
+
+  </ngx-datatable>
+  <div class="empty_state" *ngIf="(!rows)||!(rows?.length>0)">
+    <i data-feather="book-open" size="150" class="feather-center" style="width:100%"></i>
+    <p>لايوجد بيانات حاليا </p>
+    
+    
+  </div>
+
+</ng-container>
+
+
+
+
+
+
+  <ng-template #smallScreens>
+    
+    <ngx-datatable  #tableRowDetails
+    class="bootstrap core-bootstrap" [rows]="rows|filter:searchValue:searchFilterKey" 
+    [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="50" [rowHeight]="58" [limit]="30" [selected]="SelectedRows"
+       [scrollbarH]="true" 
+      [selectionType]="SelectionType.checkbox" (select)="onSelect($event)">
+   
+      <ng-container *ngFor="let col of displayedSmallColumns;let colIndex=index">
+        <ngx-datatable-column [width]="col.width" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" 
+          prop="{{col.data?.prop?col.data.prop:''}}"
+          name="{{col.title|translate}}" *ngIf="col.type =='index'">
+          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+            {{col.data?.prop?row[col.data.prop]:rowIndex+1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!" [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+          name="{{col.title|translate}}" *ngIf="col.type =='selection'">
+          <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn">
+            <div class="custom-control custom-control-primary custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [checked]="allRowsSelected"
+                (change)="selectFn(!allRowsSelected)" id="headerCustomChkbxRef" />
+              <label class="custom-control-label" for="headerCustomChkbxRef"></label>
+            </div>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-isSelected="isSelected"
+            let-onCheckboxChangeFn="onCheckboxChangeFn">
+            <div class="custom-control custom-control-primary custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [checked]="isSelected"
+                (change)="onCheckboxChangeFn($event)" id="rowCustomChkbxRef{{ rowIndex }}" />
+              <label class="custom-control-label" for="rowCustomChkbxRef{{ rowIndex }}"></label>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+  
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+          name="{{col.title|translate}}" *ngIf="col.type =='text'">   
+          
+          <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+                <span>
+                  {{row[col.data.prop]}} {{col.data.concatText}}
+                </span>
+          </ng-template>
+        </ngx-datatable-column>
+  
+  
+        
+        
+     
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+        [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+        name="{{col.title|translate}}" *ngIf="col.type =='rate'">
+        <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+          <div class="rating ng-template rating-sm">
+            <ngb-rating
+              [(rate)]="row[col.data.prop]"
+              [readonly]="true"
+              [max]="5"
+              class="outline-none"
+            >
+            <ng-template #t let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+          ></ng-template></ngb-rating>
+          </div>
+         
+        </ng-template>
+      </ngx-datatable-column>
+     
+      <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+      [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+      name="{{col.title|translate}}" *ngIf="col.type =='status'">
+      <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+        <div class="badge {{getStatus(row[col.data.prop])?.class}}">  {{getStatus(row[col.data.prop])?.name}}</div>    
+      </ng-template>
+    </ngx-datatable-column>
+  
+  
+  
+  
+  
+  
+  
+    <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+    [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+    name="{{col.title|translate}}" *ngIf="col.type =='checkBox'">
+    <ng-template let-row="row"  let-rowIndex="rowIndex"  ngx-datatable-cell-template>
+      <!-- [checked]="row[col.data.prop]" -->
+        
+  
+       <div class="custom-control custom-control-primary custom-checkbox">
+        <input type="checkbox" #ch class="custom-control-input" name="test_{{rowIndex}}"
+        [checked]="row[col.data.prop]"
+        (change)="changCheckBox(ch.checked,row)"
+         id="test_{{rowIndex}}" />
+        <label class="custom-control-label" for="test_{{rowIndex}}"></label>
+      </div>
+  
+  
+    </ng-template>
+  </ngx-datatable-column>
+  
+  
+  
+  
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+          name="{{col.title|translate}}" *ngIf="col.type =='image'">
+          <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+            <div class="d-flex align-items-center">
+              <div *ngIf="row[col.data.src]?.length > 0; else customAvatar1">
+                <img class="mr-1" (error)="changeSource($event)" [src]="imageBaseUrl+row[col.data.prop]" height="32" width="32" alt="datatable-avatar" />
+              </div>
+              <ng-template #customAvatar1>
+                <div class="avatar mr-1 ml-0 bg-light-info">
+                  <div class="avatar-content">img</div>
+                </div>
+              </ng-template>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+          name="{{col.title|translate}}" *ngIf="col.type =='avatar'">
+  
+          <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+            <div class="d-flex align-items-center {{clickable()?'clickable-avatar':''}}" (click)="getViewClick(row)">
+              <div *ngIf="row[col.data.src]?.length > 0; else customAvatar">
+                <img class="avatar rounded mr-1" (error)="changeSource($event)" [src]="imageBaseUrl+row[col.data.src]" height="32" width="32" alt="datatable-avatar" />
+              </div>
+              <ng-template #customAvatar>
+                <div class="avatar mr-1 ml-0 bg-light-info">
+                  <div class="avatar-content">{{ row[col.data.prop] | initials }}</div>
+                </div>
+              </ng-template>
+              <div class="cell-line-height" style="margin-inline-end: 0.5em;
+              margin-inline-start: 0.5em;">
+                <p class="font-medium-1 line-height-1 mb-0">{{ row[col.data.prop] }}</p>
+                <span class="text-muted font-small-2" [innerHTML]="row[col.data.description]"> </span>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" [prop]="col.data.prop"
+          name="{{col.title|translate}}" *ngIf="col.type =='date'">
+          <ng-template let-row="row" let-name="value"  ngx-datatable-cell-template>
+            <!-- {{row[col.data.prop]| date: 'dd/MM/yyyy hh:mm a'}} -->
+            {{row[col.data.prop]| date: 'dd/MM/yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="col.width!" [sortable]="col.sortable!"  [canAutoResize]="col.width=='auto'"
+          [draggable]="col.draggable" [resizeable]="col.resizeable!" name="{{col.title|translate}}"
+          *ngIf="col.type =='actions'">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="d-flex align-items-center col-actions">
+         
+              
+              <div ngbDropdown container="body" *ngIf=" getNotCollapsedActions(col).length>0">
+                <a ngbDropdownToggle href="javascript:void(0);" class="hide-arrow" id="dropdownBrowserState"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical" class="text-primary cursor-pointer mr-50"></i>
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownBrowserState">
+  
+                  <!-- <div class="my-1" *ngFor="let action of getNotCollapsedActions(col);" >
+                    <a class="mr-1 m-1" href="javascript:void(0);" container="body"  [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+                    (click)="actionClicked(action,row[action.id],row)"
+                   placement="top" ngbTooltip=""><i size="18"  [data-feather]="getOptionIcon(action.name)"></i> {{action.iconTitle}}</a>
+                  </div> -->
+  
+                
+
+
+                  <div class="my-1 icons-collapsed" *ngFor="let action of getNotCollapsedActions(col);" >
+                   
+                    <a class="" href="javascript:void(0);" container="body"
+                      *ngIf="getOptionIcon(action.name)!='eye'" [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+                    (click)="actionClicked(action,row[action.id],row)"
+                   placement="top" ngbTooltip=""><i size="18"  [data-feather]="getOptionIcon(action.name)" style="margin: 0px 5px;" class=""></i> <span class="iconTitle">{{action.iconTitle}}</span></a>
+                 
+                   <div *ngIf="getOptionIcon(action.name)=='eye'">
+                    
+                     <a class="" href="javascript:void(0);" container="body" *ngIf="!row[action.propCondation]?.includes('Not Found')||action.Show"   [style.color]="getOptionIcon(action.name)=='trash-2'?'red':''"  
+                     (click)="actionClicked(action,row[action.id],row)"
+                    placement="top" ngbTooltip=""><i size="18"  [data-feather]="getOptionIcon(action.name)"  style="margin: 0px 5px;" class=""></i><span class="iconTitle">{{action.iconTitle}}</span></a>
+                   </div>
+                   
+                  </div>
+      
+
+
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+  
+      </ng-container>
+  
+    </ngx-datatable>
+    <div class="empty_state" *ngIf="(!rows)||!(rows?.length>0)">
+      <i data-feather="book-open" size="150" class="feather-center" style="width:100%"></i>
+      <p>لايوجد بيانات حاليا </p>
+      
+      
+    </div>
+  </ng-template>
+  
+
+
+</div>

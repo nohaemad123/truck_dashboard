@@ -1,0 +1,216 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form [formGroup]="addQuestionForm">
+                    <ul ngbNav #navQuestion="ngbNav" class="nav-tabs language justify-content-end">
+                       
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">السؤال بالعربي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="questionAr" name="questionAr" type="text"
+                                    [validateArabic]="QuestionFormControls.questionAr"
+                                    appArabicValidation  
+                                    class="form-control" placeholder="السؤال بالعربي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.questionAr.errors) 
+                                        ||(QuestionFormControls.questionAr.errors?.['invalidArabicInput'])
+
+                                        || (QuestionFormControls.questionAr.touched && QuestionFormControls.questionAr.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.questionAr.errors) || (QuestionFormControls.questionAr.touched && QuestionFormControls.questionAr.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.questionAr.errors.required">برجاء
+                                            ادخال
+                                            السؤال بالعربي
+                                        </small>
+                                    </small>
+                                    <div *ngIf="(submitted && QuestionFormControls.questionAr.errors) || (QuestionFormControls.questionAr.errors?.['invalidArabicInput'])"
+                                    class="invalid-feedback">
+                                    <div *ngIf="QuestionFormControls.questionAr.errors?.['invalidArabicInput']">
+                                    السؤال يجب ان تتكون من حروف عربي</div>
+                                </div>
+                                </div>
+
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">السؤال بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="question" name="question" type="text" class="form-control"
+                                        placeholder="السؤال بالانجليزي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.question.errors) || (QuestionFormControls.question.touched && QuestionFormControls.question.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.question.errors) || (QuestionFormControls.question.touched && QuestionFormControls.question.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.question.errors.required">برجاء
+                                            ادخال
+                                            السؤال بالانجليزي
+                                        </small>
+                                    </small>
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navQuestion"></div>
+                    <ul ngbNav #navAnswer="ngbNav" class="nav-tabs language justify-content-end">
+                        
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">الاجابة
+                                        بالعربي
+                                        <span class="text-danger">*</span>
+
+                                    </label>
+                                    <quill-editor customToolbarPosition="'bottom'" placeholder="الاجابة بالعربي"
+                                    [validateArabic]="QuestionFormControls.answerAr"
+                                    appArabicValidation  
+                                    formControlName="answerAr" name="answerAr"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.answerAr.errors)
+                                        ||(QuestionFormControls.answerAr.errors?.['invalidArabicInput'])
+                                        || (QuestionFormControls.answerAr.touched && QuestionFormControls.answerAr.invalid) }"
+                                        class="border-bottom-0 breif">
+                                        <div quill-editor-toolbar>
+                                            <div class="desc-toolbar border-top-0">
+                                                <span class="ql-formats mr-0">
+                                                    <button class="ql-bold"></button>
+                                                    <button class="ql-italic"></button>
+                                                    <button class="ql-underline"></button>
+                                                    <button class="ql-align"></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </quill-editor>
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.answerAr.errors) || (QuestionFormControls.answerAr.touched && QuestionFormControls.answerAr.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.answerAr.errors.required">برجاء
+                                            ادخال
+                                            الاجابة بالعربي
+                                        </small>
+                                    </small>
+                                    <div *ngIf="(submitted && QuestionFormControls.answerAr.errors) || (QuestionFormControls.answerAr.errors?.['invalidArabicInput'])"
+                                    class="invalid-feedback">
+                                    <div *ngIf="QuestionFormControls.answerAr.errors?.['invalidArabicInput']">
+                                الاجابة يجب ان تتكون من حروف عربي</div>
+                                </div>
+                                </div>
+
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">الاجابة
+                                        بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <quill-editor name="addDescription" formControlName="answer" name="answer"
+                                        placeholder="الاجابة بالانجيليزي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.answer.errors) || (QuestionFormControls.answer.touched && QuestionFormControls.answer.invalid) }"
+                                        customToolbarPosition="'bottom'" class="border-bottom-0 breif">
+                                        <div quill-editor-toolbar>
+                                            <div class="desc-toolbar border-top-0">
+                                                <span class="ql-formats mr-0">
+                                                    <button class="ql-bold"></button>
+                                                    <button class="ql-italic"></button>
+                                                    <button class="ql-underline"></button>
+                                                    <button class="ql-align"></button>
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </quill-editor>
+
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.answer.errors) || (QuestionFormControls.answer.touched && QuestionFormControls.answer.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.answer.errors.required">برجاء
+                                            ادخال
+                                            الاجابة بالانجليزي
+                                        </small>
+                                    </small>
+
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navAnswer"></div>
+                    <div class="form-group">
+                        <label>ترتيب السؤال</label>
+                        <input type="number" formControlName="sort" name="sort"
+                        
+                            [ngClass]="
+                            { 'is-invalid':(submitted && QuestionFormControls.sort.errors) || (QuestionFormControls.sort.touched && QuestionFormControls.sort.invalid) }"
+                            class="form-control" placeholder="ترتيب السؤال">
+                        <small
+                            *ngIf=" (submitted && QuestionFormControls.sort.errors) || (QuestionFormControls.sort.touched && QuestionFormControls.sort.invalid)"
+                            class="invalid-feedback">
+                            <small *ngIf="QuestionFormControls.sort.errors.required">برجاء
+                                ادخال
+                                ترتيب السؤال 
+                            </small>
+                        </small>
+                    </div>
+
+                    <div class="form-group"  *ngIf="submitted && addQuestionForm.invalid">
+                      
+                        <div class=" p-3 alert alert-danger alert-dismissible fade show">
+                            <strong>
+                              ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+                            </strong>
+                            <button
+                              type="button"
+                              (click)="closeMessageErrors()"
+                              class="close h-10"
+                            >
+                              <span><i class="fa fa-close" style="color: brown"></i></span>
+                            </button>
+                          </div>
+                          
+                    </div>
+
+
+
+
+
+                    <div class="buttons justify-content-end d-flex mb-3">
+                      
+                        <button *ngIf="!questionId" [disabled]="loading"
+                            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                            (click)="submitData()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>حفظ
+                        </button>
+                        <button [disabled]="loading" *ngIf="questionId" class="btn btn-icon btn-primary mr-25 ml-25 btn-lg"
+                        type="submit" rippleEffect (click)="updateData()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                    </button>
+    
+                    <a *ngIf="questionId" (click)="deleteQuestion(questionId)" class="btn btn-icon btn-danger ml-25 mr-25 btn-lg"
+                        type="button" rippleEffect>
+                        <span>حذف</span>
+                    </a>
+                    <a routerLink="/admin/Frequent-questions"
+                    class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button" rippleEffect>
+                    <span>الغاء</span>
+                </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

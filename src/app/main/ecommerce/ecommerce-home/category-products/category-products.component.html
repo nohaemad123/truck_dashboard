@@ -1,0 +1,75 @@
+
+<section id="ecommerce-home-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="ecommerce-header-items">
+          <div class="result-toggler">
+            <!-- <button
+                class="navbar-toggler shop-sidebar-toggler"
+                type="button"
+                data-toggle="collapse"
+                (click)="toggleSidebar('ecommerce-sidebar')"
+              >
+                <span class="navbar-toggler-icon d-block d-lg-none"><i data-feather="menu"></i></span>
+              </button> -->
+            <div class="search-results">{{categoryName}}</div>
+          </div>
+          <div class="view-options d-flex">
+            <!-- <div class="btn-group dropdown-sort" ngbDropdown>
+              <button ngbDropdownToggle type="button" class="btn btn-outline-primary mr-1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" rippleEffect>
+                <span class="active-sorting">Featured</span>
+              </button>
+              <div ngbDropdownMenu>
+                <a ngbDropdownItem href="javascript:void(0);" (click)="sortProduct('featured')">Featured</a>
+                <a ngbDropdownItem href="javascript:void(0);" (click)="sortProduct('price-asc')">Lowest</a>
+                <a ngbDropdownItem href="javascript:void(0);" (click)="sortProduct('price-desc')">Highest</a>
+              </div>
+
+            </div> -->
+            <!-- <select class="form-control mx-3" id="basicSelect"
+              style="width: 15em;border-color: #9d9d9d;color: black;" (change)="sortProduct($event.target.value)">
+              <option value="featured" selected>Featured</option>
+              <option value="price-asc">Lowest</option>
+              <option value="price-desc">Highest</option>
+            </select> -->
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-flat-dark" [class.active]="false">
+                <input type="radio" name="radio_options" id="radio_option1" />
+                New Arrivals
+              </label>
+              <label class="btn btn-flat-dark" [class.active]="true">
+                <input type="radio" name="radio_options" id="radio_option2" />
+                Best Seller
+              </label>
+              <label class="btn btn-flat-dark" [class.active]="false">
+                <input type="radio" name="radio_options" id="radio_option3" />
+                Most Popular
+              </label>
+              <label class="btn btn-flat-dark" [class.active]="false">
+                <input type="radio" name="radio_options" id="radio_option4" />
+                View All
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <div class="swiper-responsive-breakpoints swiper-container px-0 py-0" [swiper]="swiperResponsive">
+      <div class="swiper-wrapper mb-0 mt-0 pt-1 grid-view" >
+            <app-ecommerce-item
+            class="card ecommerce-card swiper-slide"
+            [isGridView]="true"
+            [product]="product"
+            *ngFor="
+              let product of products"
+          ></app-ecommerce-item>
+        </div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+ 

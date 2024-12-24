@@ -1,0 +1,43 @@
+
+<div  [formGroup]="formGroup" class="form-group"  *ngIf="options.type">
+    <ng-container *ngIf="(options.type === 'checkbox'||options.type === 'radio');else anyType ">
+    <div class="d-flex  justify-content-between">
+      <label [for]="options.id||'0'">
+        <input
+        [type]="options.type"
+        class="form-check-input"
+         [id]="options.id"
+         [formControlName]="options.formControlName"
+         [name]="options.name">
+         {{options.label}}
+        </label>
+        <a *ngIf="options.textinfo?.urlLink" [routerLink]="options.textinfo?.urlLink" [ngStyle]="options.textinfo?.linkStyle">{{options.textinfo?.urlTitle}} </a>
+    </div>
+
+    </ng-container>
+    <ng-template #anyType>
+      <label [for]="options.id" class="mb-2">{{options.label}}</label>
+      <input
+      [type]="options.type"
+      class="form-control"
+       [id]="options.id"
+       [placeholder]="options.placeHolder"
+       [formControlName]="options.formControlName"
+       [name]="options.name">
+    </ng-template>
+
+
+
+</div>
+
+
+
+
+<!-- <div class="form-check">
+  <input type="radio" class="form-check-input"  name="optradio" value="option1" >
+  <label class="form-check-label" for="radio1">Option 1</label>
+</div>
+<div class="form-check">
+  <input type="radio" class="form-check-input"  name="optradio" value="option2">
+  <label class="form-check-label" for="radio2">Option 2</label>
+</div> -->

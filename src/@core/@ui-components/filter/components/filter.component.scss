@@ -1,0 +1,28 @@
+// @import 'style';
+.page{
+  position: absolute;
+  width:300px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  .filter-header{
+    // background-color: $primary;
+  }
+  .filter-body{
+    background-color: #fff;
+    border: 1px solid gray;
+    // height: calc(100vh - 220px);
+    height: 100vh;
+  }
+  button{
+    color: #fff;
+  }
+}
+
+.rtl{
+  right: unset!important;
+  left:0px;
+}
+
+

@@ -1,0 +1,70 @@
+@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '@core/scss/base/components/include'; // Components includes
+
+// To open dd on right
+.dropdown-menu-right {
+  right: 0 !important;
+  left: auto !important;
+}
+
+// Cart Touchspin
+.touchspin-cart {
+  .touchspin-wrapper {
+    width: 6.4rem;
+  }
+  &:focus-within {
+    box-shadow: none !important;
+  }
+}
+
+app-navbar-bookmark {
+  display: flex;
+}
+
+// Apply style on window scroll for navbar static type
+.navbar-static-style-on-scroll {
+  background-color: #fff !important;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 20px 0px !important;
+}
+
+// Dark Layout
+.dark-layout {
+  .navbar-container {
+    .search-input {
+      .search-list {
+        li {
+          &.auto-suggestion {
+            &:hover {
+              background-color: $theme-dark-body-bg;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.ecommerce{
+  
+[data-col="1-column"] .content.ecommerce-navbar{
+  margin-left:auto !important ;
+}
+.header-navbar .navbar-container ul.navbar-nav li > a.nav-link {
+  color: #dee9f4;
+}
+.header-navbar .navbar-container ul.navbar-nav li i.ficon, .header-navbar .navbar-container ul.navbar-nav li svg.ficon {
+  height: 1.5rem;
+  width: 1.5rem;
+  font-size: 1.5rem;
+  color: #dee9f4;
+}
+&[mobile-layout="false"] .search-wrapper {
+  width:-moz-available ;
+}
+.navbar-static-style-on-scroll,.horizontal-layout.navbar-static .header-navbar {
+  background-color: #696cb2 !important;
+  box-shadow: 1px 1px 5px 2px rgba(137, 153, 206, 0.81) !important;
+}
+.nav-icons{
+  display: contents;
+}
+}

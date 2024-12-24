@@ -1,0 +1,19 @@
+<!-- <pagination-controls (pageChange)="pageChangeEvent(pagination.page=$event)"></pagination-controls> -->
+
+
+<nav aria-label="Page navigation example" class=" d-flex justify-content-end float-right pagination">
+    <ul class="pagination">
+        <li class="page-item" [class.disabled]="paginationOption.page === 1"><a class="page-link"
+                (click)="setPage(paginationOption.page-1)"><img src="assets/img/icons/bi_arrow-left@2x.svg"></a></li>
+
+        <ng-container *ngFor="let page of paginationOption.pageArray;let i=index">
+            <li class="page-item" [class.active]="paginationOption.page === page"><a class="page-link"
+                    (click)="setPage(page)">{{page}}</a></li>
+
+        </ng-container>
+
+        <li class="page-item" [class.disabled]="paginationOption.page === paginationOption.pageArray.length"><a
+                class="page-link" (click)="setPage(paginationOption.page+1)"><img
+                    src="assets/img/icons/bi_arrow-right.svg"></a></li>
+    </ul>
+</nav>

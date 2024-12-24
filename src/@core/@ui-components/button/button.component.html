@@ -1,0 +1,11 @@
+
+
+<button class="btn backgroud-color" *ngIf="options"
+(click)="buttonClick($event)"
+[type]="options.type"
+[disabled]="disabledBtn"
+[ngStyle]="options.style">
+<ng-container *ngIf="options.icon">
+<img [src]="options.icon">
+</ng-container>
+{{options.name|translate}}</button>

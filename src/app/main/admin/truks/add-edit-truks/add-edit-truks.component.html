@@ -1,0 +1,586 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <div class="details">
+            <form [formGroup]="AddTruckForm" novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <h3 class="title">صوره العربة المتنقلة</h3>
+                            <div class=" image text-center uploadImage">
+                                <label class="customFileImage" for="customFileImage">
+                                    <img [src]="imageFile.truckImage">
+                                </label>
+                                <input type="file" id="customFileImage" (change)="showPreviewFile($event,'truckImage')"
+                                    accept="image/*" multiple
+                                    style="opacity: 0; position: absolute; right:0;cursor: pointer; z-index: 102" />
+
+
+                                <div class="edit" for="customFileImage">
+                                    <i data-feather="edit-2"
+                                        class="badge badge-pill badge-glow badge-secondary badge-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3 class="title">حالة العربة المتنقلة</h3>
+                            <div class="form-group d-flex justify-content-between">
+                                <label>متاح</label>
+                                <div class="custom-control custom-control-primary custom-switch">
+                                    <input
+                                    name="isOnline"    formControlName="isOnline"
+                                    type="checkbox"  class="custom-control-input" id="customSwitch3" />
+                                    <label class="custom-control-label" for="customSwitch3"></label>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex justify-content-between">
+                                <label>موافقه</label>
+                                <div class="custom-control custom-control-primary custom-switch">
+                                    <input type="checkbox"   name="isApproved" formControlName="isApproved"  class="custom-control-input" id="customSwitch33" />
+                                    <label class="custom-control-label" for="customSwitch33"></label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="col-md-9">
+                        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                            <li ngbNavItem>
+                                <a ngbNavLink>البيانات الاساسية</a>
+                                <ng-template ngbNavContent>
+                                    <div class="card">
+                                        <h3 class="title">البيانات الاساسية</h3>
+                                        <ul ngbNav #navTruckTitle="ngbNav"
+                                            class="nav-tabs language justify-content-end">
+                                           
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>العربية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">اسم
+                                                            العربة المتنقلة
+                                                            بالعربي
+                                                            <span class="text-danger">*</span>
+
+                                                        </label>
+                                                        <input type="text" id="first-name-icon" name="truckNameAr"
+                                                        placeholder="اسم العربة المتنقلة بالعربي"  
+                                                        [validateArabic]="TruckFormControls.truckNameAr"
+                                                        appArabicValidation
+                                                        formControlName="truckNameAr" class="form-control"
+                                                            name="fname-icon"
+                                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.truckNameAr.errors) || (TruckFormControls.truckNameAr.touched && TruckFormControls.truckNameAr.invalid) }
+                                                            ||(TruckFormControls.truckNameAr.errors?.['invalidArabicInput'])
+                                                            " />
+
+                                                        <small
+                                                            *ngIf=" (submitted && TruckFormControls.truckNameAr.errors) || (TruckFormControls.truckNameAr.touched && TruckFormControls.truckNameAr.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.truckNameAr.errors.required">برجاء
+                                                                ادخال
+                                                                اسم العربة المتنقلة بالعربي
+                                                            </small>
+
+
+                                                        </small>
+                                                        <div *ngIf="(submitted && TruckFormControls.truckNameAr.errors) || (TruckFormControls.truckNameAr.errors?.['invalidArabicInput'])"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="TruckFormControls.truckNameAr.errors?.['invalidArabicInput']">
+                                                        اسم العربة المتنقلة يجب ان تتكون من حروف عربي</div>
+                                                    </div>
+                                                    </div>
+
+                                                </ng-template>
+                                            </li>
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>الانجليزية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">اسم
+                                                            العربة المتنقلة
+                                                            بالانجليزي
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text" id="first-name-icon" name="truckName"
+                                                        placeholder="اسم العربة المتنقلة بالانجليزي"  
+                                                        
+                                                        formControlName="truckName" class="form-control"
+                                                            name="fname-icon"
+                                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.truckName.errors) || (TruckFormControls.truckName.touched && TruckFormControls.truckName.invalid) }" />
+                                                            <small
+                                                            *ngIf=" (submitted && TruckFormControls.truckName.errors) || (TruckFormControls.truckName.touched && TruckFormControls.truckName.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.truckName.errors.required">برجاء
+                                                                ادخال
+                                                                اسم العربة المتنقلة بالانجليزي
+                                                            </small>
+                                                        </small>
+                                                      
+
+                                                    </div>
+
+
+                                                </ng-template>
+                                            </li>
+                                        </ul>
+                                        <div [ngbNavOutlet]="navTruckTitle"></div>
+                                        <!-- <div class="alert alert-danger" 
+                                        *ngIf=" (submitted && TruckFormControls.truckName.errors) || (TruckFormControls.truckName.touched && TruckFormControls.truckName.invalid)"
+                                        role="alert">
+                                               برجاء
+                                                ادخال
+                                                اسم العربة المتنقلة بالانجليزي
+                                          
+                                        </div>
+                                        <div class="alert alert-danger" 
+                                        *ngIf=" (submitted && TruckFormControls.truckNameAr.errors) || (TruckFormControls.truckNameAr.touched && TruckFormControls.truckNameAr.invalid)"
+                                        role="alert">
+                                               برجاء
+                                                ادخال
+                                          اسم العربة المتنقلة بالعربي   
+                                          
+                                        </div> -->
+                                        <ul ngbNav #navTruckAddress="ngbNav"
+                                            class="nav-tabs language justify-content-end">
+                                           
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>العربية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">عنوان
+                                                            العربة
+                                                            المتنقلة بالعربي
+                                                            <span class="text-danger">*</span>
+
+                                                        </label>
+                                                        <input type="text" id="first-name-icon" name="addressAr"
+                                                        placeholder="عنوان العربة المتنقلة بالعربي"  
+                                                        formControlName="addressAr" class="form-control"
+                                                            name="fname-icon"
+                                                            [validateArabic]="TruckFormControls.addressAr"
+                                                            appArabicValidation
+                                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.addressAr.errors) || (TruckFormControls.addressAr.touched && TruckFormControls.addressAr.invalid) 
+                                                            ||(TruckFormControls.addressAr.errors?.['invalidArabicInput'])
+
+                                                        }" />
+
+                                                            <small
+                                                            *ngIf=" (submitted && TruckFormControls.addressAr.errors) || (TruckFormControls.addressAr.touched && TruckFormControls.addressAr.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.addressAr.errors.required">برجاء
+                                                                ادخال
+                                                                عنوان العربة المتنقلة بالعربي
+                                                            </small>
+                                                        </small>
+                                                        <div *ngIf="(submitted && TruckFormControls.addressAr.errors) || (TruckFormControls.addressAr.errors?.['invalidArabicInput'])"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="TruckFormControls.addressAr.errors?.['invalidArabicInput']">
+                                                        عنوان العربة المتنقلة يجب ان تتكون من حروف عربي</div>
+                                                    </div>
+                                                    </div>
+
+                                                </ng-template>
+                                            </li>
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>الانجليزية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">عنوان
+                                                            العربة
+                                                            المتنقلة بالانجليزي
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input type="text" id="first-name-icon" name="address"
+                                                        placeholder="عنوان العربة المتنقلة بالانجليزي"  
+                                                        formControlName="address" class="form-control"
+                                                            name="fname-icon"
+                                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.address.errors) || (TruckFormControls.address.touched && TruckFormControls.truckName.invalid) }" />
+                                                            <small
+                                                            *ngIf=" (submitted && TruckFormControls.address.errors) || (TruckFormControls.address.touched && TruckFormControls.address.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.address.errors.required">برجاء
+                                                                ادخال
+                                                                عنوان العربة المتنقلة بالانجليزي
+                                                            </small>
+                                                        </small>
+                                                      
+
+                                                    </div>
+
+
+                                                </ng-template>
+                                            </li>
+                                        </ul>
+                                        <div [ngbNavOutlet]="navTruckAddress"></div>
+                                        <!-- <div class="alert alert-danger" 
+                                        *ngIf=" (submitted && TruckFormControls.address.errors) || (TruckFormControls.address.touched && TruckFormControls.address.invalid)"
+                                        role="alert">
+                                               برجاء
+                                                ادخال
+                                                عنوان العربة المتنقلة بالانجليزي
+                                          
+                                        </div>
+                                        <div class="alert alert-danger" 
+                                        *ngIf=" (submitted && TruckFormControls.addressAr.errors) || (TruckFormControls.addressAr.touched && TruckFormControls.addressAr.invalid)"
+                                        role="alert">
+                                               برجاء
+                                                ادخال
+                                                عنوان العربة المتنقلة بالعربي   
+                                          
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label>البنك</label>
+                                            <ng-select [items]="banksData" bindLabel="bankName" bindValue="id" class=""
+                                                formControlName="bankId" placeholder="اختر البنك"
+                                                name="bankId"></ng-select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>رقم حساب البنك</label>
+                                            <input type="text" class="form-control" name="bankAccountNumber"
+                                            placeholder="رقم حساب البنك"    
+                                            formControlName="bankAccountNumber"
+                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.bankAccountNumber.errors) || (TruckFormControls.bankAccountNumber.touched && TruckFormControls.bankAccountNumber.invalid) }" />
+
+                                            
+                                            <small
+                                            *ngIf=" (submitted && TruckFormControls.bankAccountNumber.errors) || (TruckFormControls.bankAccountNumber.touched && TruckFormControls.bankAccountNumber.invalid)"
+                                            class="invalid-feedback">
+                                            <small
+                                                *ngIf="TruckFormControls.bankAccountNumber.errors.required">برجاء
+                                                ادخال
+                                                رقم حساب البنك
+                                            </small>
+                                        </small>
+                                            <!-- <div class="alert alert-danger" 
+                                        *ngIf=" (submitted && TruckFormControls.bankAccountNumber.errors) || (TruckFormControls.bankAccountNumber.touched && TruckFormControls.bankAccountNumber.invalid)"
+                                        role="alert">
+                                               برجاء
+                                                ادخال
+                                                رقم حساب البنك   
+                                          
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <h3 class="title">صوره السجل التجاري</h3>
+
+
+
+                                        <div
+                                            class="mb-3 customFileImage media flex-column flex-md-row banner-direction">
+                                            <img [src]="imageFile.commericalImage" id="blog-feature-image"
+                                                class="rounded mr-2 mb-1 mb-md-0" width="170" height="110"
+                                                alt="Blog Featured Image" />
+                                            <div class="media-body">
+                                                <small class="text-muted">دقة الصورة المطلوبة 800x400 ، حجم الصورة 10
+                                                    ميغا بايت.
+                                                </small>
+                                                <p class="my-50">
+                                                    <a href="javascript:void(0);" id="blog-image-text">{{ fileName ===
+                                                        undefined ? 'truck.jpg' : 'truck.jpg' }}  
+                                                        </a>
+                                                </p>
+                                                <div class="d-inline-block">
+                                                    <div class="form-group mb-0">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                id="blogCustomFile" accept="image/*"
+                                                                (change)="showPreviewFile($event,'header')" />
+                                                            <label class="custom-file-label" for="blogCustomFile">اختر
+                                                                صوره</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </ng-template>
+                            </li>
+                            <li ngbNavItem>
+                                <a ngbNavLink>تفاصيل العربة</a>
+                                <ng-template ngbNavContent>
+                                    <div class="card">
+                                        <h3 class="title">تفاصيل العربة </h3>
+
+                                        <div class="form-group">
+                                            <label>المستخدم</label>
+                                            <ng-select [items]="usersData" bindLabel="userNameAr" bindValue="id" class=""
+                                                formControlName="userId" placeholder="اختر المستخدم"
+                                                name="userId"></ng-select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>المدينة</label>
+                                            <ng-select [items]="citiesData" bindLabel="cityName" bindValue="id" class=""
+                                                formControlName="cityId" placeholder="اختر المدينة"
+                                                name="cityId"></ng-select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>نوع النشاط</label>
+                                            <ng-select [items]="buisnessData" bindLabel="businessName" bindValue="id"
+                                                class="" formControlName="businessTypeId" placeholder="اختر نوع النشاط"
+                                                name="businessTypeId"></ng-select>
+                                        </div>
+
+
+                                        <ul ngbNav #navTruckDescription="ngbNav"
+                                            class="nav-tabs language justify-content-end">
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>العربية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">وصف
+                                                            العربة المتنقلة
+                                                            بالعربي
+                                                            <span class="text-danger">*</span>
+
+                                                        </label>
+                                                        <quill-editor customToolbarPosition="'bottom'"
+                                                            name="descriptionAr" formControlName="descriptionAr"
+                                                            placeholder="وصف العربة المتنقلة بالعربي"
+                                                            [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.descriptionAr.errors) || (TruckFormControls.descriptionAr.touched && TruckFormControls.descriptionAr.invalid) 
+                                                            ||(TruckFormControls.descriptionAr.errors?.['invalidArabicInput'])
+
+                                                        }"
+                                                        [validateArabic]="TruckFormControls.descriptionAr"
+                                                        appArabicValidation
+                                                            class="border-bottom-0 breif">
+                                                            <div quill-editor-toolbar>
+                                                                <div class="desc-toolbar border-top-0">
+                                                                    <span class="ql-formats mr-0">
+                                                                        <button class="ql-bold"></button>
+                                                                        <button class="ql-italic"></button>
+                                                                        <button class="ql-underline"></button>
+                                                                        <button class="ql-align"></button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </quill-editor>
+                                                        <small
+                                                            *ngIf=" (submitted && TruckFormControls.descriptionAr.errors) || (TruckFormControls.descriptionAr.touched && TruckFormControls.descriptionAr.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.descriptionAr.errors.required">برجاء
+                                                                ادخال وصف العربة المتنقلة بالعربي
+                                                            </small>
+                                                        </small>
+                                                        <div *ngIf="(submitted && TruckFormControls.descriptionAr.errors) || (TruckFormControls.descriptionAr.errors?.['invalidArabicInput'])"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="TruckFormControls.descriptionAr.errors?.['invalidArabicInput']">
+                                                        وصف العربة المتنقلة يجب ان تتكون من حروف عربي</div>
+                                                    </div>
+                                                    </div>
+
+                                                </ng-template>
+                                            </li>
+                                            <li ngbNavItem>
+                                                <a ngbNavLink>الانجليزية</a>
+                                                <ng-template ngbNavContent>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="TDRequiredField">وصف
+                                                            العربة المتنقلة
+                                                            بالانجليزي
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <quill-editor name="addDescription"
+                                                       placeholder="وصف العربة المتنقلة بالانجيليزي"
+                                                        customToolbarPosition="'bottom'" name="description"
+                                                        
+                                                            formControlName="description" class="border-bottom-0 breif">
+                                                            <div quill-editor-toolbar>
+                                                                <div class="desc-toolbar border-top-0">
+                                                                    <span class="ql-formats mr-0">
+                                                                        <button class="ql-bold"></button>
+                                                                        <button class="ql-italic"></button>
+                                                                        <button class="ql-underline"></button>
+                                                                        <button class="ql-align"></button>
+                                                                        
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </quill-editor>
+                                                        <small
+                                                            *ngIf=" (submitted && TruckFormControls.description.errors) || (TruckFormControls.description.touched && TruckFormControls.description.invalid)"
+                                                            class="invalid-feedback">
+                                                            <small
+                                                                *ngIf="TruckFormControls.description.errors.required">برجاء
+                                                                ادخال
+                                                                وصف العربة المتنقلة بالانجليزي
+                                                            </small>
+                                                        </small>
+                                                    </div>
+                                                </ng-template>
+                                            </li>
+                                           
+                                        </ul>
+                                        <div [ngbNavOutlet]="navTruckDescription"></div>
+
+                                    </div>
+                                    <div class="card">
+                                       
+                                        <h3 class="title">التوصيل</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>التوصيل داخل المدينة</label>
+                                                    <input type="number"
+                                                    placeholder="التوصيل داخل المدينة" 
+                                                    [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.deliveryPriceInsideCity.errors) || (TruckFormControls.deliveryPriceInsideCity.touched && TruckFormControls.deliveryPriceInsideCity.invalid) }"
+                                                        class="form-control" name="deliveryPriceInsideCity"
+                                                        formControlName="deliveryPriceInsideCity">
+
+                                                    <small
+                                                        *ngIf=" (submitted && TruckFormControls.deliveryPriceInsideCity.errors) || (TruckFormControls.deliveryPriceInsideCity.touched && TruckFormControls.deliveryPriceInsideCity.invalid)"
+                                                        class="invalid-feedback">
+                                                        <small
+                                                            *ngIf="TruckFormControls.deliveryPriceInsideCity.errors.required">برجاء
+                                                            ادخال
+                                                            التوصيل داخل المدينة
+                                                        </small>
+
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>التوصيل خارج المدينة</label>
+                                                    <input type="number"
+                                                        [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.deliveryPriceOutInsideCity.errors) || (TruckFormControls.deliveryPriceOutInsideCity.touched && TruckFormControls.deliveryPriceOutInsideCity.invalid) }"
+                                                        placeholder="التوصيل خارج المدينة" 
+                                                        class="form-control" name="deliveryPriceOutInsideCity"
+                                                        formControlName="deliveryPriceOutInsideCity">
+
+                                                    <small
+                                                        *ngIf=" (submitted && TruckFormControls.deliveryPriceOutInsideCity.errors) || (TruckFormControls.deliveryPriceOutInsideCity.touched && TruckFormControls.deliveryPriceOutInsideCity.invalid)"
+                                                        class="invalid-feedback">
+                                                        <small
+                                                            *ngIf="TruckFormControls.deliveryPriceOutInsideCity.errors.required">برجاء
+                                                            ادخال
+                                                            التوصيل خارج المدينة
+                                                        </small>
+
+
+                                                    </small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h3 class="title">احداثيات العربة المتنقلة</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>خط الطول</label>
+                                                    <input type="number"
+                                                        [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.lon.errors) || (TruckFormControls.lon.touched && TruckFormControls.lon.invalid) }"
+                                                        placeholder="خط الطول" 
+                                                        class="form-control" name="lon" formControlName="lon">
+
+                                                    <small
+                                                        *ngIf=" (submitted && TruckFormControls.lon.errors) || (TruckFormControls.lon.touched && TruckFormControls.lon.invalid)"
+                                                        class="invalid-feedback">
+                                                        <small *ngIf="TruckFormControls.lon.errors.required">برجاء ادخال
+                                                            خط الطول
+                                                        </small>
+
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>خط العرض</label>
+                                                    <input type="number"
+                                                        [ngClass]="{ 'is-invalid':  (submitted && TruckFormControls.lat.errors) || (TruckFormControls.lat.touched && TruckFormControls.lat.invalid) }"
+                                                        placeholder="خط العرض" 
+                                                        class="form-control" name="lat" formControlName="lat">
+
+                                                    <small
+                                                        *ngIf=" (submitted && TruckFormControls.lat.errors) || (TruckFormControls.lat.touched && TruckFormControls.lat.invalid)"
+                                                        class="invalid-feedback">
+                                                        <small *ngIf="TruckFormControls.lat.errors.required">برجاء ادخال
+                                                            خط العرض
+                                                        </small>
+
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+
+                            </li>
+                        </ul>
+                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                    </div>
+                </div>
+
+
+ <div class="row"  *ngIf="submitted && AddTruckForm.invalid">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <div class="card">
+
+            <div
+            class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12"
+            style="text-align: center"
+           
+          >
+            <div class="alert alert-danger alert-dismissible fade show">
+              <strong>
+                ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+              </strong>
+              <button
+                type="button"
+                (click)="closeMessageErrors()"
+                class="close h-100"
+              >
+                <span><i class="fa fa-close" style="color: brown"></i></span>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+
+    </div>
+ </div>
+                
+
+
+             
+
+                <div class="buttons justify-content-end d-flex mb-3">
+                  
+                    <button *ngIf="!truckId" [disabled]="loading" class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit"
+                        rippleEffect (click)="submitData()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>حفظ
+                    </button>
+                    <button [disabled]="loading" *ngIf="truckId" class="btn btn-icon btn-primary mr-25 ml-25 btn-lg"
+                    type="submit" rippleEffect (click)="updateData()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                </button>
+
+                <a *ngIf="truckId" (click)="deleteTruck(truckId)" class="btn btn-icon btn-danger ml-25 mr-25 btn-lg"
+                    type="button" rippleEffect>
+                    <span>حذف</span>
+                </a>
+                <a routerLink="/admin/Trucks" class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg"
+                type="button" rippleEffect>
+                <span>الغاء</span>
+            </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+// ================================================================================================
+// 	File Name: semi-dark-layout.scss
+// 	Description: SCSS file for semi dark layout.
+// 	----------------------------------------------------------------------------------------------
+// 	Item Name: Vuexy - Vuejs, React, Angular, HTML & Laravel Admin Dashboard Template
+// 	Author: PIXINVENT
+// 	Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+@import '../bootstrap-extended/include'; // Bootstrap includes
+@import '../components/include'; // Components includes
+
+.semi-dark-layout {
+  /************ Main Menu **************/
+
+  .datatable-header-cell{
+    background: #ebe7e7 ;
+    font-weight: bold;
+  }
+  
+  
+  
+  .datatable-row-even {
+      // background-color: red !important; 
+  }
+  
+  .datatable-row-odd {
+      // background-color: blue !important;
+    background: #f9f9f9  ;
+  }
+  // main menu
+  .main-menu {
+    left:10px;
+    background-color: $theme-dark-card-bg;
+    .shadow-bottom {
+      background: linear-gradient(180deg, #303f91 44%, rgba(40, 48, 70, 0) 73%, rgba(40, 48, 70, 0)) !important;
+    }
+    &:not(.expanded) {
+      .navigation {
+        .sidebar-group-active {
+          > a {
+            background-color: $theme-dark-body-bg !important;
+          }
+        }
+      }
+    }
+  }
+
+  // main menu content
+  .main-menu-content {
+    .navigation-main {
+      background-color: $theme-dark-card-bg;
+      .navigation-header {
+        color: $theme-dark-text-muted-color;
+      }
+      .nav-item {
+        a {
+          color: $theme-dark-body-color;
+        }
+        &.open:not(.sidebar-group-active) {
+         > a {
+            background-color: $theme-dark-body-bg;
+          }
+        }
+        a:after,
+        a {
+          color: $theme-dark-body-color !important;
+        }
+        .menu-content {
+          background-color: $theme-dark-card-bg;
+          .active {
+            .menu-item {
+              color: $white;
+            }
+          }
+          li:not(.active) {
+            a {
+              background-color: $theme-dark-card-bg;
+            }
+          }
+        }
+      }
+      .active {
+        > a {
+          color: $white !important;
+        }
+        .menu-title,
+        i {
+          color: $white;
+        }
+      }
+      .sidebar-group-active {
+        a {
+          border-radius: 4px;
+        }
+      }
+      .menu-content {
+        background-color: $theme-dark-card-bg;
+        .active {
+          z-index: 1;
+          a {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  // menu collapsed active item color
+  .menu-collapsed {
+    .main-menu:not(.expanded) {
+      .navigation-main {
+        li.active {
+          > a {
+            background: $theme-dark-body-bg !important;
+            color: $white !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+

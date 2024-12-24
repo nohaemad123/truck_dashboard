@@ -1,0 +1,44 @@
+
+div#demo{
+    .carousel-inner img {
+        width: 100%;
+        height: 210px;
+      }
+    
+      .carousel-indicators{
+          position: absolute;
+          bottom:-50px;
+        li.circle{
+            width: 10px;
+            height: 10px;
+            border-radius: 100%;
+            background-color: #4f008c;
+        }
+      li.square{
+        width: 5px!important;
+        height: 5px!important;
+        border-radius:2px!important;
+        background-color: #4f008c;
+
+      }
+      }
+    
+}
+
+h1 {
+    position: absolute;
+    top: 75px;
+    width: 435px;
+    padding:10px 40px;
+    height: 58px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.45;
+    letter-spacing: normal;
+    color: #fff;
+    .subHeader{
+      color:rgba(27, 206, 216, 0.75)
+    }
+  }

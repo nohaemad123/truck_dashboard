@@ -1,0 +1,15 @@
+export class Settings{
+    siteDescription:string=''
+    siteTitle:string=''
+    email:string=''
+    phoneNumber:string=''
+    whatsAppNumber:string=''
+    linkAndroidStore:string=''
+    linkAppleStore:string=''
+    facebookLink:string=''
+    twitterLink: string=''
+    instagramLink: string=''
+    snapchatLink: string=''
+    siteDescriptionAr: string=''
+    siteTitleAr: string=''
+}

@@ -1,0 +1,190 @@
+// @import '@core/scss/angular/libs/form-wizard.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+// @import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/quill-editor.component';
+@import '@core/scss/angular/libs/datatables.component.scss';
+
+@import '@core/scss/angular/libs/toastr.component.scss';
+
+
+.inline_end_start {
+    margin-inline-end: 10px !important;
+    margin-inline-start: 10px !important;
+
+
+}
+
+.alert {
+    padding: 10px;
+}
+
+
+.content-subcatorory {
+    justify-content: space-between;
+
+    button {
+        width: 200px;
+    }
+}
+
+.buttons a.cancel {
+    background: #fff !important;
+    color: #3e495f !important;
+    border: 1px solid transparent !important;
+}
+
+[dir="rtl"] {
+    .flex-change-dir {
+        flex-direction: column;
+    }
+
+    .banner-direction {
+
+        flex-direction: row-reverse !important;
+
+    }
+}
+
+
+
+.nav-tabs.general {
+    background: #ddd;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.ql-editor {
+    min-height: 200px;
+}
+
+.marginInlne {
+    margin-inline-end: 0.7em;
+}
+
+.margin-Top {
+    margin-top: 4px;
+}
+
+.algin-end {
+    text-align: end;
+}
+
+
+
+.card-body .tab-content {
+    margin-top: 10px !important;
+}
+
+.nav-tabs.language .form-group {
+    margin-top: -50px !important;
+}
+
+.bs-stepper .bs-stepper-content .content .content-header {
+    margin-bottom: 0 !important;
+}
+
+.nav-tabs.language {
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.nav-tabs.language .nav-link {
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 5px 20px;
+    background: rgba(50, 66, 151, 0.17) !important;
+    font-weight: 500;
+    border-radius: 8px;
+    color: #575757;
+    margin: 0 5px;
+}
+
+.nav-tabs.language .nav-link.active {
+    background: #fff !important;
+    color: #324297 !important;
+    border: 1px solid #324297 !important;
+}
+
+.nav-tabs.language .nav-link:after {
+    content: none !important;
+}
+
+.nav-tabs.language .tab-content {
+    margin-top: -30px !important;
+}
+
+.details .card {
+    padding: 20px;
+    background: #fff;
+    margin-bottom: 25px;
+}
+
+.details .card h3.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.details .card .image {
+    width: 120px;
+
+    height: 120px;
+    border-radius: 10px;
+    border: 2px solid #aaa;
+    margin: 10px auto;
+    position: relative;
+}
+
+.details .card .image .edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.badge-secondary {
+    background: #fff;
+    color: #000;
+}
+
+.details .card .customFileImage>img {
+    width: 90px;
+    margin-top: 15px;
+    height: 90px;
+}
+
+.details .card p {
+    font-size: 13px;
+    // color: #aaa;
+}
+
+.details .card .stats {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10%;
+    top: 17%;
+}
+
+.details .card .stats.primary {
+    background: #0090f0;
+}
+
+.details .card .stats.warning {
+    background: #f9d500;
+}
+
+.details .card .stats.error {
+    background: #ec4b6a;
+}
+
+.details .card .stats.success {
+    background: #0ac4b9;
+}
+
+.add_category {
+    width: 75%;
+    background: #dcecf9 !important;
+    color: #3e495f !important;
+    border: 1px solid transparent !important;
+}

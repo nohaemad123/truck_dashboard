@@ -1,0 +1,207 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+.dark-layout.admin {
+	.main-menu-content .navigation-main .nav-item .menu-content {
+		background-color: $primary;
+	}
+
+	.main-menu-content .navigation-main .nav-item.open:not(.sidebar-group-active)>a {
+		background-color: $primary;
+	}
+
+	.main-menu-content .navigation-main {
+		background-color: $primary;
+	}
+
+	.main-menu-content .navigation-main .nav-item .menu-content li:not(.active) a {
+		background-color: $primary;
+	}
+
+	.main-menu .collapse-toggle-icon {
+		color: $body-bg !important;
+
+	}
+
+	.nav .modern-nav-toggle {
+		padding: 0;
+		padding-right: 0px;
+		margin: 1.171rem 0;
+		margin-top: 1.171rem;
+		margin-top: 2.8em;
+	}
+
+	.main-menu-content .navigation-main .nav-item a::after,
+	.main-menu-content .navigation-main .nav-item a {
+		color: $body-bg !important;
+	}
+	
+	.main-menu-content .navigation-main .navigation-header {
+		color: $gray-500;
+	}
+
+	.main-menu-content .navigation-main .menu-content .active {
+		z-index: 1;
+		background: $theme-dark-body-bg;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		padding: .5em;
+		border-top-left-radius: 0.6em;
+		border-bottom-left-radius: 0.6em;
+	}
+	
+	&[mobile-layout="true"]	.main-menu-content .navigation-main .menu-content .active,
+	&[mobile-layout="true"]	.main-menu-content .navigation-main  .active a {		
+		border-radius:0;
+		margin: 0;
+	}
+
+	.main-menu-content .navigation-main .menu-content .active a {
+		background-color: transparent;
+		color: $body-bg !important;
+	}
+
+	.main-menu-content .navigation-main .active .menu-title,
+	.main-menu-content .navigation-main .active i {
+		color: $body-bg !important;
+
+		letter-spacing: .5px;
+	}
+
+	.main-menu-content .navigation-main .nav-item.open>a {
+		background-color: transparent !important;
+	}
+
+	.main-menu.menu-dark {
+		// color: #dcdcdc;
+		background: $primary;
+	}
+
+	.main-menu.menu-dark .navigation li a {
+		color: $body-bg !important;
+		line-height: 1.45;
+	}
+
+
+	.main-menu.menu-dark .navigation>li.active>a svg {
+		color: $body-bg;
+	}
+
+	.main-menu.menu-dark .navigation>li>a {
+
+		margin: 0 0;
+		margin-left: 15px;
+
+	}
+
+	.main-menu.menu-dark .navigation>li>ul li:not(.has-sub) {
+		margin: 0 0;
+		margin-left: 15px;
+	}
+
+	.main-menu.menu-shadow {
+		box-shadow: none;
+	}
+
+	.main-menu.menu-dark .navigation>li.active>a {
+		background: $theme-dark-body-bg;
+		padding: 1em;
+	}
+
+	.main-menu .navbar-header {
+		border-bottom: 4px solid #3f4e9b;
+		padding-bottom: 0.7em;
+		height: fit-content;
+	}
+
+	.main-menu .navbar-header .navbar-brand {
+		display: flex;
+		align-items: center;
+		margin-top: 7px;
+		font-size: inherit;
+	}
+
+	.main-menu .ng-star-inserted.active::after {
+		content: "";
+		position: absolute;
+		background-color: transparent;
+		bottom: -50px;
+		height: 50px;
+		width: 25px;
+		border-top-right-radius: 12.5px;
+		right: 0px;
+		box-shadow: 0 -12.5px 0 0 $theme-dark-body-bg;
+	}
+	&[mobile-layout="true"] .main-menu .ng-star-inserted.active::after {		
+		border-top-left-radius: 12.5px;
+		border-top-right-radius: 0;
+		left: 0px;
+		right: auto;
+	}
+	.main-menu .ng-star-inserted.active::before {
+		content: "";
+		position: absolute;
+		background-color: transparent;
+		top: -50px;
+		height: 50px;
+		width: 25px;
+		border-bottom-right-radius: 12.5px;
+		right: 0;
+		box-shadow: 0px 12.5px 0px 0px $theme-dark-body-bg;
+	}
+	&[mobile-layout="true"] .main-menu .ng-star-inserted.active::before {		
+		border-bottom-left-radius: 12.5px;
+		border-bottom-right-radius: 0;
+		left: 0;
+		right: auto;
+	}
+
+
+
+
+	.main-menu .shadow-bottom {
+		// background: linear-gradient(180deg, #303f91 44%, rgba(40, 48, 70, 0) 73%, rgba(40, 48, 70, 0)) !important;
+		background: linear-gradient(180deg, #303f91 44%, rgba(40, 48, 70, 0) 73%, rgba(40, 48, 70, 0)) !important;
+
+	}
+
+	.main-menu .shadow-bottom {
+		display: none;
+		position: absolute;
+		z-index: 2;
+		height: 20px;
+		width: 100%;
+		pointer-events: none;
+		margin-top: -0.7rem;
+		filter: blur(5px);
+	background: linear-gradient(180deg, #303f91 44%, rgba(40, 48, 70, 0) 73%, rgba(40, 48, 70, 0)) !important;
+		;
+	}
+
+
+	.main-menu.menu-dark .navigation li a>* {
+		transition: transform 0.25s ease;
+		font-weight: bolder;
+	}
+
+	.main-menu .navbar-header .navbar-brand .brand-logo img {
+		width: 71px;
+		max-width: 100px;
+		margin-top: 3px;
+	}
+
+	.navigation {
+		font-family: cairo, Helvetica, Arial, serif;
+	}
+}
+
+

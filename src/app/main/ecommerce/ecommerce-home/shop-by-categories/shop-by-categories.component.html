@@ -1,0 +1,46 @@
+<h1 style="font-variant-caps: all-petite-caps;text-align: center;">Top Categories</h1>
+<div class="my-2">
+
+  <div
+    style="display: grid;display: grid; grid-template-columns: 1fr 1fr 1fr;grid-column-gap: 2rem;-moz-column-gap: 2rem;column-gap: 2rem;">
+    <ng-container *ngFor="let cat of categories">
+      <!-- // [
+    //   {
+    //     "id": 0,
+    //     "name": "string",
+    //     "logo": "string",
+    //     "subCategories": [
+    //       {
+    //         "value": 0,
+    //         "name": "string"
+    //       }
+    //     ]
+    //   }
+    // ] -->
+
+      <div style="border: 1px solid lightgray; padding: 1em 0;height: fit-content;display: flex;" class="my-1">
+        <div style="width: 55%">
+          <div style="display: block;margin-left: auto;margin-right: auto;width: fit-content;">
+            <img style="height: 12em;" [src]="cat?.logo" class="">
+          </div>
+        </div>
+        <div>
+          <h4> {{cat.name}} </h4>
+          <ng-container *ngFor="let subCats of cat.subCategories">
+            <a style="display: block;"> {{subCats.name}} </a>
+
+          </ng-container>
+
+        </div>
+
+      </div>
+      <!-- 0 Object { id: 11, name: "Category 8", companyId: 2, … }
+  id 11
+  name "Category 8"
+  companyId 2
+  bannerImg ""
+  description "Description 8"
+  img "https://logoisus.com/wp-content/uploads/2020/02/Electronics-Shop-Logo.jpg"
+  status 0 -->
+    </ng-container>
+  </div>

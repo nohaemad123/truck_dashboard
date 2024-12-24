@@ -1,0 +1,258 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form [formGroup]="addQuestionForm">
+                    <ul ngbNav #navQuestion="ngbNav" class="nav-tabs language justify-content-end">
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">عنوان الباقة بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="packageTitle" name="packageTitle" type="text"
+                                        class="form-control" placeholder="عنوان الباقة بالانجليزي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.packageTitle.errors) || (QuestionFormControls.packageTitle.touched && QuestionFormControls.packageTitle.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.packageTitle.errors) || (QuestionFormControls.packageTitle.touched && QuestionFormControls.packageTitle.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.packageTitle.errors.required">برجاء
+                                            ادخال
+                                            عنوان الباقة بالانجليزي
+                                        </small>
+                                    </small>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">السؤال بالعربي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="packageTitleAr" name="packageTitleAr" type="text"
+                                        class="form-control" placeholder="عنوان الباقة بالعربي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.packageTitleAr.errors) || (QuestionFormControls.packageTitleAr.touched && QuestionFormControls.packageTitleAr.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.packageTitleAr.errors) || (QuestionFormControls.packageTitleAr.touched && QuestionFormControls.packageTitleAr.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.packageTitleAr.errors.required">برجاء
+                                            ادخال
+                                            عنوان الباقة بالعربي
+                                        </small>
+                                    </small>
+
+                                </div>
+
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navQuestion"></div>
+                    <ul ngbNav #navAnswer="ngbNav" class="nav-tabs language justify-content-end">
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">وصف الباقة بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="packageDescription" name="packageDescription" type="text"
+                                        class="form-control" placeholder="وصف الباقة بالانجليزي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.packageDescription.errors) || (QuestionFormControls.packageDescription.touched && QuestionFormControls.packageDescription.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.packageDescription.errors) || (QuestionFormControls.packageDescription.touched && QuestionFormControls.packageDescription.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.packageDescription.errors.required">برجاء
+                                            ادخال
+                                            وصف الباقة بالانجليزي
+                                        </small>
+                                    </small>
+
+                                </div>
+
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">وصف الباقة بالعربي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input formControlName="packageDescriptionAr" name="packageDescriptionAr"
+                                        type="text" class="form-control" placeholder="وصف الباقة بالعربي"
+                                        [ngClass]="{ 'is-invalid':(submitted && QuestionFormControls.packageDescriptionAr.errors) || (QuestionFormControls.packageDescriptionAr.touched && QuestionFormControls.packageDescriptionAr.invalid) }">
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.packageDescriptionAr.errors) || (QuestionFormControls.packageDescriptionAr.touched && QuestionFormControls.packageDescriptionAr.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.packageDescriptionAr.errors.required">برجاء
+                                            ادخال
+                                            وصف الباقة بالعربي
+                                        </small>
+                                    </small>
+
+                                </div>
+
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navAnswer"></div>
+                    <ul ngbNav #navFeatures="ngbNav" class="nav-tabs language justify-content-end">
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">مميزات الباقة بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div *ngFor="let feature of features; let i = index" @heightIn>
+                                        <div class="row d-flex align-items-end">
+                                            <div class="col-md-10 col-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="itemcost"
+                                                        id="itemCost{{ i }}" placeholder="ميزة الباقة بالانجليزي"
+                                                        formControlName="features{{i}}" name="features" />
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-group">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1 btn-filled"
+                                                        (click)="deleteFeature(i)" rippleEffect>
+                                                        <i data-feather="x" class="mr-25"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <button class="btn btn-icon btn-primary add_variation" type="button"
+                                        (click)="addfeature()" rippleEffect>
+                                        <i data-feather="plus" class="mr-25"></i>
+                                        <span>اضافة ميزة</span>
+                                    </button>
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.features.errors) || (QuestionFormControls.features.touched && QuestionFormControls.features.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.features.errors.required">برجاء
+                                            ادخال
+                                            مميزات الباقة بالانجليزي
+                                        </small>
+                                    </small>
+
+                                </div>
+
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">مميزات الباقة بالعربي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div *ngFor="let featureAr of featuresAr; let i = index" @heightIn>
+                                        <div class="row d-flex align-items-end">
+                                            <div class="col-md-10 col-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="itemcost"
+                                                        name="itemCost{{ i }}" id="itemCost{{ i }}"
+                                                        placeholder="ميزة الباقة بالعربي" formControlName="features"
+                                                        name="features" />
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-group">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1 btn-filled"
+                                                        (click)="deleteFeatureAr(i)" rippleEffect>
+                                                        <i data-feather="x" class="mr-25"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+
+                            
+                                    <button class="btn btn-icon btn-primary add_variation" type="button"
+                                        (click)="addfeatureAr()" rippleEffect>
+                                        <i data-feather="plus" class="mr-25"></i>
+                                        <span>اضافة ميزة</span>
+                                    </button>
+                                    <small
+                                        *ngIf=" (submitted && QuestionFormControls.features.errors) || (QuestionFormControls.features.touched && QuestionFormControls.features.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="QuestionFormControls.features.errors.required">برجاء
+                                            ادخال
+                                            مميزات الباقة بالانجليزي
+                                        </small>
+                                    </small>
+
+                                </div>
+
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navFeatures"></div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group d-flex">
+
+                                <label>حالة الباقة</label>
+                                <div class="custom-control custom-control-primary custom-switch">
+                                    <input name="status" formControlName="status" type="checkbox"
+                                        class="custom-control-input" id="customSwitch3" />
+                                    <label class="custom-control-label" for="customSwitch3"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group d-flex">
+
+                                <label>افضل قيمه</label>
+                                <div class="custom-control custom-control-primary custom-switch">
+                                    <input name="best_value" formControlName="best_value" type="checkbox"
+                                        class="custom-control-input" id="customSwitch4" />
+                                    <label class="custom-control-label" for="customSwitch4"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons justify-content-end d-flex mb-3">
+                       
+                        <button *ngIf="!questionId" [disabled]="loading"
+                            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                            (click)="submitData()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>حفظ
+                        </button>
+                        <button [disabled]="loading" *ngIf="questionId"
+                            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                            (click)="updateData()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                        </button>
+
+                        <a *ngIf="questionId" (click)="deleteQuestion(questionId)"
+                            class="btn btn-icon btn-danger ml-25 mr-25 btn-lg" type="button" rippleEffect>
+                            <span>حذف</span>
+                        </a>
+                        <a routerLink="/admin/Packages"
+                        class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button" rippleEffect>
+                        <span>الغاء</span>
+                    </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

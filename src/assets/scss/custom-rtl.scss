@@ -1,0 +1,284 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+[dir="rtl"].admin {
+
+	// write here ya noha
+	.breadcrumb-item+.breadcrumb-item::before {
+		float: right !important;
+		padding-right: 0.6rem;
+		padding-left: 0.6rem;
+		color: #6e6b7b;
+		// content: "/";
+	}
+
+	.card-title {
+		text-align: right;
+	}
+
+	.form-group,
+	.form-group input,
+	.statistics-body .media-body {
+		text-align: right;
+	}
+
+	.custom-checkbox.remember_me .custom-control-label::before,
+	.custom-checkbox.remember_me .custom-control-label::after,
+	.custom-radio.remember_me .custom-control-label::before,
+	.custom-radio.remember_me .custom-control-label::after {
+		left: auto !important;
+		right: 0 !important;
+	}
+
+	.customFileImage {
+		direction: ltr;
+	}
+
+	.ql-editor{
+		text-align: right;
+	}
+
+	#user-profile .profile-header .profile-img-container{
+		right: 2.14rem;
+		left: auto;
+
+	}
+
+	.card-body{
+		text-align: right;
+	}
+
+	.custom-file-label::after {
+		right: auto;
+		left: 0;
+		border-left: 0;
+		border-right: inherit;
+	}
+
+	.details .card .customFileImage>img {
+		margin-right: 0 !important;
+		margin-left: 10px !important;
+	}
+
+	.details {
+		direction: rtl;
+		text-align: right;
+	}
+
+	.remember_me label {
+		padding-right: 25px;
+	}
+
+	.password_div {
+		direction: rtl;
+	}
+
+	button.add_user,
+	.media .user-avatar,
+	.statistics-body .avatar {
+		margin-right: 10px !important;
+		margin-left: 10px;
+	}
+
+	.vertical-overlay-menu .main-menu .navigation > li > a > svg, .vertical-overlay-menu .main-menu .navigation > li > a > i{
+		margin-left: 14px;
+		margin-right: 0;
+		float: right;
+
+	}
+
+	button.remove {
+		margin-right: 10px;
+	}
+
+	// .statistics-body 
+	//   {
+	// 	.media{
+	// 		display: block; 
+	// 		flex: unset;
+	// 	}
+	//   }
+
+	.collapsedTogle {
+		margin-left: unset;
+		margin-right: auto !important;
+	}
+
+
+	.toggle-icon,
+	.vertical-layout.vertical-menu-modern .collapse-toggle-icon {
+		margin-right: 7.425rem !important;
+	}
+
+
+	.main-menu {
+		right: 0;
+	}
+
+	body {
+		text-align: right !important;
+	}
+
+	.main-menu.menu-dark .navigation>li>a {
+
+		margin: 0 0;
+		margin-right: 15px;
+
+	}
+
+	.main-menu.menu-dark .navigation>li>ul li:not(.has-sub) {
+		margin: 0 0;
+		margin-right: 15px;
+	}
+
+	:not(.blank-page) .content {
+
+		margin-left: auto;
+		margin-right: $menu-expanded-width;
+	}
+
+	.navbar-container.content {
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.header-navbar.navbar-static-top {
+		right: $menu-expanded-width;
+
+	}
+
+	.header-navbar.navbar-static-top .nav.navbar-nav {
+		margin-right: auto !important;
+		margin-left: 0 !important;
+
+	}
+
+	.vertical-layout.vertical-menu-modern.menu-expanded .main-menu .navigation li.has-sub>a::after {
+		right: auto;
+		left: 20px;
+		transform: rotate(180deg);
+
+	}
+
+	.vertical-layout.vertical-menu-modern .main-menu .navigation>li>a svg,
+	.vertical-layout.vertical-menu-modern .main-menu .navigation>li>a i {
+		margin-left: 1.1rem;
+		margin-right: 0;
+	}
+
+	.vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content>li>a svg,
+	.vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content>li>a i {
+		margin-left: 1.45rem;
+		margin-right: 0;
+	}
+
+	.header-navbar .navbar-container ul.navbar-nav li a.dropdown-user-link .user-nav {
+		margin-right: 0;
+		margin-left: 0.8rem;
+
+	}
+
+	.header-navbar .navbar-container .dropdown-language .nav-link .flag-icon {
+		margin-right: 0;
+		margin-left: 0.4rem;
+	}
+
+	.input-group>.input-group-append>.btn,
+	.input-group>.input-group-append>.input-group-text,
+	.input-group>.input-group-prepend:not(:first-child)>.btn,
+	.input-group>.input-group-prepend:not(:first-child)>.input-group-text,
+	.input-group>.input-group-prepend:first-child>.btn:not(:first-child),
+	.input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child) {
+		border-radius: 0.357rem;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.input-group-append .input-group-text {
+		border: 1px solid $custom-control-border-color;
+		border-right: 0;
+	}
+
+	.input-group:not(.has-validation)>.form-control:not(:last-child),
+	.input-group:not(.has-validation)>.custom-select:not(:last-child),
+	.input-group:not(.has-validation)>.custom-file:not(:last-child) .custom-file-label,
+	.input-group:not(.has-validation)>.custom-file:not(:last-child) .custom-file-label::after {
+		border-radius: 0.357rem;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	.input-group-merge .form-control:not(:last-child) {
+		padding: 0.438rem 1rem;
+		border: 1px solid $custom-control-border-color;
+
+		padding-left: 0;
+		border-left: 0;
+	}
+
+	.auth-custom-style {
+
+		.input-group-append .input-group-text {
+			border: 1px solid $custom-control-border-color;
+			border-left: 0;
+		}
+
+		.input-group-merge .form-control:not(:last-child) {
+
+			padding: 0.438rem 1rem;
+			border: 1px solid $custom-control-border-color;
+
+			padding-right: 0;
+			border-right: 0;
+		}
+
+	}
+
+	.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell{
+		text-align: right;
+		font-size: 14px !important; 
+    font-weight: 600 !important;
+	}
+
+
+
+	.datatable-header-cell{
+		font-size: 12px  !important; 
+		font-weight: bold !important;
+	}
+	.dropdown-menu-right {
+		right: auto !important;
+		left: 0 !important;
+		text-align: right;
+
+	}
+
+	.dropdown-menu-header .notification-title {
+		margin-left: auto !important;
+		margin-right: 0 !important;
+	}
+
+	.navigation .navigation-header {
+		text-align: right;
+		padding-right: 1em !important;
+	}
+
+	.btn.search-input-close {
+		left: 1rem;
+		right: auto;
+	}
+
+	.search-input-icon {
+		right: 1rem !important;
+		left: auto !important;
+	}
+}

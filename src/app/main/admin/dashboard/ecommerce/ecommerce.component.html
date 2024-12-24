@@ -1,0 +1,108 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <div class="row match-height" *ngIf="isAdmin || isClient">
+      <!-- Medal Card -->
+
+      <!-- Statistics Card -->
+      <div class="col-xl-12 col-md-12 col-12">
+        <div class="card card-statistics">
+          <div class="card-header">
+            <h4 class="card-title">الاحصائيات</h4>
+            <div class="d-flex align-items-center">
+              <!-- <p class="card-text font-small-2 mr-25 mb-0">تم التعديل منذ شهر</p> -->
+            </div>
+          </div>
+          <div class="card-body statistics-body">
+            <div class="row">
+              <div class=" my-2 col-6 mb-2 mb-xl-0" routerLink="/admin/Trucks">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-primary mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="truck" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.trucks }}</h4>
+                    <p class="card-text font-small-3 mb-0">عربة المتنقلة</p>
+                  </div>
+                </div>
+              </div>
+              <div class=" my-2 col-6  mb-2 mb-xl-0" routerLink="/admin/users">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-info mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="user" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.users }}</h4>
+                    <p class="card-text font-small-3 mb-0">مستخدم</p>
+                  </div>
+                </div>
+              </div>
+              <div class=" my-2 col-6 mb-2 mb-sm-0" routerLink="/admin/businessTypes">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-danger mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="database" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.businessTypes }}</h4>
+                    <p class="card-text font-small-3 mb-0">نوع نشاط</p>
+                  </div>
+                </div>
+              </div>
+              <div class=" my-2 col-6" routerLink="/admin/cities">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-success mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="map-pin" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.cities }}</h4>
+                    <p class="card-text font-small-3 mb-0">مدينة</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-6" routerLink="/admin/banks">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-info mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="credit-card" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.banks }}</h4>
+                    <p class="card-text font-small-3 mb-0">بنك</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6" routerLink="/admin/Frequent-questions">
+                <div class="media media_stat">
+                  <div class="avatar bg-light-danger mr-2">
+                    <div class="avatar-content">
+                      <i data-feather="help-circle" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{ statistics.fqas }}</h4>
+                    <p class="card-text font-small-3 mb-0">سؤال</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Statistics Card -->
+    </div>
+
+  
+  </div>
+</div>

@@ -1,0 +1,723 @@
+<app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+<div class="details products">
+  <form [formGroup]="addEditProductForm">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- <div class="card">
+          <h3 class="title">{{'FORM.LABELS.THUMNBAIL'|translate}}</h3>
+          <div class="image text-center">
+            <img src="https://guide-images.cdn.ifixit.com/igi/o4OjCNmNeOhvsS1P.medium">
+            <div class="edit">
+              <i style="cursor: pointer;" data-feather="edit-2"
+                class="badge badge-pill badge-glow badge-secondary badge-up"></i>
+              <input type="file" id="updateFileImage" accept="image/*"
+                style="opacity: 0; position: absolute; cursor: pointer; z-index: 102" />
+            </div>
+
+
+          </div>
+          <p class="text-center">{{'FORM.LABELS.THUMBNAIL_DESC'|translate}}</p>
+        </div> -->
+        <div class="card">
+          <div class="d-flex">
+            <h3 class="title">{{'FORM.LABELS.STATUS'|translate}}</h3>
+            <div class="stats {{'colorCodeStatus'+statusValue}}"></div>
+          </div>
+
+
+          <ng-select bindValue="value" placeholder="Select status" (change)="setStatus($event)" name="status"
+            formControlName="status" [items]="status" bindLabel="name"> </ng-select>
+          <p class="mt-0.5">{{'FORM.LABELS.STATUS_DESC'|translate}}</p>
+
+          <ng-container *ngIf="scheduled">
+            <label>{{'FORM.LABELS.PUBLISHING'|translate}}</label>
+            <ng2-flatpickr
+            formControlName="publishDate" name="publishDate"
+            [config]="dateTimeOptions" placeholder="{{'FORM.PLACEHOLDER.DATA_TIME'|translate}}"
+              name="dateTime"></ng2-flatpickr>
+          </ng-container>
+        </div>
+        <div class="card">
+          <h3 class="title">{{'FORM.LABELS.PRODUCT_DETAILS'|translate}}</h3>
+          <div class="form-group">
+            <label>{{'FORM.LABELS.CATEGORY'|translate}}</label>
+            <ng-select (change)="selectCategory($event)" placeholder="Select cateogry" [items]="categoryList"
+              bindLabel="name" bindValue="value" name="category" formControlName="category"> </ng-select>
+            <p class="mt-0.5">{{'FORM.LABELS.CATEGORY_DESC'|translate}}</p>
+          </div>
+          <div class="form-group" *ngIf="subCategory_items.length!=0">
+            <label>{{'FORM.LABELS.SUB_CATEGORY'|translate}}</label>
+            <div class="d-flex">
+              <ng-select class="subCateorySelect" name="subCategoryId" formControlName="subCategoryId"
+                (change)="selectSubCategory($event)" placeholder="Select sub cateogry" [items]="subCategory_items"
+                bindValue="id" bindLabel="name">
+              </ng-select>
+              <button (click)="addSelectSubCategory()" class=" btn btn-primary btn-sm"><i
+                  data-feather="plus"></i></button>
+            </div>
+            <p class="mt-0.5 m-0">{{'FORM.LABELS.SUB_CATEGORY_DESC'|translate}}</p>
+
+
+          </div>
+          <div class="subCategories d-flex">
+
+            <span class="subCategory" *ngFor="let subCategory of productSubCategory">{{subCategory.name}} <span
+                class="delete" (click)="deleteCat(subCategory.subCategoryId)">x</span></span>
+          </div>
+          <a class="btn btn-primary add_category" routerLink="/admin/categories/Add" role="button" target="_blank"
+            rippleEffect><span [data-feather]="'plus'" [class]="'mr-25'"></span> {{'ADD_CATEGORY'|translate}}</a>
+          <div class="form-group">
+            <label>{{'FORM.LABELS.BRANDS'|translate}}</label>
+            <ng-select placeholder="Select brand" bindValue="value" (change)="selectBrand($event)" name="brandID"
+              formControlName="brandID" [items]="brandList" bindLabel="name"> </ng-select>
+            <p class="mt-0.5">{{'FORM.LABELS.BRAND_DESC'|translate}}</p>
+          </div>
+          <div class="form-group">
+            <label>{{'FORM.LABELS.TAGS'|translate}}</label>
+            <ng-select [items]="tagList" [multiple]="true" bindLabel="name" bindValue="name" formControlName="tags"
+              name="tags">
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                <span class="ng-value-label"> {{ item.name }}</span>
+                <span class="ng-value-icon right" aria-hidden="true" (click)="clear(item)">×</span>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item">
+                {{ item.name }}
+              </ng-template>
+            </ng-select>
+            <p class="mt-0.5">{{'FORM.LABELS.TAG_DESC'|translate}}</p>
+          </div>
+
+        </div>
+        <div class="card">
+          <h3 class="title">{{'FORM.LABELS.PRODUCT_TEMPLATE'|translate}}</h3>
+          <label>{{'FORM.LABELS.PRODUCT_TEMPLATE_LABEL'|translate}}</label>
+          <ng-select placeholder="Select product template" [items]="product_template" bindLabel="name"> </ng-select>
+          <p class="mt-0.5">{{'FORM.LABELS.PRODUCT_TEMPLATE_DESC'|translate}}</p>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+          <li ngbNavItem>
+            <a ngbNavLink>{{'FORM.TABS.GENERAL'|translate}}</a>
+            <ng-template ngbNavContent>
+              <div class="card">
+                <h3 class="title">{{'FORM.TABS.GENERAL'|translate}}</h3>
+                <ul ngbNav #navEnd="ngbNav" class="nav-tabs language justify-content-end">
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ENGLISH'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.ENAME'|translate}}:</label>
+                        <input formControlName="productNameEn" name="productNameEn" type="text" id="first-name-icon"
+                          class="form-control" name="fname-icon"
+                          [ngClass]="{ 'is-invalid':(submitted && f.productNameEn.errors) || (f.productNameEn.touched && f.productNameEn.invalid) }"
+                          placeholder="{{'FORM.PLACEHOLDER.ENAME'|translate}}" />
+                        <div
+                          *ngIf="(submitted && f.productNameEn.errors) || (f.productNameEn.touched && f.productNameEn.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.productNameEn.errors.required">{{'FORM.MESSAGES.ENAME_REQUIRED' | translate}}
+                          </div>
+                          <div *ngIf="f.productNameEn.errors.minlength">{{'FORM.MESSAGES.ENAME_LEAST' | translate}}
+                          </div>
+                        </div>
+                        <p>{{'FORM.LABELS.ENAME_DESC'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ARABIC'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.ANAME'|translate}}:</label>
+                        <input type="text" id="first-name-icon" formControlName="productName" name="productName"
+                          class="form-control" name="fname-icon"
+                          [ngClass]="{ 'is-invalid':(submitted && f.productName.errors) || (f.productName.touched && f.productName.invalid) }"
+                          placeholder="{{'FORM.PLACEHOLDER.ANAME'|translate}}" />
+                        <div
+                          *ngIf="(submitted && f.productName.errors) || (f.productName.touched && f.productName.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.productName.errors.required">{{'FORM.MESSAGES.ANAME_REQUIRED' | translate}}
+                          </div>
+                          <div *ngIf="f.productName.errors.minlength">{{'FORM.MESSAGES.ANAME_LEAST' | translate}}</div>
+                        </div>
+                        <p>{{'FORM.LABELS.ANAME_DESC'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+
+                </ul>
+                <div [ngbNavOutlet]="navEnd"></div>
+                <ul ngbNav #navEnd2="ngbNav" class="nav-tabs language justify-content-end">
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ENGLISH'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.EBREIF_DESCRIPTION_TITLE'|translate}}:</label>
+                        <quill-editor formControlName="productShortDescriptionEn" name="productShortDescriptionEn"
+                          customToolbarPosition="'bottom'"
+                          [ngClass]="{ 'is-invalid':(submitted && f.productShortDescriptionEn.errors) || (f.productShortDescriptionEn.touched && f.productShortDescriptionEn.invalid) }"
+                          class="border-bottom-0 breif" placeholder="{{'FORM.PLACEHOLDER.EBREIF_DESC'|translate}}">
+                          <div quill-editor-toolbar>
+                            <div class="desc-toolbar border-top-0">
+                              <span class="ql-formats mr-0">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-align"></button>
+                              </span>
+                            </div>
+                          </div>
+                        </quill-editor>
+                        <div
+                          *ngIf="(submitted && f.productShortDescriptionEn.errors) || (f.productShortDescriptionEn.touched && f.productShortDescriptionEn.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.productShortDescriptionEn.errors.required">
+                            {{'FORM.MESSAGES.ENGLISH_BRIEF_DESCRIPTION_REQUIRED' | translate}}</div>
+                          <div *ngIf="f.productShortDescriptionEn.errors.minlength">
+                            {{'FORM.MESSAGES.ENGLISH_BRIEF_DESCRIPTION_MAX' | translate}}</div>
+                        </div>
+                        <p>{{'FORM.LABELS.EBREIF_DESCRIPTION_CONTENT'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ARABIC'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.ABREIF_DESCRIPTION_TITLE'|translate}}:</label>
+                        <quill-editor name="productShortDescription" formControlName="productShortDescription"
+                          customToolbarPosition="'bottom'"
+                          [ngClass]="{ 'is-invalid':(submitted && f.productShortDescription.errors) || (f.productShortDescription.touched && f.productShortDescription.invalid) }"
+                          class="border-bottom-0 breif" placeholder="{{'FORM.PLACEHOLDER.EBREIF_DESC'|translate}}">
+                          <div quill-editor-toolbar>
+                            <div class="desc-toolbar border-top-0">
+                              <span class="ql-formats mr-0">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-align"></button>
+                              </span>
+                            </div>
+                          </div>
+                        </quill-editor>
+
+                        <div
+                          *ngIf="(submitted && f.productShortDescription.errors) || (f.productShortDescription.touched && f.productShortDescription.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.productShortDescription.errors.required">
+                            {{'FORM.MESSAGES.ARABIC_BRIEF_DESCRIPTION_REQUIRED' | translate}}</div>
+                          <div *ngIf="f.productShortDescription.errors.minlength">
+                            {{'FORM.MESSAGES.ARABIC_BRIEF_DESCRIPTION_MAX' | translate}}</div>
+                        </div>
+                        <p>{{'FORM.LABELS.ABREIF_DESCRIPTION_CONTENT'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+
+                </ul>
+                <div [ngbNavOutlet]="navEnd2"></div>
+
+              </div>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.MEDIA'|translate}}</h3>
+                <div class="image-upload-wrap">
+                  <div class="media" *ngIf="productImages.length==0">
+                    <a class="media-left" href="javascript:void(0)">
+                      <img src="assets/images/icons/file.png" alt="Generic placeholder image" height="50" width="50" />
+                    </a>
+                    <div class="media-body">
+                      <h4 class="media-heading">{{'FORM.LABELS.IMAGES.HEADER'|translate}}</h4>
+                      <p>{{'FORM.LABELS.IMAGES.CONTENT'|translate}}</p>
+                    </div>
+                  </div>
+
+                  <div class="product_images" *ngIf="productImages.length!=0">
+                    <div class="row">
+
+
+                      <div class="col-md-4" *ngFor="let image of productImages;let i=index">
+                        <div class="product_image d-flex justify-content-center">
+                          <img [src]="image.imageProduct">
+                          <div class="edit" (click)="removeImage(i)">
+                            <i style="cursor: pointer;" data-feather="x"
+                              class="badge badge-pill badge-secondary badge-up"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <input (change)="onSelectImage($event)" class="file-upload-input" multiple type='file'
+                    accept="image/*" />
+
+                </div>
+
+              </div>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.PRICING'|translate}}</h3>
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.BASE_PRICE'|translate}}:</label>
+                  <input
+                    [ngClass]="{ 'is-invalid':(submitted && f.priceProduct.errors) || (f.priceProduct.touched && f.priceProduct.invalid) }"
+                    type="number" id="first-name-icon" class="form-control" name="priceProduct"
+                    formControlName="priceProduct" placeholder="199.99" />
+                  <div
+                    *ngIf="(submitted && f.priceProduct.errors) || (f.priceProduct.touched && f.priceProduct.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.priceProduct.errors.required">{{'FORM.MESSAGES.PRICE_REQUIRED' | translate}}</div>
+                  </div>
+                  <p>{{'FORM.LABELS.PRODUCT_PRICE_DESC'|translate}}</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label" for="TDRequiredField">{{'FORM.LABELS.COST'|translate}}:</label>
+                  <input
+                    [ngClass]="{ 'is-invalid':(submitted && f.costProduct.errors) || (f.costProduct.touched && f.costProduct.invalid) }"
+                    type="number" id="first-name-icon" class="form-control" name="costProduct"
+                    formControlName="costProduct" placeholder="{{'FORM.PLACEHOLDER.COST'|translate}}" />
+                  <div *ngIf="(submitted && f.costProduct.errors) || (f.costProduct.touched && f.costProduct.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.costProduct.errors.required">{{'FORM.MESSAGES.COST_REQUIRED' | translate}}</div>
+                  </div>
+                  <p>{{'FORM.LABELS.COST_DESC'|translate}}</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.DISCOUNT_TYPE'|translate}}:</label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group mb-2">
+                        <div class="custom-control custom-radio {{!isPercentage?'active':''}}"
+                          (click)="isPercentage = false">
+                          <input type="radio" id="customRadio1" name="customRadio" [checked]="isPercentage===false"
+                            class="custom-control-input" />
+                          <label class="custom-control-label radio"
+                            for="customRadio1">{{'FORM.LABELS.NO_DISCOUNT'|translate}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group mb-2">
+                        <div class="custom-control custom-radio  {{isPercentage?'active':''}}"
+                          (click)="isPercentage = true">
+                          <input type="radio" [checked]="isPercentage===true" id="customRadio2" name="customRadio"
+                            class="custom-control-input" />
+                          <label class="custom-control-label radio"
+                            for="customRadio2">{{'FORM.LABELS.PERCENTAGE'|translate}}
+                            %</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group mb-2">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="customRadio3" disabled name="customRadio"
+                            class="custom-control-input" />
+                          <label class="custom-control-label radio"
+                            for="customRadio3">{{'FORM.LABELS.FIXED_PRICE'|translate}}</label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <p></p>
+
+                  </div>
+                  <div *ngIf="isPercentage" class="mt-2">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label>{{'FORM.LABELS.DISCOUNT_PERCENTAGE'|translate}}</label>
+                      </div>
+                      <div class="col-md-12">
+
+                        <h2 for="volume" class="text-center discountPercentage">{{discountPercentage}} <span
+                            class="percentage">%</span>
+                        </h2>
+                      </div>
+                    </div>
+                    <input type="range" id="volume" name="volume" (change)="setDiscount($event)" min="1" max="100"
+                      class="form-control" [value]="10">
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.TAX_CLASS'|translate}}</label>
+                        <ng-select formControlName="taxId" name="taxId" bindValue="id" placeholder="Select tax class"
+                          [items]="taxClass" bindLabel="value"> </ng-select>
+                        <p>{{'FORM.MESSAGES.TAX_CLASS'|translate}}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.VAT_AMOUNT'|translate}}</label>
+                        <input type="number" id="first-name-icon" class="form-control" name="vatAmount" placeholder="35"
+                          formControlName="vatAmount" />
+                        <p>{{'FORM.MESSAGES.VAT_AMOUNT'|translate}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink>{{'FORM.TABS.ADVANCED'|translate}}</a>
+            <ng-template ngbNavContent>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.INVENTORY'|translate}}</h3>
+                <div class="form-group">
+                  <label class="form-control-label" for="TDRequiredField">{{'FORM.LABELS.CODE'|translate}}:</label>
+                  <input type="text" id="first-name-icon" class="form-control" name="codeProduct"
+                    formControlName="codeProduct"
+                    [ngClass]="{ 'is-invalid':(submitted && f.codeProduct.errors) || (f.codeProduct.touched && f.codeProduct.invalid) }"
+                    placeholder="011985001" />
+                  <div *ngIf="(submitted && f.codeProduct.errors) || (f.codeProduct.touched && f.codeProduct.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.codeProduct.errors.required">{{'FORM.MESSAGES.CODE_REQUIRED' | translate}}</div>
+                    <div *ngIf="f.codeProduct.errors.maxlength">{{'FORM.MESSAGES.CODE_MAX' | translate}}</div>
+                  </div>
+                  <p>{{'FORM.MESSAGES.CODE_DESC'|translate}}</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label" for="TDRequiredField">{{'FORM.LABELS.BARCODE'|translate}}:</label>
+                  <input type="text" id="first-name-icon" class="form-control" name="fname-icon"
+                    placeholder="011985001" />
+                  <p>{{'FORM.MESSAGES.BARCODE'|translate}}</p>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        for="TDRequiredField">{{'FORM.LABELS.QUANTITY'|translate}}</label>
+                      <input type="number" id="first-name-icon" formControlName="qteProducts"
+                        [ngClass]="{ 'is-invalid':(submitted && f.qteProducts.errors) || (f.qteProducts.touched && f.qteProducts.invalid) }"
+                        class="form-control" name="qteProducts" placeholder="35" />
+
+                      <div
+                        *ngIf="(submitted && f.qteProducts.errors) || (f.qteProducts.touched && f.qteProducts.invalid)"
+                        class="invalid-feedback">
+                        <div *ngIf="f.qteProducts.errors.required">{{'FORM.MESSAGES.QUANTITY_REQUIRED' | translate}}
+                        </div>
+                      </div>
+                      <p>{{'FORM.MESSAGES.QUANTITY'|translate}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="form-group">
+
+                      <input type="text" id="first-name-icon" class="form-control" name="fname-icon"
+                        placeholder="{{'FORM.PLACEHOLDER.WAREHOUSE'|translate}}" />
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        for="TDRequiredField">{{'FORM.LABELS.MINIMUM_QUANTITY'|translate}}</label>
+                      <input type="number" id="first-name-icon" formControlName="minimumQTE"
+                        [ngClass]="{ 'is-invalid':(submitted && f.minimumQTE.errors) || (f.minimumQTE.touched && f.minimumQTE.invalid) }"
+                        class="form-control" name="minimumQTE" placeholder="35" />
+
+                      <div *ngIf="(submitted && f.minimumQTE.errors) || (f.minimumQTE.touched && f.minimumQTE.invalid)"
+                        class="invalid-feedback">
+                        <div *ngIf="f.minimumQTE.errors.required">{{'FORM.MESSAGES.MINIMUM_QUANTITY_REQUIRED' |
+                          translate}}</div>
+                      </div>
+                      <p>{{'FORM.MESSAGES.MIN_QUA_DESC'|translate}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        for="TDRequiredField">{{'FORM.LABELS.MAXIMUM_QUANTITY'|translate}}</label>
+                      <input type="number" id="first-name-icon" formControlName="maximumQTE" class="form-control"
+                        name="maximumQTE"
+                        [ngClass]="{ 'is-invalid':(submitted && f.maximumQTE.errors) || (f.maximumQTE.touched && f.maximumQTE.invalid) }"
+                        placeholder="40" />
+                      <div *ngIf="(submitted && f.maximumQTE.errors) || (f.maximumQTE.touched && f.maximumQTE.invalid)"
+                        class="invalid-feedback">
+                        <div *ngIf="f.maximumQTE.errors.required">{{'FORM.MESSAGES.MAXIMUM_QUANTITY_REQUIRED' |
+                          translate}}</div>
+                      </div>
+                      <p>{{'FORM.MESSAGES.MAX_QUA_DESC'|translate}}</p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label" for="TDRequiredField">{{'FORM.LABELS.BACKORDERS'|translate}}</label>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck2"
+                      formControlName="allowBackorders" name="allowBackorders" />
+                    <label class="custom-control-label" for="customCheck2">{{'FORM.LABELS.YES'|translate}}</label>
+                  </div>
+                  <p>{{'FORM.MESSAGES.BACKORDERS'|translate}}</p>
+                </div>
+
+                <ul ngbNav #navEnd3="ngbNav" class="nav-tabs language justify-content-end">
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ENGLISH'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.EPRODUCT_DESCRIPTION_TITLE'|translate}}:</label>
+                        <quill-editor name="descriptionEn" formControlName="descriptionEn"
+                          customToolbarPosition="'bottom'"
+                          [ngClass]="{ 'is-invalid':(submitted && f.descriptionEn.errors) || (f.descriptionEn.touched && f.descriptionEn.invalid) }"
+                          class="border-bottom-0 breif" placeholder="{{'FORM.PLACEHOLDER.EBREIF_DESC'|translate}}">
+                          <div quill-editor-toolbar>
+                            <div class="desc-toolbar border-top-0">
+                              <span class="ql-formats mr-0">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-align"></button>
+                              </span>
+                            </div>
+                          </div>
+                        </quill-editor>
+                        <div
+                          *ngIf="(submitted && f.descriptionEn.errors) || (f.descriptionEn.touched && f.descriptionEn.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.descriptionEn.errors.required">
+                            {{'FORM.MESSAGES.ENGLISH_PRODUCT_DESCRIPTION_REQUIRED' | translate}}</div>
+                        </div>
+                        <p>{{'FORM.LABELS.EPRODUCT_DESCRIPTION_CONTENT'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li ngbNavItem>
+                    <a ngbNavLink>{{'FORM.TABS.ARABIC'|translate}}</a>
+                    <ng-template ngbNavContent>
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          for="TDRequiredField">{{'FORM.LABELS.APRODUCT_DESCRIPTION_TITLE'|translate}}:</label>
+                        <quill-editor name="description"
+                          [ngClass]="{ 'is-invalid':(submitted && f.descriptionEn.errors) || (f.descriptionEn.touched && f.descriptionEn.invalid) }"
+                          customToolbarPosition="'bottom'" formControlName="description" class="border-bottom-0 breif"
+                          placeholder="{{'FORM.PLACEHOLDER.EBREIF_DESC'|translate}}">
+                          <div quill-editor-toolbar>
+                            <div class="desc-toolbar border-top-0">
+                              <span class="ql-formats mr-0">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-align"></button>
+                              </span>
+                            </div>
+                          </div>
+                        </quill-editor>
+                        <div
+                          *ngIf="(submitted && f.description.errors) || (f.description.touched && f.description.invalid)"
+                          class="invalid-feedback">
+                          <div *ngIf="f.description.errors.required">
+                            {{'FORM.MESSAGES.ARABIC_PRODUCT_DESCRIPTION_REQUIRED' | translate}}</div>
+                        </div>
+                        <p>{{'FORM.LABELS.APRODUCT_DESCRIPTION_CONTENT'|translate}}</p>
+                      </div>
+                    </ng-template>
+                  </li>
+                </ul>
+                <div [ngbNavOutlet]="navEnd3"></div>
+              </div>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.VARIATIONS'|translate}}</h3>
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.PRODUCT_VARIATION'|translate}}</label>
+                  <div *ngFor="let item of items; let i = index" @heightIn>
+                    <div class="row d-flex align-items-end">
+                      <div class="col-md-4 col-12">
+                        <div class="form-group">
+                          <ng-select name="itemName{{ i }}" id="itemName{{ i }}" placeholder="Select a variation"
+                            [items]="variation" bindLabel="name"> </ng-select>
+
+                        </div>
+                      </div>
+
+                      <div class="col-md-3 col-12">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="itemcost" name="itemCost{{ i }}"
+                            id="itemCost{{ i }}" placeholder="{{'FORM.LABELS.VARIATION'|translate}}" />
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-2 col-12">
+                        <div class="form-group">
+                          <button class="btn btn-outline-danger text-nowrap px-1 btn-filled" (click)="deleteItem(i)"
+                            rippleEffect>
+                            <i data-feather="x" class="mr-25"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <button class="btn btn-icon btn-primary add_variation" type="button" (click)="addItem()" rippleEffect>
+                    <i data-feather="plus" class="mr-25"></i>
+                    <span>{{'FORM.LABELS.ADD_VARIATION'|translate}}</span>
+                  </button>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.SHIPPING'|translate}}</h3>
+                <div class="form-group">
+
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="requiredShipping"
+                      formControlName="requiredShipping" checked id="customCheck3" (change)="changePhysical($event)" />
+                    <label class="custom-control-label"
+                      for="customCheck3">{{'FORM.LABELS.PHYSICAL_PRODUCT'|translate}}</label>
+                  </div>
+                  <p>{{'FORM.MESSAGES.PHYSICAL_PRODUCT'|translate}}</p>
+                </div>
+                <div *ngIf="isPhysical">
+                  <div class="form-group">
+                    <label class="form-control-label" for="TDRequiredField">{{'FORM.LABELS.WEIGHT'|translate}}:</label>
+                    <input type="number"
+                      [ngClass]="{ 'is-invalid':(submitted && f.weight.errors) || (f.weight.touched && f.weight.invalid) }"
+                      name="weight" formControlName="weight" id="first-name-icon" class="form-control" name="fname-icon"
+                      placeholder="4.3" />
+
+                    <div *ngIf="(submitted && f.weight.errors) || (f.weight.touched && f.weight.invalid)"
+                      class="invalid-feedback">
+                      <div *ngIf="f.weight.errors.required">{{'FORM.MESSAGES.WEIGHT_REQUIRED' | translate}}</div>
+                    </div>
+                    <p>{{'FORM.MESSAGES.WEIGHT'|translate}}</p>
+                  </div>
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.DIMENSIONS'|translate}}:</label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="number" id="first-name-icon" class="form-control" name="width" placeholder="12"
+                          formControlName="width" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="number" id="first-name-icon" class="form-control" placeholder="4"
+                          formControlName="height" name="height" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="number" id="first-name-icon" class="form-control" placeholder="8.5"
+                          formControlName="length" name="length" />
+                      </div>
+                    </div>
+                  </div>
+                  <p>{{'FORM.MESSAGES.DIMENSIONS'|translate}}</p>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="title">{{'FORM.LABELS.META_OPTIONS'|translate}}</h3>
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.SEO.PRODUCT_PAGE_TITLE'|translate}}:</label>
+                  <input type="text" id="first-name-icon" class="form-control"
+                    [ngClass]="{ 'is-invalid':(submitted && f.productPageTitle.errors) || (f.productPageTitle.touched && f.productPageTitle.invalid) }"
+                    name="productPageTitle" formControlName="productPageTitle"
+                    placeholder="{{'FORM.PLACEHOLDER.META_TAG_TITLE'|translate}}" />
+                  <div
+                    *ngIf="(submitted && f.productPageTitle.errors) || (f.productPageTitle.touched && f.productPageTitle.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.productPageTitle.errors.required">{{'FORM.MESSAGES.PRODUCT_PAGE_TITLE_REQUIRED' |
+                      translate}}</div>
+                    <div *ngIf="f.productPageTitle.errors.maxlength">{{'FORM.MESSAGES.PRODUCT_PAGE_TITLE_MAX' |
+                      translate}}</div>
+                  </div>
+                  <p>{{'FORM.MESSAGES.META_TITLE'|translate}}</p>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.SEO.PRODUCT_PAGE_DESCRIPTION'|translate}}:</label>
+                  <quill-editor customToolbarPosition="'bottom'" class="border-bottom-0 breif"
+                    placeholder="{{'FORM.PLACEHOLDER.EBREIF_DESC'|translate}}"
+                    [ngClass]="{ 'is-invalid':(submitted && f.productPageDescription.errors) || (f.productPageDescription.touched && f.productPageDescription.invalid) }"
+                    name="productPageDescription" formControlName="productPageDescription">
+                    <div quill-editor-toolbar>
+                      <div class="desc-toolbar border-top-0">
+                        <span class="ql-formats mr-0">
+                          <button class="ql-bold"></button>
+                          <button class="ql-italic"></button>
+                          <button class="ql-underline"></button>
+                          <button class="ql-align"></button>
+                        </span>
+                      </div>
+                    </div>
+                  </quill-editor>
+                  <div
+                    *ngIf="(submitted && f.productPageDescription.errors) || (f.productPageDescription.touched && f.productPageDescription.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.productPageDescription.errors.required">
+                      {{'FORM.MESSAGES.PRODUCT_PAGE_DESCRIPTION_REQUIRED' | translate}}</div>
+                    <div *ngIf="f.productPageDescription.errors.maxlength">
+                      {{'FORM.MESSAGES.PRODUCT_PAGE_DESCRIPTION_MAX' | translate}}</div>
+                  </div>
+                  <p>{{'FORM.MESSAGES.META_DESCRIPTION'|translate}}</p>
+                </div>
+                <!-- <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.SEO.KEYWORDS'|translate}}:</label>
+                  <input type="text" id="first-name-icon" class="form-control" name="fname-icon" placeholder="" />
+                  <p>{{'FORM.MESSAGES.META_KEYWORDS'|translate}}</p>
+                </div> -->
+                <div class="form-group">
+                  <label class="form-control-label"
+                    for="TDRequiredField">{{'FORM.LABELS.PRODUCT_PAGE_URL'|translate}}:</label>
+                  <input type="text"
+                    [ngClass]="{ 'is-invalid':(submitted && f.productPageUrl.errors) || (f.productPageUrl.touched && f.productPageUrl.invalid) }"
+                    formControlName="productPageUrl" id="first-name-icon" class="form-control" name="productPageUrl"
+                    placeholder="https://example.nasayan.store/products/" />
+                  <div
+                    *ngIf="(submitted && f.productPageUrl.errors) || (f.productPageUrl.touched && f.productPageUrl.invalid)"
+                    class="invalid-feedback">
+                    <div *ngIf="f.productPageUrl.errors.required">{{'FORM.MESSAGES.PRODUCT_PAGE_url_REQUIRED' |
+                      translate}}</div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+
+        </ul>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        <div class="buttons justify-content-end d-flex">
+          <a [routerLink]="['/admin/products']" class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button"
+            rippleEffect>
+            <span>{{'CANCEL'|translate}}</span>
+          </a>
+          <button [disabled]="loading" *ngIf="!id" (click)="addProduct()"
+            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <span>{{'SAVE'|translate}}</span>
+
+          </button>
+
+          <button [disabled]="loading" (click)="updateProduct()" *ngIf="id"
+            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            {{'EDIT'|translate}}
+
+          </button>
+
+          <a *ngIf="id" (click)="deleteProduct(id)" class="btn btn-icon btn-danger ml-25 mr-25 btn-lg" type="button"
+            rippleEffect>
+            <span>{{'ACTIONS.DELETE_PRODUCT'|translate}}</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

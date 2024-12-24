@@ -1,0 +1,17 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+
+
+.buttons a.cancel {
+    background: #fff !important;
+    color: #3e495f !important;
+    padding: 11px !important;
+    border: 1px solid #3e495f !important;
+}
+
+
+.custom-checkbox .custom-control-label::before, .custom-checkbox .custom-control-label::after, .custom-radio .custom-control-label::before, .custom-radio .custom-control-label::after{
+    right: 0px;
+
+}

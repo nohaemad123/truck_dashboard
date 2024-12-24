@@ -1,0 +1,99 @@
+
+
+
+<div [ngStyle]="formStyle">
+
+<div class="header" [ngStyle]="options.header.style">
+  <div *ngIf="options.header.logo.src" class="logo"><img [src]="'assets/'+options.header.logo.src"
+     [ngStyle]="options.header.logo.style"></div>
+  <div class="text" > {{options.header.name}}</div>
+  <div class="subtext" >{{options.header.Subheader}}</div>
+
+</div>
+
+
+
+
+
+
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+<div class="mt-2"  *ngFor="let field of options.fieldGroup;let i =index">
+  <label *ngIf="field.templateOptions.SectionLabel" class=" mb-2"  >{{field.templateOptions.SectionLabel}}</label>
+  <app-input [formGroup]="form" [options]="field.templateOptions"  *ngIf="field.templateOptions.type!=='selectList'"
+  ></app-input>
+
+
+  <div  [ngClass]="field.templateOptions.SectionLabel ? 'mt-1' : 'mt-3'" *ngIf="field.templateOptions.type==='selectList'"   >
+      <app-drop-down   [items]="field.templateOptions.items"></app-drop-down>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+    <!-- <div class="form-group">
+      <label for="name">{{field.templateOptions.label}}</label>
+      <input
+          [formControlName]="field.key"
+          [type]="field.templateOptions.type"
+          class="form-control">
+  </div> -->
+
+
+
+  <!-- <div *ngIf="getFormControl[field.key].touched && getFormControl[field.key].invalid">
+    <ng-container *ngIf="field.validators">
+      <div class="alert alert-danger" *ngFor="let validation of field.validators">
+          <span  *ngIf="validation.name">{{validation.message}}</span>
+      </div>
+
+    </ng-container>
+
+</div> -->
+
+
+<div class="buttons mt-4">
+  <button type="submit" class="btn" [ngStyle]="options.button.style" > {{options.button.name}}</button>
+
+</div>
+
+<!-- {{options.textinfo.mssage}} -->
+<!-- <a [routerLink]="link.redirectTo">{{link.text}}</a> -->
+<div class="textinfo m-3 text-center">
+  <span> {{options.textinfo?.mssage}}  <a [routerLink]="options.textinfo?.urlLink" [ngStyle]="options.textinfo?.linkStyle">{{options.textinfo?.urlTitle}}</a>  </span>
+
+</div>
+</form>
+
+</div>
+
+
+
+
+
+    <!-- <div class="form-group">
+        <label for="email">Email</label>
+        <input
+            getFormControlName="email"
+            id="email"
+            type="text"
+            class="form-control">
+        <div *ngIf="formControl['email'].touched && formControl['email'].invalid" class="alert alert-danger">
+            <div *ngIf="formControl['email'].errors && formControl['email'].errors['required']">Email is required.</div>
+            <div *ngIf="formControl['email'].errors && formControl['email'].errors['email']">Please, enter valid email address.</div>
+        </div>
+    </div> -->
+
+    <!-- [disabled]="form.invalid" -->

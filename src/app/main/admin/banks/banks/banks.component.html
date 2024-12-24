@@ -1,0 +1,138 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- User List -->
+    <section class="users-list-wrapper">
+      <!-- users filter start -->
+
+      <!-- users filter end -->
+
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center">عرض
+                <select class="form-control mx-25" [(ngModel)]="ItemsPerpage" (change)="filterByPage()">
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                البيانات</label>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end search_sec">
+            <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+              <label class="d-flex align-items-center ml-1 ml-md-0"> <span class="m-end"> بحث </span><input
+                  [(ngModel)]="searchValue" name="searchValue" type="search" class="form-control ml-25" /></label>
+              <a (click)="OpenModal()" class="btn btn-primary ml-1" rippleEffect>
+                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                  class="d-none d-sm-inline-block">اضافة بنك </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <app-custom-table [searchValue]="searchValue" [searchFilterKey]="['bankName']" (EditRowEvent)="EditBank($event)"
+          [coloumns]="Table_Coloumns" [rows]="Allbanks" (DeleteRowEvent)="deleteBank($event.id)"
+          [SelectedRows]="selections" [AddNewBtn]="AddNewBtn"
+          [small_columns]="small_columns"
+
+          >
+
+        </app-custom-table>
+
+
+
+
+
+
+
+        
+
+      </div>
+    </section>
+    <!--/ User List -->
+  </div>
+
+
+</div>
+
+
+
+<ng-template #addNewBank>
+
+  <app-modal-content [options]="addNewBankOptoinsModal">
+    <div slot="content">
+      <form [formGroup]="addBankForm">
+       
+        <div class="form-group">
+          <label for="">اسم البنك بالعربي</label>
+          <input type="text"
+          [validateArabic]="BankFormControls.bankNameAr"
+          appArabicValidation
+          [ngClass]="{ 'is-invalid':(submitted && BankFormControls.bankNameAr.errors)
+            ||(BankFormControls.bankNameAr.errors?.['invalidArabicInput'])
+            || (BankFormControls.bankNameAr.touched && BankFormControls.bankNameAr.invalid) }"
+            formControlName="bankNameAr" name="bankNameAr" class="form-control" name="" id="" aria-describedby="helpId"
+            placeholder="اسم البنك بالعربي">
+          <div
+            *ngIf="(submitted && BankFormControls.bankNameAr.errors) || (BankFormControls.bankNameAr.touched && BankFormControls.bankNameAr.invalid)"
+            class="invalid-feedback">
+            <div *ngIf="BankFormControls.bankNameAr.errors.required">
+              برجاء ادخال اسم البنك بالعربي</div>
+          </div>
+          <div *ngIf="(submitted && BankFormControls.bankNameAr.errors) || (BankFormControls.bankNameAr.errors?.['invalidArabicInput'])"
+          class="invalid-feedback">
+          <div *ngIf="BankFormControls.bankNameAr.errors?.['invalidArabicInput']">
+          اسم البنك يجب ان تتكون من حروف عربي</div>
+      </div>
+        </div>
+
+        <div class="form-group">
+          <label for=""> اسم البنك بالانجليزي </label>
+          <input type="text"
+            [ngClass]="{ 'is-invalid':(submitted && BankFormControls.bankName.errors) || (BankFormControls.bankName.touched && BankFormControls.bankName.invalid) }"
+            class="form-control" formControlName="bankName" name="bankName" id="" aria-describedby="helpId"
+            placeholder="اسم البنك بالانجليزي">
+          <div
+            *ngIf="(submitted && BankFormControls.bankName.errors) || (BankFormControls.bankName.touched && BankFormControls.bankName.invalid)"
+            class="invalid-feedback">
+            <div *ngIf="BankFormControls.bankName.errors.required">
+              برجاء ادخال اسم البنك بالانجليزي</div>
+          </div>
+        </div>
+        <!-- <div class="custom-control custom-control-success custom-switch d-flex justify-content-between mb-2">
+            <p class="mb-50">تفعيل /تعطيل </p>
+            <input type="checkbox"   formControlName="status" class="custom-control-input" id="customSwitch4" />
+            <label class="custom-control-label" for="customSwitch4"></label>
+          </div> -->
+
+          <!-- <div class="form-group"  *ngIf="submitted && addBankForm.invalid">
+                      
+            <div class=" p-3 alert alert-danger alert-dismissible fade show">
+                <strong>
+                  ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+                </strong>
+                <button
+                  type="button"
+                  (click)="closeMessageErrors()"
+                  class="close h-10"
+                >
+                  <span><i class="fa fa-close" style="color: brown"></i></span>
+                </button>
+              </div>
+              
+        </div> -->
+
+        <button *ngIf="!bankId" [disabled]="loading" type="submit" class="btn btn-primary" (click)="saveBank()"><span
+            *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> حفظ</button>
+        <button *ngIf="bankId" [disabled]="loading" type="submit" class="btn btn-primary" (click)="updateBank()"><span
+            *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> تعديل</button>
+            <a class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg"
+            type="button" rippleEffect (click)="closeModal()">
+            <span>الغاء</span></a>
+          </form>
+    </div>
+  </app-modal-content>
+</ng-template>

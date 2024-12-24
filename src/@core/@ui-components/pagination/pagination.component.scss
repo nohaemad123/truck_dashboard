@@ -1,0 +1,22 @@
+.pagination ul li a{
+padding: 0;
+width: 30px;
+height: 30px;
+text-align: center;
+margin-right: 5px;
+color: #000;
+}
+
+.pagination ul li.disabled{
+    opacity: 0.4;
+}
+
+.pagination ul li {
+padding: 0;
+}
+
+.pagination .active>.page-link,.pagination .page-link.active{
+    background-color: #324297;
+    border-color: #324297;
+    color: #fff;
+}

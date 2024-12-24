@@ -1,0 +1,144 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="d-flex justify-content-between align-items-center m-1">
+                        <label class="d-flex align-items-center">عرض
+                            <select class="form-control mx-25" [(ngModel)]="ItemsPerpage" (change)="filterByPage()">
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            البيانات</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end search_sec">
+                    <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                        <label class="d-flex align-items-center ml-1 ml-md-0"> <span class="m-end">
+                                بحث </span><input name="searchValue"  [(ngModel)]="searchValue" type="search" class="form-control ml-25"
+                                /></label>
+                
+                    </div>
+                </div>
+            </div>
+            <app-custom-table [searchValue]="searchValue"
+                [searchFilterKey]="['name','tite','message','email']" [coloumns]="Table_Coloumns" [rows]="allContacts"
+                (DeleteRowEvent)="deleteBank($event.id)"
+                [small_columns]="small_columns"
+                (EditRowEvent)="EditContact($event)"
+                [SelectedRows]="selections" >
+
+            </app-custom-table>
+
+        </div>
+                </div>
+                </div>
+
+                <ng-template #editNewContact>
+
+                    <app-modal-content [options]="editContactOptoinsModal">
+                        <div slot="content">
+                            <form [formGroup]="editContactForm">
+                                <div class="form-group">
+                                    <label for="">الاسم</label>
+                                    <input type="text"
+                                    placeholder="الاسم"  
+                                    [ngClass]="{ 'is-invalid':(submitted && buisnessFormControls.name.errors) || (buisnessFormControls.name.touched && buisnessFormControls.name.invalid) }"
+                                        class="form-control" formControlName="name" name="name" id=""
+                                        aria-describedby="helpId">
+                                    <div *ngIf="(submitted && buisnessFormControls.name.errors) || (buisnessFormControls.name.touched && buisnessFormControls.name.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="buisnessFormControls.name.errors.required">
+                                            برجاء ادخال الاسم</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">العنوان</label>
+                                    <input type="text"
+                              
+                                    placeholder="نوع النشاط بالعربي"   
+                                    [ngClass]="
+                                    { 'is-invalid':(submitted && buisnessFormControls.tite.errors) 
+                                    || (buisnessFormControls.tite.touched && buisnessFormControls.tite.invalid)
+                                }"
+                                        class="form-control" formControlName="tite" name="tite" id=""
+                                        aria-describedby="helpId">
+                                        <!-- {{buisnessFormControls.businessNameAr.value|json}} -->
+                                    <div *ngIf="(submitted && buisnessFormControls.tite.errors) || (buisnessFormControls.tite.touched && buisnessFormControls.tite.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="buisnessFormControls.tite.errors.required">
+                                            برجاء ادخال العنوان</div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="">البريد الالكتروني</label>
+                                    <input type="email"
+                                    placeholder="البريد الالكتروني"  
+                                        [ngClass]="{ 'is-invalid':(submitted && buisnessFormControls.email.errors) || (buisnessFormControls.email.touched && buisnessFormControls.email.invalid) }"
+                                        class="form-control" formControlName="email" name="email" id=""
+                                        aria-describedby="helpId">
+                                    <div *ngIf="(submitted && buisnessFormControls.email.errors) || (buisnessFormControls.email.touched && buisnessFormControls.email.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="buisnessFormControls.email.errors.required">
+                                            برجاء ادخال البريد الالكتروني</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">رقم الهاتف</label>
+                                    <input type="tel"
+                                    placeholder="رقم الهاتف"  
+                                        [ngClass]="{ 'is-invalid':(submitted && buisnessFormControls.phone.errors) || (buisnessFormControls.phone.touched && buisnessFormControls.phone.invalid) }"
+                                        class="form-control" formControlName="phone" name="phone" id=""
+                                        aria-describedby="helpId">
+                                    <div *ngIf="(submitted && buisnessFormControls.phone.errors) || (buisnessFormControls.phone.touched && buisnessFormControls.phone.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="buisnessFormControls.phone.errors.required">
+                                            برجاء ادخال رقم الهاتف</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">الرسالة</label>
+                                    <textarea
+                                    placeholder="الرساله" rows="5"  
+                                        [ngClass]="{ 'is-invalid':(submitted && buisnessFormControls.message.errors) || (buisnessFormControls.message.touched && buisnessFormControls.message.invalid) }"
+                                        class="form-control" formControlName="message" name="message" id=""
+                                        aria-describedby="helpId"></textarea>
+                                    <div *ngIf="(submitted && buisnessFormControls.message.errors) || (buisnessFormControls.message.touched && buisnessFormControls.message.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="buisnessFormControls.message.errors.required">
+                                            برجاء ادخال الرسالة</div>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group"  *ngIf="submitted && addBuisnessForm.invalid">
+                                      
+                                    <div class=" p-3 alert alert-danger alert-dismissible fade show">
+                                        <strong>
+                                          ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+                                        </strong>
+                                        <button
+                                          type="button"
+                                          (click)="closeMessageErrors()"
+                                          class="close h-10"
+                                        >
+                                          <span><i class="fa fa-close" style="color: brown"></i></span>
+                                        </button>
+                                      </div>
+                                      
+                                </div> -->
+                
+                               
+                                <button [disabled]="loading" type="submit" class="btn btn-primary"
+                                    (click)="updateContact()"> <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    تعديل</button>
+                                    <a class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg"
+                            type="button" rippleEffect (click)="closeModal()">
+                            <span>الغاء</span></a>
+                            </form>
+                        </div>
+                    </app-modal-content>
+                </ng-template>

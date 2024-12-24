@@ -1,0 +1,267 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <section class="app-user-edit">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="settingForm">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>العنوان بالعربي</label>
+                                    <input autocomplete="off" placeholder="العنوان بالعربي"
+                                        [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.siteTitleAr.errors)
+                                        ||(SettingsFormControls.siteTitleAr.errors?.['invalidArabicInput'])
+                                        || (SettingsFormControls.siteTitleAr.touched && SettingsFormControls.siteTitleAr.invalid) }"
+                                        [validateArabic]="SettingsFormControls.siteTitleAr"
+                                        appArabicValidation
+                                        type="text" class="form-control" formControlName="siteTitleAr" name="siteTitleAr">
+                                    <div *ngIf="(submitted && SettingsFormControls.siteTitleAr.errors) || (SettingsFormControls.siteTitleAr.touched && SettingsFormControls.siteTitleAr.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.siteTitleAr.errors.required">
+                                            برجاء ادخال العنوان بالعربي</div>
+                                    </div>
+                                    <div *ngIf="(submitted && SettingsFormControls.siteTitleAr.errors) || (SettingsFormControls.siteTitleAr.errors?.['invalidArabicInput'])"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.siteTitleAr.errors?.['invalidArabicInput']">
+                                    عنوان الموقع يجب ان يتكون من حروف عربي</div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>العنوان بالانجليزي</label>
+                                    <input autocomplete="off" placeholder="العنوان بالانجليزي"
+                                        [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.siteTitle.errors) || (SettingsFormControls.siteTitle.touched && SettingsFormControls.siteTitle.invalid) }"
+                                        type="text" class="form-control" formControlName="siteTitle" name="siteTitle">
+                                    <div *ngIf="(submitted && SettingsFormControls.siteTitle.errors) || (SettingsFormControls.siteTitle.touched && SettingsFormControls.siteTitle.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.siteTitle.errors.required">
+                                            برجاء ادخال العنوان بالانجليزي</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>وصف الموقع بالعربي</label>
+
+                                    <fieldset class="form-group">
+                                        <textarea class="form-control" id="basicTextarea" rows="3"
+                                         
+                                        [validateArabic]="SettingsFormControls.siteDescriptionAr"
+                                        appArabicValidation
+                                            [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.siteDescriptionAr.errors)
+                                            ||(SettingsFormControls.siteDescriptionAr.errors?.['invalidArabicInput'])
+    
+                                            || (SettingsFormControls.siteDescriptionAr.touched && SettingsFormControls.siteDescriptionAr.invalid) }"
+                                        placeholder="وصف الموقع بالعربي" formControlName="siteDescriptionAr" name="siteDescriptionAr"></textarea>
+                                        <div *ngIf="(submitted && SettingsFormControls.siteDescriptionAr.errors) || (SettingsFormControls.siteDescriptionAr.touched && SettingsFormControls.siteDescriptionAr.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.siteDescriptionAr.errors.required">
+                                            برجاء ادخال وصف الموقع بالعربي</div>
+                                    </div>
+                                    <div *ngIf="(submitted && SettingsFormControls.siteDescriptionAr.errors) || (SettingsFormControls.siteDescriptionAr.errors?.['invalidArabicInput'])"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.siteDescriptionAr.errors?.['invalidArabicInput']">
+                                    وصف يجب ان تتكون من حروف عربي</div>
+                                </div>
+                                    </fieldset>
+
+                                   
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>وصف الموقع بالانجليزي</label>
+
+                                    <fieldset class="form-group">
+                                        <textarea class="form-control" id="basicTextarea" rows="3"
+                                            placeholder="وصف الموقع بالانجليزي" formControlName="siteDescription" name="siteDescription"></textarea>
+                                            <div *ngIf="(submitted && SettingsFormControls.siteDescription.errors) || (SettingsFormControls.siteDescription.touched && SettingsFormControls.siteDescription.invalid)"
+                                            class="invalid-feedback">
+                                            <div *ngIf="SettingsFormControls.siteDescription.errors.required">
+                                                برجاء ادخال وصف الموقع بالانجليزي</div>
+                                        </div>
+                                        </fieldset>
+
+                                 
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>البريد الالكتروني</label>
+                                    <input autocomplete="off" placeholder="البريد الالكتروني"
+                                        [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.email.errors) || (SettingsFormControls.email.touched && SettingsFormControls.email.invalid) }"
+                                        type="text" class="form-control" formControlName="email" name="email">
+                                    <div *ngIf="(submitted && SettingsFormControls.email.errors) || (SettingsFormControls.email.touched && SettingsFormControls.email.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.email.errors.required">
+                                            برجاء ادخال البريد الالكتروني</div>
+                                        <div *ngIf="SettingsFormControls.email.errors.email">
+                                            {{'FORM.MESSAGES.EMAIL_FORMAT'
+                                            | translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>رقم الهاتف</label>
+                                    <input autocomplete="off" placeholder="رقم الهاتف"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.phoneNumber.errors) || (SettingsFormControls.phoneNumber.touched && SettingsFormControls.phoneNumber.invalid) }"
+                                    type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber">
+                                <div *ngIf="(submitted && SettingsFormControls.phoneNumber.errors) || (SettingsFormControls.phoneNumber.touched && SettingsFormControls.phoneNumber.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.phoneNumber.errors.required">
+                                        برجاء ادخال رقم الهاتف</div>
+                                   
+                                </div>
+                            </div>
+                            </div>
+
+                        
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>رقم الواتس اب</label>
+                                    <input autocomplete="off" placeholder="رقم الواتس اب"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.whatsAppNumber.errors) || (SettingsFormControls.whatsAppNumber.touched && SettingsFormControls.whatsAppNumber.invalid) }"
+                                    type="text" class="form-control" formControlName="whatsAppNumber" name="whatsAppNumber">
+                                <div *ngIf="(submitted && SettingsFormControls.whatsAppNumber.errors) || (SettingsFormControls.whatsAppNumber.touched && SettingsFormControls.whatsAppNumber.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.whatsAppNumber.errors.required">
+                                        برجاء ادخال رقم الواتس اب</div>
+                                  
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>لينك التطبيق علي متجر الاندرويد</label>
+                                    <input autocomplete="off" placeholder="لينك التطبيق علي متجر الاندرويد"
+                                        [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.linkAndroidStore.errors) || (SettingsFormControls.linkAndroidStore.touched && SettingsFormControls.linkAndroidStore.invalid) }"
+                                        type="text" class="form-control" formControlName="linkAndroidStore" name="linkAndroidStore">
+                                    <div *ngIf="(submitted && SettingsFormControls.linkAndroidStore.errors) || (SettingsFormControls.linkAndroidStore.touched && SettingsFormControls.linkAndroidStore.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.linkAndroidStore.errors.required">
+                                            برجاء ادخال لينك التطبيق علي متجر الاندرويد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>لينك التطبيق علي متجر الايفون</label>
+                                    <input autocomplete="off" placeholder="لينك التطبيق علي متجر الايفون"
+                                        [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.linkAppleStore.errors) || (SettingsFormControls.linkAppleStore.touched && SettingsFormControls.linkAppleStore.invalid) }"
+                                        type="text" class="form-control" formControlName="linkAppleStore" name="linkAppleStore">
+                                    <div *ngIf="(submitted && SettingsFormControls.linkAppleStore.errors) || (SettingsFormControls.linkAppleStore.touched && SettingsFormControls.linkAppleStore.invalid)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="SettingsFormControls.linkAppleStore.errors.required">
+                                            برجاء ادخال لينك التطبيق علي متجر الايفون</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>فيس بوك لينك</label>
+                                    <input autocomplete="off" placeholder="فيس بوك لينك"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.facebookLink.errors) || (SettingsFormControls.facebookLink.touched && SettingsFormControls.facebookLink.invalid) }"
+                                    type="text" class="form-control" formControlName="facebookLink" name="facebookLink">
+                                <div *ngIf="(submitted && SettingsFormControls.facebookLink.errors) || (SettingsFormControls.facebookLink.touched && SettingsFormControls.facebookLink.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.facebookLink.errors.required">
+                                        برجاء ادخال فيس بوك لينك</div>
+                                   
+                                </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>تويتر لينك</label>
+                                    <input autocomplete="off" placeholder="تويتر لينك"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.twitterLink.errors) || (SettingsFormControls.twitterLink.touched && SettingsFormControls.twitterLink.invalid) }"
+                                    type="text" class="form-control" formControlName="twitterLink" name="twitterLink">
+                                <div *ngIf="(submitted && SettingsFormControls.twitterLink.errors) || (SettingsFormControls.twitterLink.touched && SettingsFormControls.twitterLink.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.twitterLink.errors.required">
+                                        برجاء ادخال تويتر لينك</div>
+                                
+                                </div>
+                                </div>
+                            </div>
+
+
+
+                      
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>انستجرام لينك</label>
+                                    <input autocomplete="off" placeholder="انستجرام لينك"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.instagramLink.errors) || (SettingsFormControls.instagramLink.touched && SettingsFormControls.instagramLink.invalid) }"
+                                    type="text" class="form-control" formControlName="instagramLink" name="instagramLink">
+                                <div *ngIf="(submitted && SettingsFormControls.instagramLink.errors) || (SettingsFormControls.instagramLink.touched && SettingsFormControls.instagramLink.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.instagramLink.errors.required">
+                                        برجاء ادخال انستجرام لينك</div>
+                                  
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>سناب شات لينك</label>
+                                    <input autocomplete="off" placeholder="سناب شات لينك"
+                                    [ngClass]="{ 'is-invalid':(submitted && SettingsFormControls.snapchatLink.errors) || (SettingsFormControls.snapchatLink.touched && SettingsFormControls.snapchatLink.invalid) }"
+                                    type="text" class="form-control" formControlName="snapchatLink" name="snapchatLink">
+                                <div *ngIf="(submitted && SettingsFormControls.snapchatLink.errors) || (SettingsFormControls.snapchatLink.touched && SettingsFormControls.snapchatLink.invalid)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="SettingsFormControls.snapchatLink.errors.required">
+                                        برجاء ادخال سناب شات لينك</div>
+                                   
+                                </div>
+                                </div>
+                            </div>
+
+                        
+                          
+                          
+                          
+                            <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+
+                             
+                              
+                                <button type="submit" *ngIf="id>0"  [disabled]="loading" (click)="updateSetting()"
+                                class="add_user btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1" rippleEffect>
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> تعديل
+                            </button>
+                            <button type="submit" *ngIf="id<=0"  [disabled]="loading" (click)="saveSetting()"
+                            class="add_user btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1" rippleEffect>
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> حفظ
+                        </button>
+                        <a [routerLink]="['/admin/Trucks']" class="btn btn-outline-secondary"
+                        rippleEffect>الغاء</a>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

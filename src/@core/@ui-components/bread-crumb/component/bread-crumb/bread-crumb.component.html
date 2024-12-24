@@ -1,0 +1,11 @@
+    <ol class="breadcrumb" setRtl>
+      <li class="breadcrumb-item">
+        <ng-container *ngFor="let link of links ; let i =index">
+          <a  [routerLink]="[link.route]" routerLinkActive="active"  (click)="clicked(i+1)" class="text-middle font-12">
+            <span> {{link.name|translate}} </span>
+             <!-- <img   src="assets/images/icons/number-selector.svg" alt="alt"> -->
+             <span *ngIf="i != links.length-1"> > </span>
+         </a>
+        </ng-container>
+      </li>
+    </ol>

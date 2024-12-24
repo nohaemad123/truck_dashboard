@@ -1,0 +1,65 @@
+.card{
+  // margin: 100px 0px;
+  font-weight: 500;
+  .content-with-center-text p{
+    font-weight:800;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top:  0.5rem;
+    line-height: 1.2;
+    color: #3d4465;
+
+  }
+
+
+  .card-header{
+    .header-text{
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      color: #3d4465;
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+  }
+
+
+
+
+
+
+
+  .btn-add{
+    border: 1px solid #C8C9CC;
+    border-radius: 8px;
+    font-weight:600;
+    i{
+      margin-inline-start:10px ;
+      // margin-inline-end: 10px;
+
+    }
+  }
+
+  // .btn-save{
+  //   border: 1px solid #5446F5;
+  //   border-radius: 8px;
+  //   font-weight:600;
+  //   background: #5446F5;
+  //   color: #fff;
+
+  // }
+
+
+  .card-content{
+    padding: 1.5em;
+
+
+    .form-control:disabled, .form-control[readonly]{
+      background: #eeeeee;
+      opacity: 1;
+    }
+
+
+  }
+
+
+}

@@ -1,0 +1,491 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+// .bordered-layout .main-menu .navigation, .bordered-layout .main-menu {
+// 	background: #6c62dd;
+//   }
+//   .main-menu.menu-light .navigation li a {
+// 	color: #e5e3ea;
+//   }
+
+@import './custom-dark-layout.scss';
+@import './custom-semi-dark-layout.scss';
+@import './custom-rtl.scss';
+@import './custom-dark-layout-rtl.scss';
+@import './custom-semi-dark-layout-rtl.scss';
+@import './footer.scss';
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
+// @import '@core/scss/angular/libs/quill-editor.component';
+
+@import './responsive.scss';
+
+
+
+body {
+	font-family: cairo, Helvetica, Arial, serif;
+	background-color: $body-bg;
+
+}
+
+@media (min-width: 576px) {
+	.header-navbar .navbar-container {
+		padding: 0.8rem 1.4rem;
+		padding-left: 1.4rem;
+		padding-left: 2rem;
+	}
+}
+
+.semi-dark-layout.admin .main-menu-content .navigation-main .nav-item .menu-content{
+	// background: #fff;
+}
+
+.semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li{
+	border-top-left-radius: 0.6em;
+    border-bottom-left-radius: 0.6em;
+}
+
+.semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li a{
+	// background: #0f1d65;
+	background: #0f1d65;
+	color: #fff ;
+
+}
+
+.semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li:first-child a{
+	border-radius: 0.6em 0.6em 0em 0em;
+}
+.semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li:last-child a{
+	border-radius: 0em 0em 0.6em 0.6em ;
+}
+
+
+.semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li.active a{
+	background: transparent !important;
+}
+
+[mobile-layout="false"] {
+	.navbar-static .navbar-container {
+
+		.search-input.open,
+		.search-input.desktop-nav-custom {
+			border-radius: 0.6em;
+			width: 100%;
+			position: relative;
+			box-shadow: 1px 1px 3px 1px rgba(39, 41, 43, 0.1);
+		}
+
+		.nav-item.nav-search {
+			list-style: none;
+		}
+	}
+
+	.search-wrapper {
+
+		display: inline-block;
+		width: 60%;
+	}
+
+	.navbar-container .search-input .search-input-icon {
+		z-index: 2;
+		// display: none;
+		position: absolute;
+		left: 0.8rem;
+		top: 22%;
+		cursor: pointer;
+	}
+
+	.navbar-container .search-input .search-input-icon i,
+	.navbar-container .search-input .search-input-icon svg {
+		height: 1.45rem;
+		width: 1.45rem;
+		font-size: 1.45rem;
+		color: black;
+		font-weight: bolder;
+	}
+
+	.navbar-container .search-input.open input {
+		padding: 1em 2.8em;
+	}
+
+	.search-wrapper .filter-search {
+		white-space: nowrap;
+		font-size: 1.2em;
+		width: 8.4em;
+		padding: 0.6em 0;
+	}
+
+	.search-wrapper .filter-search svg {
+		vertical-align: middle !important;
+	}
+
+	.mobile-nav-custom {
+
+		display: none;
+	}
+
+}
+
+.clickable-avatar {
+	cursor: pointer;
+}
+
+.clickable-avatar p:hover {
+	color: $primary;
+}
+
+.card {
+	box-shadow: 1px 1px 3px 1px rgba(39, 41, 43, 0.1);
+}
+
+
+.semi-dark-layout.admin .main-menu {
+	left: 0;
+}
+
+.navigation .navigation-header {
+	font-family: Cairo, Helvetica, Arial, serif;
+	font-size: 1rem;
+}
+
+[dir="rtl"].admin .main-menu {
+	right: 0;
+	left: auto;
+}
+
+[dir="rtl"] .semi-dark-layout.admin .main-menu.menu-dark .navigation  .nav-item .menu-content li{
+	border-top-right-radius: 0.6em;
+    border-bottom-right-radius: 0.6em;
+}
+
+
+[dir="rtl"].admin .blank-page .content {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+[dir="rtl"][mobile-layout="true"].admin .content {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+[dir="rtl"][mobile-layout="true"].admin .vertical-overlay-menu.menu-open .main-menu {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+	transition: -($menu-expanded-width) 0.25s, opacity 0.25s, transform 0.25s;
+	right: 0;
+
+}
+
+[dir="rtl"][mobile-layout="true"].admin .vertical-overlay-menu .main-menu,
+.vertical-overlay-menu.menu-hide .main-menu {
+	opacity: 0;
+	transform: translate3d(0, 0, 0);
+	transition: width 0.25s, opacity 0.25s, transform 0.25s;
+	width: $menu-expanded-width !important;
+	left: auto;
+	right: -($menu-expanded-width);
+}
+
+.feather-center {
+	width: 100% !important;
+	color: $body-bg;
+}
+
+.auth-custom-style {
+
+	.brand-logo {
+		justify-content: right !important;
+		margin: 0 !important;
+		margin-bottom: 1em !important;
+		padding-bottom: 1em;
+		top: 1rem !important // border-bottom: 2px solid #dce0f8;
+	}
+
+	.form-control,
+	.input-group-text {
+		border-width: 2px;
+		border-color: #e0e6f9;
+	}
+
+	.form-control:focus,
+	.input-group-text:focus {
+		border-color: $primary;
+	}
+
+	.card-title {
+		color: #5870bd;
+		margin: 0;
+		font-size: 1.3em;
+		letter-spacing: 1px;
+	}
+
+	.was-validated .form-control:invalid,
+	.form-control.is-invalid {
+		border-color: $red;
+	}
+
+}
+
+
+
+[mobile-layout="true"].admin .navbar-container {
+	background: aliceblue;
+	border-radius: 1em;
+	box-shadow: 2px 1px 4px 2px rgba(39, 41, 43, 0.15);
+	top: 3%;
+	border: 1px solid #32429761;
+	position: fixed;
+	top: 5px;
+	width: 98%;
+	left: 1%;
+	height: 5em;
+	min-height: fit-content !important;
+}
+
+[mobile-layout="true"].admin .header-navbar.navbar-static-top {
+	left: 1%;
+	width: fit-content;
+}
+
+[mobile-layout="true"].admin .desktop-nav-custom {
+	display: none;
+}
+
+.colorCodeStatus0 {
+	background-color: #0090f0;
+}
+
+.colorCodeStatus1 {
+	background-color: #ea5455;
+
+}
+
+.colorCodeStatus2 {
+	background-color: #00cfe8;
+}
+
+.colorCodeStatus3 {
+	background-color: #ff9f43;
+}
+
+.ecommerce-application .ecommerce-card .item-img {
+	padding: 0 1em;
+}
+
+.ecommerce-application .ecommerce-card img {
+	height: 13em
+}
+
+.ecommerce-application .ecommerce-home .ecommerce-card img {
+	height: 10em
+}
+
+.ecommerce-application .ecommerce-card .item-img a {
+	margin: 0 auto;
+}
+
+.ecommerce-application .ecommerce-home .grid-view .ecommerce-card .item-img {
+	min-height: 10.85rem;	
+  }
+  .ecommerce-application .ecommerce-home{
+	.delivery-date,.in-stock,.available{
+		display: none !important;
+	}
+  }
+  .ecommerce-application .ecommerce-home .grid-view .ecommerce-card .card-body {
+	min-height: 10em;
+  }
+body.ecommerce {
+	background-color: white
+}
+
+body.ecommerce .ecommerce-application .sidebar-shop .card {
+	background-color: #f6f6f6 !important;
+}
+
+body.ecommerce .ecommerce-application .item-name a.text-body {
+	font-weight: normal;
+	-webkit-line-clamp: 2;
+	line-height: 1.4em;
+	font-size: 1.1em;
+	color: #3b3f42 !important;
+}
+body.ecommerce .ecommerce-application .list-view .item-name a.text-body {
+
+	-webkit-line-clamp: 5;
+}
+
+body.ecommerce .ecommerce-application .grid-view .ecommerce-card .item-wrapper>* {
+	margin-top: 0.2em;
+}
+
+body.ecommerce .ecommerce-application .grid-view .ecommerce-card .item-wrapper {
+	display: inline-block;
+}
+
+body.ecommerce .ecommerce-application .grid-view .ecommerce-card .btn-wishlist {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	padding: 0;
+}
+
+
+.btn-custom.btn-cart {
+	margin: 1em !important;
+	margin-top: 1em;
+	border-radius: 0.5em !important;
+	margin-top: 0 !important;
+}
+
+//   body.ecommerce .ecommerce-application  .grid-view .ecommerce-card .btn-cart{
+// 	position: absolute;
+//   top:  2.5em;
+//   right: 0.5em;
+//   padding: 0;
+//   }
+.ecommerce-application .ecommerce-card {
+	background-color: #f6f6f6 !important;
+	box-shadow: none;
+}
+
+.ecommerce-application .list-view .ecommerce-card {
+	border: 1px solid #d5d5d5;
+}
+
+.ecommerce-application .list-view .ecommerce-card .item-options {
+	background-color: white;
+}
+
+.ecommerce-application .ecommerce-card:hover {
+	transform: translateY(-4px) !important;
+	box-shadow: none !important;
+	border: 1px solid #d5d5d5;
+}
+
+.ecommerce-application .list-view .ecommerce-card:hover {
+	border: 1px solid #bec1d7;
+}
+
+.btn-custom {
+	background-color: rgba(50, 66, 151, 0.12) !important;
+	color: #324297 !important;
+	margin: 1em !important;
+	margin-top: 1em;
+	border-radius: 0.5em !important;
+	margin-top: 0 !important;
+}
+
+.btn-custom:hover {
+	border-color: #324297 !important;
+	background-color: #324297 !important;
+	color: #fff !important;
+}
+
+@media (max-width: 1440px) {
+	.px-xxxl-2 {
+		padding-left: 1.5rem !important;
+		padding-right: 1.5rem !important;
+	}
+}
+
+text-muted {
+	color: #858591 !important;
+}
+.ecommerce-application .sidebar-shop .filter-title {
+	font-size: 1.3em;
+	letter-spacing: 1px;
+	font-variant-caps: all-petite-caps;
+	// color: #ff7800;
+	font-weight: 500;
+  }
+  .ecommerce-application .ecommerce-header-items {	
+	background-color: #f6f6f6;
+	padding: 0.3em;
+  }
+  .view-type {
+	padding: 0.6em 1.5em;color: black;font-weight: 500;
+  }
+  .ecommerce-application .app-ecommerce-details .product-img {
+  width: auto !important;
+  max-height: 400px;
+  padding: 1em;
+  max-width: 600px !important;
+}
+.ecommerce-header-items .search-results {
+	font-size: 1.2em;
+	font-weight: 610 !important;
+	padding: 0 1em;
+  }
+
+  .ecommerce-header-items{
+	margin: 1em 0;
+  }
+
+.ecommerce-application {
+
+}
+// .ecommerce-application .ecommerce-home  .ecommerce-card{
+//   text-align: left;
+// padding: 0;
+//   }
+
+
+.ngx-datatable.scroll-horz .datatable-body{
+	overflow-x:unset !important;
+  }
+
+
+
+
+  .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    position: absolute;
+    margin-top: -11px;
+    margin-right: -13px;
+    right: 0;
+    top: 50%;
+    width: 18px;
+  }
+
+
+  .ql-editor ol li:not(.ql-direction-rtl), .ql-editor ul li:not(.ql-direction-rtl) {
+    padding-left: 1.5em;
+    color: black;
+    /* font-size: revert; */
+}
+
+
+.ql-editor li:not(.ql-direction-rtl)::before {
+    margin-left: -0.5em !important;
+    margin-right: 0.5em !important;
+    text-align: right;
+}
+
+
+
+
+.vertical-overlay-menu .main-menu .navigation li.has-sub > a:after{
+	left: 10px !important;
+    right: auto !important;
+}
+
+
+
+
+
+
+.m-end{
+    margin: 0px 0.5em;
+
+}

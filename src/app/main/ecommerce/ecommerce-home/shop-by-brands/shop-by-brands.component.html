@@ -1,0 +1,25 @@
+<h1 style="font-variant-caps: all-petite-caps;text-align: center;">Top Brands</h1>
+<div class="my-2">
+    <ng-container *ngFor="let brand of brands">
+
+
+        <div style="height: 8em;border: 1px solid lightgray; padding: 1em 0;width: 20%;display: inline-block;">
+            <img style="max-width: 80%;max-height: 100%;margin: auto;display: block;" [src]="brand?.imgBrand" class="">
+
+            <!-- <div>
+        <h4> {{brand.name}} </h4>
+        
+        
+      </div> -->
+
+        </div>
+        <!-- 0 Object { id: 11, name: "Category 8", companyId: 2, … }
+  id 11
+  name "Category 8"
+  companyId 2
+  bannerImg ""
+  description "Description 8"
+  img "https://logoisus.com/wp-content/uploads/2020/02/Electronics-Shop-Logo.jpg"
+  status 0 -->
+    </ng-container>
+</div>

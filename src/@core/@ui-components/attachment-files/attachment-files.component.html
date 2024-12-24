@@ -1,0 +1,243 @@
+<!-- <div class="files_element">
+  <div>
+    <input
+      type="file"
+      id="customFileVideo"
+      [max]="AttactmentFileOptions.size"
+      (change)="showPreviewFile($event)"
+      [accept]="AttactmentFileOptions.filesAllowed"
+      [multiple]="AttactmentFileOptions.type=='Mulltiple'? true : false"
+    />
+  </div>
+</div> -->
+
+
+<span class="btn btn-primary btn-file">
+  Browse...<input type="file" id="customFileVideo" [max]="AttactmentFileOptions.size" (change)="showPreviewFile($event)"
+    [accept]="AttactmentFileOptions.filesAllowed" [multiple]="AttactmentFileOptions.type=='Mulltiple'? true : false">
+</span>
+
+
+<p class="text-alert" *ngIf="AttactmentFileOptions.type=='Mulltiple'"> يمكن ارفاق اكثر من ملف </p>
+<p class="text-alert" *ngIf="AttactmentFileOptions.type=='Single'"> يمكن ارفاق ملف واحد فقط </p>
+
+
+
+
+<div class="row m-3">
+  <ng-container *ngFor="let item of files; let i = index">
+
+    <div class="col-md-4 col-12" *ngIf="i>0">
+      <div class="progress" *ngIf="item.progress && i > 0">
+        <div class="progress-bar" [style.width]="item.progress + '%'">
+          {{ item.progress }}%
+        </div>
+      </div>
+
+      <p class="error_upload" *ngIf="item.isUpload == false && !item.progress && i > 0">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        {{ "not_uploaded"  }}
+      </p>
+
+
+
+      <div class="remove_image" [ngStyle]="{'right':fileflage? '7.1em':''}"
+        *ngIf="!item.progress && i > 0 && AttactmentFileOptions.actions.delete=='delete'" (click)="removeFile(i)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </div>
+
+      <div class="view_image" [ngStyle]="{'opacity':fileflage ? '0':'1'}"
+        *ngIf="!item.progress && i > 0 && AttactmentFileOptions.actions.view=='view'" (click)="previewFile(item)">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </div>
+
+
+      <img *ngIf=" i > 0 && imageflage" class="img-responsive" [src]="item.localUrl" alt="Land Image" />
+
+      <video controls *ngIf="i > 0 && videoflage" class="img-responsive" [src]="item.localUrl" alt="Land Image"
+        width="150px">
+
+      </video>
+
+
+
+      <!-- {{item|json}} -->
+      <div class="attactments">
+        <a *ngIf="i > 0 && fileflage" (click)="openAttactments(item.file)">
+          <i class="fa fa-paperclip" aria-hidden="true"></i>
+
+          {{ item.file }}
+        </a>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+  </ng-container>
+</div>
+
+
+
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+      </div>
+      <div class="modal-body">
+        <img *ngIf="imageflage" [src]="imgPreview" id="imagepreview" style="width: 425px; height: 425px;">
+        <video controls *ngIf="videoflage" class="img-responsive" [src]="imgPreview" alt="Land Image" width="150px">
+
+        </video>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="files_element" *ngIf="type == 'images'">
+  <label for="customFileImage">
+    <i class="fas fa-image"></i>
+    <span> {{ "add_image"  }}</span>
+  </label>
+  <div>
+    <input
+      *ngIf="type == 'images'"
+      type="file"
+      id="customFileImage"
+      (change)="showPreviewFile($event)"
+      accept="image/*"
+      multiple
+      style="opacity: 0; position: absolute; cursor: pointer; z-index: 102"
+    />
+  </div>
+</div>
+
+<div class="files_element" *ngIf="type == 'files'">
+  <label for="customFiles">
+    <i class="fa fa-paperclip"></i>
+    <span> {{ "add_file"  }} </span>
+  </label>
+  <div>
+    <input
+      *ngIf="type == 'files'"
+      type="file"
+      id="customFiles"
+      (change)="showPreviewFile($event)"
+      accept="application*"
+      multiple
+      style="opacity: 0; position: absolute; cursor: pointer; z-index: 102"
+    />
+  </div>
+</div> -->
+
+<!-- <div
+  class="file_ubloaded"
+  *ngIf="files.length > 1 && (type == 'images' || type == 'video')"
+>
+  <span class="title" *ngIf="type == 'images'">{{ "images"  }}</span>
+  <span class="title" *ngIf="type == 'video'">{{ "videos"  }}</span> -->
+
+<!-- <ng-container *ngFor="let item of files; let i = index">
+    <div class="div_image" *ngIf="i > 0">
+      <div class="progress" *ngIf="item.progress && i > 0">
+        <div class="progress-bar" [style.width]="item.progress + '%'">
+          {{ item.progress }}%
+        </div>
+      </div>
+      <p
+        class="error_upload"
+        *ngIf="item.isUpload == false && !item.progress && i > 0"
+      >
+        <i class="fa fa-times" aria-hidden="true"></i>
+        {{ "not_uploaded"  }}
+      </p>
+
+
+
+      <div
+        class="remove_image btn"
+        *ngIf="!item.progress && i > 0"
+        (click)="removeFile(i)"
+      >
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </div>
+
+      <img
+        *ngIf="type == 'images' && i > 0"
+        class="img-responsive"
+        [src]="item.localUrl"
+        alt="Land Image"
+        width="150px"
+        height="150px"
+      />
+      <video
+        *ngIf="type == 'video' && i > 0"
+        class="img-responsive"
+        [src]="item.localUrl"
+        alt="Land Image"
+        width="150px"
+      ></video>
+    </div>
+  </ng-container>
+</div> -->
+
+<!-- <div class="file_ubloaded" *ngIf="files.length > 1 && type == 'files'">
+  <span class="title">{{ "files"  }}</span>
+  <ng-container *ngFor="let item of files; let i = index">
+    <div class="div_image" *ngIf="i > 0">
+      <div class="progress" *ngIf="item.progress && i > 0">
+        <div class="progress-bar" [style.width]="item.progress + '%'">
+          {{ item.progress }}%
+        </div>
+      </div>
+      <p
+        class="error_upload"
+        *ngIf="item.isUpload == false && !item.progress && i > 0"
+      >
+        <i class="fa fa-times" aria-hidden="true"></i>
+        {{ "not_uploaded"  }}
+      </p>
+
+
+      <i
+        class="fa fa-paperclip"
+        *ngIf="type == 'files' && i > 0 && !item.progress"
+      ></i>
+      <div
+        class="remove_image btn"
+        *ngIf="!item.progress && i > 0"
+        (click)="removeFile(i)"
+      >
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </div>
+      <div>
+        <a *ngIf="type == 'files' && i > 0">
+          {{ item.file }}
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</div> -->

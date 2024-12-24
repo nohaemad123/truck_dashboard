@@ -1,0 +1,25 @@
+@import '@core/scss/base/pages/page-profile';
+
+.truck_image{
+    width: 100%;
+    height: 250px;
+}
+
+.profile-image{
+    justify-content: center;
+    display: flex;
+    margin-top: -6%;
+    margin-bottom: 20px;
+}
+
+.profile-image img{
+    width: 100px;
+    border: 5px solid #fff;
+}
+
+.card h5{
+    color: #324297;
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}

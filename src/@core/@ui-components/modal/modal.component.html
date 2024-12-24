@@ -1,0 +1,22 @@
+
+<div class="ns-modal" >
+  <div class="ns-modal-dialog">
+    <div class="ns-modal-content">
+           <div class="">
+            <img [src]="'assets/img/'+options.imgSrc" alt="icon">
+           <div class="text-header" [translate]="options.header?options.header:''" ></div>
+           <div class="message" [translate]="options.message?options.message:''" ></div>
+
+
+           </div>
+
+
+      <div class="buttons">
+        <!-- <button type="button" class="btn cancel" (click)="onNoClick()" *ngIf="options.buttons.showcancelBtn">cancel</button> -->
+        <button type="button" class="btn submit" (click)="goTo(options.buttons?.actions);closeModale()">{{options.buttons!.name|translate}}</button>
+      </div>
+
+    </div>
+  </div>
+
+

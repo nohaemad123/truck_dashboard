@@ -1,0 +1,279 @@
+@import '@core/scss/angular/libs/form-wizard.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/quill-editor.component';
+@import '@core/scss/angular/libs/toastr.component.scss';
+
+
+.details.products .nav-tabs.general {
+    background: #ddd;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.details.products .discountPercentage {
+    font-size: 40px;
+    color: #000;
+    font-weight: bold;
+}
+
+.details.products .subCategories .subCategory {
+    background-color: #324297 !important;
+    color: #fff;
+    border: none !important;
+    font-size: 0.8rem !important;
+    border-radius: 4px !important;
+    display: flex;
+    margin-right: 5px;
+    padding: 1px 5px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.details.products .subCateorySelect{
+    width: 90%;
+    margin-right: 5px;
+}
+
+.details.products .plus_category_icon{
+    margin-top: 10px;
+    
+}
+
+.details.products .subCategories .subCategory .delete {
+    padding: 1px 5px;
+    font-size: 0.8rem !important;
+    cursor: pointer;
+}
+
+.details.products .percentage {
+    font-size: 16px;
+    position: absolute;
+    margin-left: 5px;
+}
+
+.details.products .card-body .tab-content {
+    margin-top: 10px !important;
+}
+
+.details.products .nav-tabs.language .form-group {
+    margin-top: -50px !important;
+}
+
+.details.products .bs-stepper .bs-stepper-content .content .content-header {
+    margin-bottom: 0 !important;
+}
+
+.details.products .nav-tabs.language {
+    margin-bottom: 0 !important;
+}
+
+.details.products .nav-tabs.language .nav-link {
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 5px 20px;
+    background: rgba(50, 66, 151, 0.17) !important;
+    font-weight: 500;
+    border-radius: 8px;
+    color: #575757;
+    margin: 0 5px;
+}
+
+.details.products .nav-tabs.language .nav-link.active {
+    background: #fff !important;
+    color: #324297 !important;
+    border: 1px solid #324297 !important;
+}
+
+.details.products .nav-tabs.language .nav-link:after {
+    content: none !important;
+}
+
+.details.products .nav-tabs.language .tab-content {
+    margin-top: -30px !important;
+}
+
+.details.products .card {
+    padding: 20px;
+    background: #fff;
+    margin-bottom: 25px;
+}
+
+.details.products .card h3.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.details.products .card .image {
+    width: 120px;
+
+    height: 120px;
+    border-radius: 10px;
+    border: 2px solid #aaa;
+    margin: 10px auto;
+    position: relative;
+}
+
+.details.products .card .image .edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.details.products .product_image {
+    position: relative;
+}
+
+.details.products .badge-secondary {
+    background: #fff;
+    color: #000;
+}
+
+.details.products .card img {
+    width: 90px;
+    margin-top: 15px;
+    height: 90px;
+}
+
+.details.products .card p {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.details.products .card .stats {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10%;
+    top: 17%;
+}
+
+.details.products .card .stats.primary {
+    background: #0090f0;
+}
+
+.details.products .card .stats.warning {
+    background: #f9d500;
+}
+
+.details.products .card .stats.error {
+    background: #ec4b6a;
+}
+
+.details.products .card .stats.success {
+    background: #0ac4b9;
+}
+
+.details.products .add_category {
+    width: 75%;
+    background: #dcecf9 !important;
+    color: #3e495f !important;
+    border: 1px solid transparent !important;
+}
+
+.details.products .ql-editor {
+    min-height: 200px;
+}
+
+.details.products .file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    left: 0;
+    outline: none;
+    opacity: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.details.products .image-upload-wrap {
+    background: #dce7fd;
+    padding: 15px 20px;
+    position: relative;
+    border: 2px dashed #a1aec1;
+    border-radius: 10px;
+}
+
+.details.products .image-upload-wrap .media-left {
+    margin-right: 20px;
+}
+
+.details.products .image-upload-wrap .media-left img {
+    width: 50px;
+    margin-top: 0 !important;
+    height: 50px;
+}
+
+.details.products .media-heading {
+    font-size: 18px;
+    font-weight: bold;
+    color: #41475f;
+}
+
+.details.products .media-body p {
+    color: #b8c0d5;
+    font-size: 14px;
+    margin: 0;
+}
+
+.details.products .form-group {
+    margin-bottom: 0;
+}
+
+.details.products .custom-radio {
+    padding: 15px 20px;
+    position: relative;
+    padding-left: 50px !important;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+}
+
+.details.products .custom-radio.active {
+    background: #dce7fd;
+    border: 2px dashed #a1aec1;
+}
+
+.details.products .custom-checkbox .custom-control-label.radio::before,
+.details.products .custom-checkbox .custom-control-label.radio::after,
+.details.products .custom-radio .custom-control-label.radio::before,
+.details.products .custom-radio .custom-control-label.radio::after {
+    top: 15px;
+    left: 20px;
+}
+
+.details.products button.add_variation {
+    background: #dcecf9 !important;
+    color: #3e495f !important;
+    border: 1px solid transparent !important;
+}
+
+.details.products .buttons a.cancel {
+    background: #fff !important;
+    color: #3e495f !important;
+    border: 1px solid transparent !important;
+}
+
+.details.products .product_images {
+    width: 65%;
+    margin: 20px auto;
+}
+
+.details.products .product_images .product_image {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.details.products .product_images .product_image img {
+    width: 100%;
+    margin-top: 0;
+    height: 150px;
+}
+
+.details.products .product_images .product_image .edit {
+    z-index: 99999;
+}

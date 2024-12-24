@@ -1,0 +1,300 @@
+
+
+// // @import "style";
+
+
+// /* remove border radius for the tab */
+
+// span.progress{
+//   background-color: unset;
+//   .complete{
+//     color:green
+//   }
+//   .reject{
+//     color:red
+//   }
+//   .waiting{
+//     color:yellow
+//   }
+// }
+
+
+
+
+// .tableContent {
+//   background-color: #fff;
+//   height: auto;
+//   margin-top: 30px;
+//   padding: 20px 15px;
+//   border-radius: 13px;
+
+//   // width: 100%;
+//   table {
+//     // padding-top:30px ;
+//     width: 100%;
+//     border-collapse: separate;
+//     border-spacing: 0 1em;
+
+
+
+
+//     td.mat-cell {
+//       border-bottom: 1px solid #F2F2F2;
+//       border-top: 1px solid #F2F2F2;
+//        border-radius: 7px;
+
+//        img{
+//         margin-right: 10px;
+//         margin-left: 10px;
+//        }
+//     }
+
+//     td.mat-cell:first-child{
+//       border-left: 1px solid #F2F2F2;
+
+//     }
+//     td.mat-cell:last-child{
+//       border-right: 1px solid #F2F2F2;
+
+//     }
+
+
+//   }
+
+//   .fitlerDataTable {
+//     margin: 12px;
+//     width: 100%;
+//   }
+
+// }
+
+// .iconsActions {
+//   img:first-child {
+//     margin: 0px 10px;
+
+//   }
+// }
+
+// tr.mat-row {
+//   border-top: 1px solid #F2F2F2;
+//   border-bottom: 1px solid #F2F2F2;
+// }
+
+// th {
+//   color: rgba(0, 0, 0, 0.87);
+//   background: #E5E5E5;
+//   font-weight: 500;
+//   font-size: 15px;
+//   line-height: 22px;
+//   /* identical to box height */
+
+//   letter-spacing: 0.04em;
+//   text-transform: lowercase;
+// }
+
+// .ActiveRow {
+//   background: #324297 !important;
+//   // border-radius: 3px !important;
+//   td.mat-cell {
+//     color: #fff !important;
+//     border-radius: unset !important;
+//   }
+
+//   td.mat-cell:first-child{
+
+//     // border-radius: 7px !important;
+
+//   }
+//   td.mat-cell:last-child{
+//     // border-radius: 7px !important;
+
+//   }
+
+
+// }
+
+// ::ng-deep .table-wrapper {
+//   &.cursor-pointer {
+//     .mat-table {
+//       .mat-row {
+//         cursor: pointer;
+//       }
+//     }
+//   }
+
+//   .mat-table {
+//     box-shadow: none;
+//     background-color: transparent;
+//     // @include small-screen {
+//     //   width: 100% !important;
+//     // }
+
+//     .mat-header-row {
+//       background-color: #f2f4f4;
+//     }
+
+//     .mat-row {
+//       background: #f7f8f8;
+//       margin: 15px 0;
+//       border-left: 5px solid #1bced8;
+//       border-radius: 5px;
+
+//       &.selected,
+//       &:hover {
+//         background-color: rgba(221, 224, 226, 0.59);
+//       }
+
+//       &.rtl {
+//         border-left: unset !important;
+//         border-right: 5px solid #1bced8;
+//       }
+//     }
+
+//     .mat-row {
+//       background-color: #FFF;
+
+//     }
+
+//     .mat-header-row,
+//     .mat-row {
+//       border-bottom-width: 0;
+
+//       .mat-header-cell {
+//         min-width: max-content;
+//       }
+
+//       .mat-header-cell,
+//       .mat-cell {
+//         flex: 0 0 90px;
+
+//         // @include small-screen {
+//         //   flex: 1;
+//         // }
+
+//         &.mat-column-index,
+//         &.mat-column-checkbox {
+//           flex: 0 0 60px;
+//         }
+
+//         &.default {
+//           max-width: 170px;
+//         }
+
+//         &.small {
+//           max-width: 85px;
+//         }
+
+//         &.medium {
+//           max-width: 250px;
+//         }
+
+//         &.max-width {
+//           // @include small-screen {
+//           //   max-width: 110px;
+//           // }
+
+//           // @include normal-screen {
+//           //   max-width: 175px;
+//           // }
+
+//           // @include xlarge-screen {
+//           //   max-width: 190px;
+//           // }
+
+//           // @include xxlarge-screen {
+//           //   max-width: 270px;
+//           // }
+
+//           // @include xxxlarge-screen {
+//           //   max-width: 430px;
+//           // }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .action {
+//   width: 118px;
+//   height: 30px;
+//   border-radius: 4px;
+//   background-color: #4f008c;
+//   color: #fff;
+//   font-size: 12px;
+//   text-align: center;
+//   padding: 5px
+// }
+
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
+
+.datatable-scroll {
+  width: auto !important;
+}
+
+
+.empty_state {
+  position: relative;
+  top: -20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  i {
+    margin: auto;
+    margin-bottom: 0px;
+    font-size: 90px;
+    color: #ccc;
+  }
+
+  h3 {
+    margin: 8px 0px;
+    text-align: center;
+    font-weight: normal;
+    font-family: Cairo;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    color: #68768a;
+    font-size: 1.5em;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 0px;
+    color: #9196a0;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 8px;
+    margin: 20px auto auto auto;
+    width: 50%;
+    max-width: 200px;
+
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: 1px solid #c2c6db !important;
+    background-color: $body-bg;
+  }
+
+}
+.avatar {
+  background-color: #e7edf9;}
+
+  .icons-collapsed{
+   margin:  0px 10px;
+    .iconTitle,.feather,i{
+      margin: 0px 5px !important;
+   }
+  }
+  
+
+  p{
+    white-space: pre-line;
+  }

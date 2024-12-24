@@ -1,0 +1,11 @@
+<div [formGroup]="formGroup" *ngIf="formGroup">
+  <select #dropDown [formControlName]="controlName" [(ngModel)]="selectId" class="form-select" [ngStyle]="options.style" (change)="onSelected($event)">
+
+    <option disabled value="" selected *ngIf="options.placeholder" [translate]="options.placeholder?options.placeholder:''"  ></option>
+    <!-- <option  [ngValue]="" >{{options.items[0].name|translate}}</option> -->
+    <ng-container *ngFor="let item of options.items;let i=index;let first = first;">
+      <option   [value]="item.id" > {{item.name|translate}}</option>
+     </ng-container>
+  </select>
+</div>
+

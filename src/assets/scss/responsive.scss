@@ -1,0 +1,87 @@
+@media(max-width:320px){
+    .search_sec input[type="search"]{
+        width: 150px !important;
+    }
+
+    .nav-tabs.language .nav-link{
+        padding: 5px 16px !important;
+
+    }
+}
+
+@media(max-width:765px){
+    [dir=rtl].admin :not(.blank-page) .content{
+    margin-left: auto;
+    margin-right: 0;
+    padding-top: 0 !important;
+
+}
+
+.uploadImage input[type='file']{
+    right: -40px !important;
+}
+
+button.mobile_button{
+    margin-right: 10px;
+}
+
+.search_sec input[type="search"]{
+    width: 180px;
+}
+
+
+
+.navigation li a i, .navigation li a svg{
+    margin-right: 0 ;
+    margin-left: 10px;
+}
+
+.search_sec label span{
+    margin-left: 10px;
+}
+
+.brand-logo img{
+    width: 60px !important;
+    margin-top: 10px;
+
+}
+
+.brand-logo{
+    width: auto !important;
+    overflow: auto !important;
+}
+
+[dir=rtl].admin button.add_user, [dir=rtl].admin .media .user-avatar, [dir=rtl].admin .statistics-body .avatar{
+    margin-right: 0 ;
+    margin-left: 0 ;
+    margin-top: 10px !important;
+
+}
+
+.cell-line-height p{
+font-size: 12px !important;
+}
+
+.media_stat .avatar{
+margin-left: 10px !important;
+}
+
+
+.btn-icon{
+margin: 0.1em !important;
+}
+
+.loading {
+    left: 50% !important;
+}
+
+.loading-logo{
+    left: 42% !important;
+    top: 32% !important;
+}
+
+
+
+
+}
+

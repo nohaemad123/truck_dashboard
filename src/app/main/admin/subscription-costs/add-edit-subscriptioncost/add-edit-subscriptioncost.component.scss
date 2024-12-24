@@ -1,0 +1,55 @@
+// @import '@core/scss/angular/libs/form-wizard.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+// @import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/quill-editor.component';
+@import '@core/scss/angular/libs/datatables.component.scss';
+
+@import '@core/scss/angular/libs/toastr.component.scss';
+
+.nav-tabs.language .form-group {
+    margin-top: -50px !important;
+}
+
+.buttons a.cancel {
+    background: #fff !important;
+    color: #3e495f !important;
+    border: 1px solid #3e495f !important;
+}
+
+.ql-editor {
+    min-height: 200px;
+}
+
+.bs-stepper .bs-stepper-content .content .content-header {
+    margin-bottom: 0 !important;
+}
+
+.nav-tabs.language {
+    margin-top:10px !important;
+    margin-bottom: 20px !important;
+}
+
+.nav-tabs.language .nav-link {
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 5px 20px;
+    background: rgba(50, 66, 151, 0.17) !important;
+    font-weight: 500;
+    border-radius: 8px;
+    color: #575757;
+    margin: 0 5px;
+}
+
+.nav-tabs.language .nav-link.active {
+    background: #fff !important;
+    color: #324297 !important;
+    border: 1px solid #324297 !important;
+}
+
+.nav-tabs.language .nav-link:after {
+    content: none !important;
+}
+
+.nav-tabs.language .tab-content {
+    margin-top: -30px !important;
+}

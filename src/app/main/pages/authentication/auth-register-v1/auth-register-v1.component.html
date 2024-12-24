@@ -1,0 +1,132 @@
+<div class="auth-wrapper auth-v1 auth-custom-style px-2">
+  <div class="auth-inner py-2">
+    <!-- Register v1 -->
+    <a href="javascript:void(0);" class="brand-logo">
+      <img src="{{ coreConfig.app.appLogoImageDark }}" alt="brand-logo" height="60" />
+      <!-- <h2 class="brand-text text-primary ml-1">{{ coreConfig.app.appName }}</h2> -->
+    </a>
+    <div class="card mb-0">
+      <div class="card-body">
+
+
+        <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
+        <p class="card-text mb-2">Make your app management easy and fun!</p>
+
+        <form class="auth-register-form mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="register-companyName" class="form-label">{{'AUTH.LABELS.COMPANY_NAME' | translate}}</label>
+            <input type="text" formControlName="companyName" class="form-control"
+              placeholder="{{'AUTH.PLACE_HOLDERS.COMPANY_NAME' | translate}}" aria-describedby="register-companyName"
+               autofocus
+              [ngClass]="{ 'is-invalid': (submitted && f.companyName.errors) || (f.companyName.touched && f.companyName.invalid)}" />
+            <div *ngIf="(submitted && f.companyName.errors) || (f.companyName.touched && f.companyName.invalid)"
+              class="invalid-feedback">
+              <div *ngIf="f.companyName.errors.required">{{'AUTH.MESSAGES.COMPANY_NAME_REQUIRED' | translate}}</div>
+              <div *ngIf="f.companyName.errors.minLength">{{'AUTH.MESSAGES.COMPANY_NAME_LEAST' | translate}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-url" class="form-label">{{'AUTH.LABELS.URL' | translate}}</label>
+            <input type="url" formControlName="url" class="form-control"
+              placeholder="{{'AUTH.PLACE_HOLDERS.URL' | translate}}" aria-describedby="register-url" 
+              autofocus [ngClass]="{ 'is-invalid': (submitted && f.url.errors) || (f.url.touched && f.url.invalid)}" />
+            <div *ngIf="(submitted && f.url.errors) || (f.url.touched && f.url.invalid)" class="invalid-feedback">
+              <div *ngIf="f.url.errors.required">{{'AUTH.MESSAGES.URL_REQUIRED' | translate}}</div>
+              <div *ngIf="f.url.errors.pattern">{{'AUTH.MESSAGES.URL_PATTERN' | translate}}</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-email" class="form-label">{{'AUTH.LABELS.EMAIL' | translate}}</label>
+            <input type="email" formControlName="email" class="form-control"
+              placeholder="{{'AUTH.PLACE_HOLDERS.EMAIL' | translate}}" aria-describedby="register-email" 
+              [ngClass]="{ 'is-invalid':(submitted && f.email.errors) || (f.email.touched && f.email.invalid) }" />
+            <div *ngIf="(submitted && f.email.errors) || (f.email.touched && f.email.invalid)" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">{{'AUTH.MESSAGES.EMAIL_REQUIRED' | translate}}</div>
+              <div *ngIf="f.email.errors.email">{{'AUTH.MESSAGES.NOT_EMAIL' | translate}}</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="register-password" class="form-label">Password</label>
+            <div class="input-group input-group-merge form-password-toggle">
+              <input [type]="passwordTextType ? 'text' : 'password'" formControlName="password"
+                class="form-control form-control-merge" placeholder="············" aria-describedby="register-password"
+                
+                [ngClass]="{ 'is-invalid error': (submitted && f.password.errors) || (f.password.touched && f.password.invalid) }" />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }" (click)="togglePasswordTextType()"></i></span>
+              </div>
+            </div>
+            <div *ngIf="(submitted && f.password.errors) || (f.password.touched && f.password.invalid)"
+              class="invalid-feedback"
+              [ngClass]="{ 'd-block': (submitted && f.password.errors) || (f.password.touched && f.password.invalid) }">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="register-PHONE_NUMBER" class="form-label">{{'AUTH.LABELS.PHONE_NUMBER'|translate}}</label>
+            <div style="width: 100%;" class="">
+              <ng-select [items]="filterOptions" [searchable]="false" bindLabel="text" bindValue="text" class="d-inline-block col-3 px-0" formControlName="countryCode"
+                [clearable]="false">
+
+              </ng-select>
+              <input type="text" formControlName="phoneNumber" class="form-control col-9 d-inline-block"
+                placeholder="{{'AUTH.LABELS.PHONE_NUMBER'|translate}}" aria-describedby="register-PHONE_NUMBER"
+                
+                [ngClass]="{ 'is-invalid':(submitted && f.phoneNumber.errors) || (f.phoneNumber.touched && f.phoneNumber.invalid) }" />
+            </div>
+
+            <div *ngIf="(submitted && f.email.errors) || (f.phoneNumber.touched && f.phoneNumber.invalid)"
+              class="invalid-feedback">
+              <div *ngIf="f.phoneNumber.errors.required">{{'AUTH.MESSAGES.PHONE_NUMBER_REQUIRED' | translate}}</div>
+              <div *ngIf="f.phoneNumber.errors.minlength">{{'AUTH.MESSAGES.PHONE_NUMBER_LEAST' | translate}}</div>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" type="checkbox" id="register-privacy-policy"  />
+              <label class="custom-control-label" for="register-privacy-policy">
+                I agree to <a href="javascript:void(0);">privacy policy & terms</a>
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block"  rippleEffect>Sign up</button>
+        </form>
+
+        <p class="text-center mt-2">
+          <span>Already have an account? </span>
+          <a routerLink="/pages/authentication/login-v1">
+            <span> Sign in instead</span>
+          </a>
+        </p>
+
+        <div class="divider my-2">
+          <div class="divider-text">or</div>
+        </div>
+
+        <div class="auth-footer-btn d-flex justify-content-center">
+          <a href="javascript:void(0)" class="btn btn-facebook">
+            <i data-feather="facebook"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-twitter white">
+            <i data-feather="twitter"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-google">
+            <i data-feather="mail"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-github">
+            <i data-feather="github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /Register v1 -->
+  </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form [formGroup]="addBannerForm">
+                 
+                    <div class="form-group">
+                        <label class="form-control-label" for="TDRequiredField">
+                          
+                            <span class="text-danger">*</span>
+
+                        </label>
+                        <quill-editor customToolbarPosition="'bottom'" placeholder="وصف المستخدم بالعربي"
+                            formControlName="descriptionAr" name="descriptionAr"
+                            [validateArabic]="BannerFormControls.descriptionAr"
+                            appArabicValidation
+                            [modules]="{ syntax: true, toolbar: [['code-block']] }"
+                            [ngClass]="{ 'is-invalid':(submitted && BannerFormControls.descriptionAr.errors) 
+                            ||(BannerFormControls.descriptionAr.errors?.['invalidArabicInput'])
+                            || (BannerFormControls.descriptionAr.touched && BannerFormControls.descriptionAr.invalid) }"
+                            class="border-bottom-0 breif">
+                            <div quill-editor-toolbar>
+                                <span class="ql-formats">
+                                  <button class="ql-bold" [title]="'Bold'"></button>
+                                  <button class="ql-italic" [title]="'italic'"></button>
+                                  <button class="ql-underline" [title]="'underline'"></button>
+                                </span>
+                                <span class="ql-formats">
+                                  <select class="ql-align" [title]="'Alignment'">
+                                    <option selected></option>
+                                    <option value="center"></option>
+                                    <option value="right"></option>
+                                    <option value="justify"></option>
+                                  </select>
+                                </span>
+                                <span class="ql-formats">
+                                  <button class="ql-list" value="ordered" type="button"></button>
+                                </span>
+                                <span class="ql-formats">
+                                  <button class="ql-link" value="ordered" type="button"></button>
+                                  <button class="ql-image" value="ordered" type="button"></button>
+                                  <button class="ql-video" value="ordered" type="button"></button>
+                                </span>
+                                <!-- <span class="ql-formats">
+                                  <button class="ql-formula" value="ordered" type="button"></button>
+                                  <button class="ql-code-block" value="ordered" type="button"></button>
+                                </span>
+                                <span class="ql-formats">
+                                  <button class="ql-clean" value="ordered" type="button"></button>
+                                </span> -->
+                              </div>
+                        </quill-editor>
+                        <small
+                            *ngIf=" (submitted && BannerFormControls.descriptionAr.errors) || (BannerFormControls.descriptionAr.touched && BannerFormControls.descriptionAr.invalid)"
+                            class="invalid-feedback">
+                            <small *ngIf="BannerFormControls.descriptionAr.errors.required">برجاء
+                                ادخال
+                                وصف المستخدم بالعربي
+                            </small>
+                        </small>
+                        <div *ngIf="(submitted && BannerFormControls.descriptionAr.errors) || (BannerFormControls.descriptionAr.errors?.['invalidArabicInput'])"
+                        class="invalid-feedback">
+                        <div *ngIf="BannerFormControls.descriptionAr.errors?.['invalidArabicInput']">
+                        وصف المستخدم يجب ان تتكون من حروف عربي</div>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label" for="TDRequiredField">وصف المستخدم
+                          بالانجليزي
+                          <span class="text-danger">*</span>
+                      </label>
+                      <quill-editor name="description" formControlName="description"
+                          name="pageDescription" placeholder="وصف المستخدم بالانجيليزي"
+                          [modules]="{ syntax: true, toolbar: [['code-block']] }"
+                          [ngClass]="{ 'is-invalid':(submitted && BannerFormControls.description.errors) || (BannerFormControls.description.touched && BannerFormControls.description.invalid) }"
+                          customToolbarPosition="'bottom'" class="border-bottom-0 breif">
+                          <div quill-editor-toolbar>
+                              <span class="ql-formats">
+                                <button class="ql-bold" [title]="'Bold'"></button>
+                                <button class="ql-italic" [title]="'italic'"></button>
+                                <button class="ql-underline" [title]="'underline'"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <select class="ql-align" [title]="'Alignment'">
+                                  <option selected></option>
+                                  <option value="center"></option>
+                                  <option value="right"></option>
+                                  <option value="justify"></option>
+                                </select>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-list" value="ordered" type="button"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-link" value="ordered" type="button"></button>
+                                <button class="ql-image" value="ordered" type="button"></button>
+                                <button class="ql-video" value="ordered" type="button"></button>
+                              </span>
+                              <!-- <span class="ql-formats">
+                                <button class="ql-formula" value="ordered" type="button"></button>
+                                <button class="ql-code-block" value="ordered" type="button"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-clean" value="ordered" type="button"></button>
+                              </span> -->
+                            </div>
+                      </quill-editor>
+
+                      <small
+                          *ngIf=" (submitted && BannerFormControls.description.errors) || (BannerFormControls.description.touched && BannerFormControls.description.invalid)"
+                          class="invalid-feedback">
+                          <small *ngIf="BannerFormControls.description.errors.required">برجاء
+                              ادخال
+                              وصف المستخدم بالانجليزي
+                          </small>
+                      </small>
+
+                  </div>
+                  
+               
+               
+                    <div class="buttons justify-content-end d-flex mb-3">
+                     
+                    
+                        <button [disabled]="loading" 
+                            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                            (click)="submitData()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                        </button>
+
+                      
+                        <a routerLink="/admin/Trucks"
+                        class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button" rippleEffect>
+                        <span>الغاء</span>
+                    </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

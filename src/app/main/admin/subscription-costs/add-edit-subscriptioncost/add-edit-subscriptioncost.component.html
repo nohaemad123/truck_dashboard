@@ -1,0 +1,110 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="addSubscriptionForm">
+                    <ul ngbNav #navQuestion="ngbNav" class="nav-tabs language justify-content-end">
+                        <li ngbNavItem>
+                            <a ngbNavLink>الانجليزية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">اسم الاشتراك بالانجليزي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        [ngClass]="{ 'is-invalid':(submitted && SubscritonFormControls.subscriptName.errors) || (SubscritonFormControls.subscriptName.touched && SubscritonFormControls.subscriptName.invalid) }"
+                                        formControlName="subscriptName" name="subscriptName" type="text"
+                                        class="form-control" placeholder="اسم الاشتراك بالانجليزي">
+                                    <small
+                                        *ngIf=" (submitted && SubscritonFormControls.subscriptName.errors) || (SubscritonFormControls.subscriptName.touched && SubscritonFormControls.subscriptName.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="SubscritonFormControls.subscriptName.errors.required">برجاء
+                                            ادخال
+                                            اسم الاشتراك بالانجليزي
+                                        </small>
+                                    </small>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem>
+                            <a ngbNavLink>العربية</a>
+                            <ng-template ngbNavContent>
+                                <div class="form-group">
+                                    <label class="form-control-label" for="TDRequiredField">اسم الاشتراك بالعربي
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text"
+                                        [ngClass]="{ 'is-invalid':(submitted && SubscritonFormControls.subscriptNameAr.errors) || (SubscritonFormControls.subscriptNameAr.touched && SubscritonFormControls.subscriptNameAr.invalid) }"
+                                        formControlName="subscriptNameAr" name="subscriptNameAr" class="form-control"
+                                        placeholder="اسم الاشتراك بالعربي">
+                                    <small
+                                        *ngIf=" (submitted && SubscritonFormControls.subscriptNameAr.errors) || (SubscritonFormControls.subscriptNameAr.touched && SubscritonFormControls.subscriptNameAr.invalid)"
+                                        class="invalid-feedback">
+                                        <small *ngIf="SubscritonFormControls.subscriptNameAr.errors.required">برجاء
+                                            ادخال
+                                            اسم الاشتراك بالعربي
+                                        </small>
+                                    </small>
+                                </div>
+
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="navQuestion"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>نوع الاشتراك</label>
+                                <ng-select [items]="subscriptionTypes" bindLabel="name" bindValue="value" class=""
+                                    formControlName="subscriptionType" placeholder="اختر نوع الاشتراك" name="subscriptionType"></ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>الدولة</label>
+                                <ng-select [items]="countryData" bindLabel="name" bindValue="value" class=""
+                                    formControlName="country" placeholder="اختر الدولة" name="country"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex">
+
+                        <label>حالة الاشتراك</label>
+                        <div class="custom-control custom-control-primary custom-switch">
+                            <input name="status" formControlName="status" type="checkbox"
+                                class="custom-control-input" id="customSwitch3" />
+                            <label class="custom-control-label" for="customSwitch3"></label>
+                        </div>
+                    </div>
+
+                    <div class="buttons justify-content-end d-flex mb-3">
+                 
+                    <button *ngIf="!subscriptionId" [disabled]="loading"
+                        class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                        (click)="submitData()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>حفظ
+                    </button>
+                    <button [disabled]="loading" *ngIf="subscriptionId" class="btn btn-icon btn-primary mr-25 ml-25 btn-lg"
+                    type="submit" rippleEffect (click)="updateData()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                </button>
+
+                <a *ngIf="subscriptionId" (click)="deleteQuestion(subscriptionId)" class="btn btn-icon btn-danger ml-25 mr-25 btn-lg"
+                    type="button" rippleEffect>
+                    <span>حذف</span>
+                </a>
+                <a routerLink="/admin/Frequent-questions"
+                class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button" rippleEffect>
+                <span>الغاء</span>
+            </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

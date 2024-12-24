@@ -1,0 +1,23 @@
+<div class="content-wrapper container-xxl overflow-hidden p-0">
+
+
+  <div class="content-detached content-right">
+    <div class="ecommerce-home">
+     
+      <app-shop-by-categories [categories]="categories"></app-shop-by-categories>
+      <!-- E-commerce Head Section Starts -->
+      <div class="my-2"><img src="assets/images/pages/eCommerce/banner.jpg"
+          style="width: 100%;border: 1px solid lightgray;"></div>
+      <ng-container *ngIf="products">
+        <ng-container *ngFor="
+          let cat of categories.slice(1, 4)">
+          <app-category-products [products]="products" [categoryName]="cat.name"></app-category-products>
+
+        </ng-container>
+      </ng-container>
+      <app-shop-by-brands [brands]="brands"></app-shop-by-brands>
+
+      <!-- E-commerce Pagination Ends -->
+    </div>
+  </div>
+</div>

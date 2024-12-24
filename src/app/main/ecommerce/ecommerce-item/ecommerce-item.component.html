@@ -1,0 +1,86 @@
+<!-- Ecommerce Item -->
+<div class="item-img text-center">
+
+
+  <!-- <a *ngIf="product.isInCart !== true" href="javascript:void(0)" class="btn btn-icon btn-icon rounded-circle btn-flat-primary btn-cart"
+(click)="addToCart(product)" rippleEffect>
+<i class="fa fa-shopping-bag  fa-lg m-1"></i>
+</a> -->
+  <a [routerLink]="'/details/' + product.id">
+    <img class="img-fluid card-img-top" (error)="changeSource($event)" [src]="product?.productImages[0]?.imageProduct"
+      alt="img-placeholder" />
+  </a>
+</div>
+<div class="card-body">
+  <div class="item-wrapper">
+    <h6 class="item-name">
+      <a class="text-body" [routerLink]="'/details/' + product.id"> {{ product.productName }}</a>
+      <span class="card-text item-company">By <a href="javascript:void(0)" class="company-name">{{ product.brands.name
+          }}</a></span>
+    </h6>
+    <div class="item-rating">
+      {{product.rate}} 4
+      <div class="rating rating-sm d-inline-block">
+        <ngb-rating [rate]="'4.5'" [readonly]="true" [max]="5" class="outline-none">
+          <ng-template #t let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill === 100">
+              <!-- <span class="custom-half" [style.width.%]="fill">&#9733;</span>&#9733; -->
+            </span></ng-template></ngb-rating>
+
+      </div>
+      <ng-template #t let-fill="fill"><span class="custom-star" [class.custom-full]="fill === 100"><span
+            class="custom-half" [style.width.%]="fill">&#9733;</span>&#9733;
+        </span></ng-template>
+      {{product.rate}} (23)
+    </div>
+    <span class="in-stock text-success mb-1">In Stock</span>
+
+    <div class="item-cost">
+      <h6 class="item-price" style="font-size: 1.9em;font-weight: normal;"><sup style="font-weight: bolder;"><small
+            style="font-size: 1.1rem;font-weight: 580;">$ </small></sup> {{ product.priceProduct.toFixed(2) }}</h6>
+    </div>
+    <span class="delivery-date text-muted d-block">Delivery by, Wed Apr 25</span>
+    <span class="available text-success d-block">17% off 4 offers Available</span>
+  </div>
+  <!--  
+  <p class="card-text item-description">
+    {{ product.description }}
+  </p> -->
+</div>
+<div class="item-options text-center">
+  <div class="item-wrapper">
+    <div class="item-cost">
+      <h4 class="item-price"style="font-size: 1.9em;font-weight: normal;"><sup style="font-weight: bolder;"><small
+        style="font-size: 1.1rem;font-weight: 580;">$ </small></sup> {{ product.priceProduct.toFixed(2) }}</h4>
+      <!-- <p class="card-text shipping" *ngIf="product.hasFreeShippking"> -->
+        <p class="card-text shipping" >
+        <span class="badge badge-pill badge-light-success">Free Shipping</span>
+      </p>
+    </div>
+  </div>
+  <a *ngIf="isWishlistOpen !== true" href="javascript:void(0)"
+    class="btn-wishlist " [ngClass]="!isGridView === true ? 'btn btn-light' : 'btn btn-icon btn-icon rounded-circle btn-flat-primary'"
+    (click)="toggleWishlist(product)"
+    rippleEffect>
+    <i class="fa {{isGridView === true ? 'fa-lg m-1' : ''}} {{product.isInWishlist === true ? 'fa-heart text-danger' : 'fa-heart-o'}}" ></i>
+    <span *ngIf="!isGridView">Wishlist</span>
+  </a>
+  <a *ngIf="isWishlistOpen === true && !isGridView" href="javascript:void(0)" class="btn btn-light btn-wishlist"
+  (click)="toggleWishlist(product)" rippleEffect>
+  <i data-feather="x"></i>
+  <span>Remove</span>
+</a>
+  <a *ngIf="product.isInCart !== true" href="javascript:void(0)" class="btn-cart"
+  [ngClass]="!isGridView === true ? 'btn btn-primary' : 'btn btn-custom waves-effect'"
+    (click)="addToCart(product)" rippleEffect>
+    <i data-feather="shopping-cart" class="mr-25"></i>
+    <span class="add-to-cart">Add to cart</span>
+  </a>
+  <a *ngIf="product.isInCart === true" routerLink="/checkout"  class="btn-cart"
+  [ngClass]="!isGridView === true ? 'btn btn-primary' : 'btn btn-custom waves-effect'"
+   rippleEffect>
+    <i data-feather="shopping-cart" class="mr-25"></i>
+    <span class="add-to-cart">View in cart</span>
+  </a>
+
+</div>
+<!--/ Ecommerce Item -->

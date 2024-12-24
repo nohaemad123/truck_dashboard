@@ -1,0 +1,144 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- User List -->
+    <section class="users-list-wrapper">
+      <!-- users filter start -->
+      <!-- <div class="card">
+          <h5 class="card-header">{{'SerchFilter'|translate}}</h5>
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select [items]="selectRole" [(ngModel)]="selectedRole" name="selectedRole" bindLabel="name"
+                        placeholder="Select Role" (change)="filterByRole($event)"></ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select [items]="selectPlan" [(ngModel)]="selectedPlan" name="selectedPlan" bindLabel="name"
+                        placeholder="Select Plan" (change)="filterByPlan($event)"></ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select [items]="selectStatus" [(ngModel)]="selectedStatus" name="selectedStatus"
+                        bindLabel="name" placeholder="Select Status" (change)="filterByStatus($event)"></ng-select>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> -->
+      <!-- users filter end -->
+
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center">عرض
+                <select class="form-control mx-25" [(ngModel)]="ItemsPerpage" (change)="filterByPage()">
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                بيانات</label>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end search_sec">
+            <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+              <label class="d-flex align-items-center ml-1 ml-md-0"> <span class="m-end"> بحث </span><input
+                  [(ngModel)]="searchValue" name="searchValue" type="search" class="form-control ml-25" /></label>
+              <a (click)="OpenModal()" class="btn btn-primary ml-1" rippleEffect>
+                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                  class="d-none d-sm-inline-block">اضافة مدينة </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <app-custom-table
+        [small_columns]="small_columns"
+        [searchValue]="searchValue" [searchFilterKey]="['cityName']" (EditRowEvent)="EditCity($event)"
+          [coloumns]="Table_Coloumns" [rows]="allCities" (DeleteRowEvent)="deleteBank($event.id)"
+          [SelectedRows]="selections" [AddNewBtn]="AddNewBtn">
+
+        </app-custom-table>
+
+      </div>
+    </section>
+    <!--/ User List -->
+  </div>
+</div>
+
+<ng-template #addNewCity>
+
+  <app-modal-content [options]="addNewBankOptoinsModal">
+    <div slot="content">
+      <form [formGroup]="addCityForm">
+        <div class="form-group">
+          <label for="">اسم المدينة بالعربي</label>
+          <input type="text"
+          [validateArabic]="CityFormControls.cityNameAr"
+          appArabicValidation
+          [ngClass]="{ 'is-invalid':(submitted && CityFormControls.cityNameAr.errors) 
+          ||(CityFormControls.cityNameAr.errors?.['invalidArabicInput'])
+          ||(CityFormControls.cityNameAr.touched && CityFormControls.cityNameAr.invalid) }"
+            class="form-control" formControlName="cityNameAr" name="cityNameAr" id="" aria-describedby="helpId"
+            placeholder="اسم المدينة بالعربي">
+          <div
+            *ngIf="(submitted && CityFormControls.cityNameAr.errors) || (CityFormControls.cityNameAr.touched && CityFormControls.cityNameAr.invalid)"
+            class="invalid-feedback">
+            <div *ngIf="CityFormControls.cityNameAr.errors.required">
+              برجاء ادخال اسم المدينة بالعربي</div>
+          </div>
+          <div *ngIf="(submitted && CityFormControls.cityNameAr.errors) || (CityFormControls.cityNameAr.errors?.['invalidArabicInput'])"
+          class="invalid-feedback">
+          <div *ngIf="CityFormControls.cityNameAr.errors?.['invalidArabicInput']">
+          اسم المدينة يجب ان تتكون من حروف عربي</div>
+      </div>
+        </div>
+        <div class="form-group">
+          <label for="">اسم المدينة بالانجليزي </label>
+          <input type="text"
+            [ngClass]="{ 'is-invalid':(submitted && CityFormControls.cityName.errors) || (CityFormControls.cityName.touched && CityFormControls.cityName.invalid) }"
+            class="form-control" formControlName="cityName" name="cityName" id="" aria-describedby="helpId"
+            placeholder="اسم المدينة بالانجليزي">
+          <div
+            *ngIf="(submitted && CityFormControls.cityName.errors) || (CityFormControls.cityName.touched && CityFormControls.cityName.invalid)"
+            class="invalid-feedback">
+            <div *ngIf="CityFormControls.cityName.errors.required">
+              برجاء ادخال اسم المدينة بالانجليزي</div>
+          </div>
+        </div>
+        <!-- <div class="form-group"  *ngIf="submitted && addCityForm.invalid">
+                      
+          <div class=" p-3 alert alert-danger alert-dismissible fade show">
+              <strong>
+                ( {{ validationAllControlls }} ) {{ "مطلوب" | translate }}
+              </strong>
+              <button
+                type="button"
+                (click)="closeMessageErrors()"
+                class="close h-10"
+              >
+                <span><i class="fa fa-close" style="color: brown"></i></span>
+              </button>
+            </div>
+            
+      </div> -->
+
+        <button *ngIf="!cityId" [disabled]="loading" type="submit" class="btn btn-primary" (click)="saveCity()"> <span
+            *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> حفظ</button>
+        <button *ngIf="cityId" [disabled]="loading" type="submit" class="btn btn-primary" (click)="updateCity()"> <span
+            *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> تعديل</button>
+            <a class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg"
+            type="button" rippleEffect (click)="closeModal()">
+            <span>الغاء</span></a>
+      </form>
+    </div>
+  </app-modal-content>
+</ng-template>

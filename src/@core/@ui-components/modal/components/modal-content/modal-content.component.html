@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <div  *ngIf="options.headerTitle" class="header-text">{{options.headerTitle|translate}}</div>
+    <div (click)="dissmissMoadal()" >
+      <!-- <span>  <i class="father x-circle"></i> </span> -->
+      <i class="feather icon-x-circle font-medium-2 cursor-pointer  p-1"></i>
+    </div>
+  </div>
+
+
+  <div class="card-content" [ngStyle]="options.style">
+    <ng-content select="[slot=content]"></ng-content>
+  </div>
+
+  </div>
+
+
+
+
+

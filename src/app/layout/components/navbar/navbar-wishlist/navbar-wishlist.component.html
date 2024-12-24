@@ -1,0 +1,51 @@
+<li ngbDropdown class="nav-item d-none d-lg-block  dropdown-cart  pl-3 pr-1">
+  
+    <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarCartDropdown"
+      ><span [data-feather]="'heart'" [size]="32" ></span
+      ><span class="badge badge-pill badge-primary badge-up cart-item-count" *ngIf="wishListLength>0">{{ wishListLength }}</span></a
+    >
+  
+    <ul
+      ngbDropdownMenu
+      aria-labelledby="navbarCartDropdown"
+      class="dropdown-menu dropdown-menu-media dropdown-menu-right"
+    >
+      <!-- Cart header -->
+      <li class="dropdown-menu-header">
+        <div class="dropdown-header d-flex">
+          <h4 class="notification-title mb-0 mr-auto">My Wishlist</h4>
+          <div class="badge badge-pill badge-light-primary">{{ wishListLength }} Items</div>
+        </div>
+      </li>
+      <!--/ Cart header -->
+  
+      <!-- Cart content -->
+      <li class="scrollable-container media-list" [perfectScrollbar]>
+        <ng-container *ngIf="products.length">
+          <ng-container *ngFor="let product of products">
+            <div class="media align-items-center" *ngIf="product?.isInWishlist === true">
+              <img class="d-block rounded mr-1" [src]="product?.productImages[0]?.imageProduct" alt="donuts" width="62" />
+              <div class="media-body">
+                <button class="btn p-0" (click)="removeFromWishlist(product)">
+                  <i class="ficon cart-item-remove" data-feather="x"></i>
+                </button>
+                <div class="media-heading">
+                  <h6 class="cart-item-title">
+                    <a class="text-body" [routerLink]="'/apps/e-commerce/ecommerce-details/' + product.id">{{
+                      product.productName
+                    }}</a>
+                  </h6>
+                  <small class="cart-item-by">{{ product.brands.name }}</small>
+                </div>
+                
+                <h5 class="cart-item-price">${{ product.priceProduct.toFixed(2) }}</h5>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </li>
+      <!--/ Cart content -->
+  
+    </ul>
+  </li>
+  

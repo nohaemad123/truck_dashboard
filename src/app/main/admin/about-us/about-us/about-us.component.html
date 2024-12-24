@@ -1,0 +1,83 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="addAboutForm">
+                 
+                    <div class="form-group">
+                        <label class="form-control-label" for="TDRequiredField">
+                          عن التطبيق بالعربي
+                            <span class="text-danger">*</span>
+
+                        </label>
+                        <textarea class="form-control" rows="10"
+                        formControlName="nameAr" name="nameAr"
+                        [validateArabic]="AboutFormControls.nameAr"
+                        appArabicValidation
+                        [ngClass]="{ 'is-invalid':(submitted && AboutFormControls.nameAr.errors) 
+                        ||(AboutFormControls.nameAr.errors?.['invalidArabicInput'])
+                        || (AboutFormControls.nameAr.touched && AboutFormControls.nameAr.invalid) }"
+                        placeholder="عن التطبيق بالعربي"></textarea>
+                   
+                        <small
+                            *ngIf=" (submitted && AboutFormControls.nameAr.errors) || (AboutFormControls.nameAr.touched && AboutFormControls.nameAr.invalid)"
+                            class="invalid-feedback">
+                            <small *ngIf="AboutFormControls.nameAr.errors.required">برجاء
+                                ادخال
+                                 عن التطبيق بالعربي
+                            </small>
+                        </small>
+                        <div *ngIf="(submitted && AboutFormControls.nameAr.errors) || (AboutFormControls.nameAr.errors?.['invalidArabicInput'])"
+                        class="invalid-feedback">
+                        <div *ngIf="AboutFormControls.nameAr.errors?.['invalidArabicInput']">
+                        عن التطبيق  يجب ان تتكون من حروف عربي</div>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label" for="TDRequiredField">عن النطبيق بالانجليزي
+                          
+                          <span class="text-danger">*</span>
+                      </label>
+                      <textarea class="form-control" rows="10"
+                      formControlName="name" name="name"
+                      [ngClass]="{ 'is-invalid':(submitted && AboutFormControls.name.errors) 
+                      ||(AboutFormControls.name.errors?.['invalidArabicInput'])
+                      || (AboutFormControls.name.touched && AboutFormControls.name.invalid) }"
+                      placeholder="عن التطبيق بالانجليزي"></textarea>
+
+                      <small
+                          *ngIf=" (submitted && AboutFormControls.name.errors) || (AboutFormControls.name.touched && AboutFormControls.name.invalid)"
+                          class="invalid-feedback">
+                          <small *ngIf="AboutFormControls.name.errors.required">برجاء
+                              ادخال
+                              عن التطبيق بالانجليزي
+                          </small>
+                      </small>
+
+                  </div>
+                  
+               
+               
+                    <div class="buttons justify-content-end d-flex mb-3">
+                     
+                    
+                        <button [disabled]="loading" 
+                            class="btn btn-icon btn-primary mr-25 ml-25 btn-lg" type="submit" rippleEffect
+                            (click)="submitData()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>تعديل
+                        </button>
+
+                      
+                        <a routerLink="/admin/Trucks"
+                        class="btn btn-icon btn-primary ml-25 mr-25 cancel btn-lg" type="button" rippleEffect>
+                        <span>الغاء</span>
+                    </a>
+                    </div>
+                </form>
+                </div>
+                </div>
+                </div>

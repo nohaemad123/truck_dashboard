@@ -1,0 +1,10 @@
+<div [formGroup]="formGroup" *ngIf="formGroup">
+  <ng-multiselect-dropdown [formControlName]="controlName"
+    [placeholder]="'custom placeholder'"
+    [settings]="dropdownSettings"
+    [(ngModel)]="selectedItems"
+    [data]="dropdownList"
+    (onSelect)="onItemSelect($event)"
+  >
+  </ng-multiselect-dropdown>
+  </div>

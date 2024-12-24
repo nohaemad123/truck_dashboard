@@ -1,0 +1,146 @@
+<div *ngIf="horizontalMenu" class="navbar-header d-xl-block d-none " style="min-width: 130px;">
+  <!-- Navbar brand -->
+  <ul class="nav navbar-nav flex-row">
+    <li class="nav-item">
+      <a class="navbar-brand" [routerLink]="['/admin/dashboard/ecommerce']">
+        <span class="brand-logo">
+          <img src="assets/images/logo/logo_white_2.svg" alt="brand-logo" width="36" />
+        </span>
+        <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
+      </a>
+    </li>
+  </ul>
+  <!--/ Navbar brand -->
+</div>
+<!-- <div *ngIf="!(coreConfig.layout.type==='admin')"
+  style="background: #8999ce;height: 2em;min-height: 2.5em;display: inline-block;height: 2em;width: 100%;z-index: 9;">
+  <div class="container-xxl content "
+    style="margin-left: auto !important;padding: 0.5em;color: #373333;font-size: 12px;">
+    <span>Free shipping Over 245LE &amp;
+      Free Returns <a style="font-weight: bold;">Details</a></span>
+    <span ngbDropdown class="nav-item dropdown dropdown-language" *ngIf="!(coreConfig.layout.type==='admin')">
+      <a class="nav-link dropdown-toggle px-1" id="dropdown-flag" ngbDropdownToggle>
+        <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i><span
+          class="selected-language px-1">{{ languageOptions[_translateService.currentLang].title }}</span></a>
+      <div ngbDropdownMenu aria-labelledby="dropdown-flag">
+        <a *ngFor="let lang of _translateService.getLangs()" ngbDropdownItem (click)="setLanguage(lang)">
+          <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
+        </a>
+      </div>
+    </span>
+  </div>
+</div> -->
+<div
+  class="navbar-container d-flex content ecommerce-navbar py-1  {{!(coreConfig.layout.type==='admin')?'container-xxl ml-auto px-0 px-xxxl-2 ':''}}">
+  <div class="search-wrapper d-flex align-items-center ">
+
+    <!-- <div class="bookmark-wrapper d-flex align-items-center"> -->
+    <!-- Menu Toggler | Menu icon will be hidden in case of layout without menu -->
+    <ul class="nav navbar-nav d-xl-none px-0" *ngIf="!coreConfig.layout.menu.hidden">
+      <li class="nav-item"><a class="brand-logo px-0"
+          style="width: 38px;display: inline-block;direction: ltr;overflow: hidden;"><img alt="brand-logo"
+            src="assets/images/logo/logo_white_2.svg" style="width: 26px;"></a></li>
+      <li class="nav-item" style="margin: auto;">
+        <a class="nav-link menu-toggle" (click)="toggleSidebar('menu')">
+          <span [data-feather]="'menu'" [class]="'ficon'"></span>
+        </a>
+      </li>
+    </ul>
+    <!--/ Menu Toggler -->
+
+    <!-- Bookmark -->
+    <!-- <app-navbar-bookmark></app-navbar-bookmark> -->
+    <!--/ Bookmark -->
+
+    <ul class="nav navbar-nav " style="display: contents;" *ngIf="!(coreConfig.layout.type==='admin')">
+      <li class="nav-item"><a class="brand-logo px-0"
+          style="display: inline-block;direction: ltr;overflow: hidden;"><img alt="brand-logo"
+            src="{{ coreConfig.app.appLogoImage }}" style="width: 26px;"></a></li>
+      <li class="nav-item px-3" style="margin: auto;">
+        <a class="nav-link menu-toggle" (click)="toggleSidebar('menu')">
+          <span [data-feather]="'menu'" [class]="'ficon'"></span>
+        </a>
+      </li>
+    </ul>
+    <!-- Search -->
+    <!-- *ngIf="!coreConfig.layout.menu.hidden" -->
+    <!-- search Hina ya momnen -->
+    <!-- <app-navbar-search *ngIf="coreConfig.layout.type==='admin'" style="width: 100%;"
+      class="desktop-nav-custom"></app-navbar-search> -->
+    <!-- <app-navbar-search-ecommerce *ngIf="!(coreConfig.layout.type==='admin')" style="width: 100%;"
+      class="desktop-nav-custom"></app-navbar-search-ecommerce> -->
+    <!--/ Search -->
+    <!-- <button type="button" *ngIf="coreConfig.layout.type==='admin'" rippleeffect=""
+      class="filter-search btn btn-primary mx-2 waves-effect waves-float waves-light desktop-nav-custom">
+      <span [data-feather]="'sliders'" [size]="22" [class]="'mr-50'"></span>
+      Filter </button> -->
+
+  </div>
+  <ul class="nav navbar-nav align-items-center ml-auto nav-icons">
+
+
+    <!-- Language selection -->
+    <!-- <li ngbDropdown class="nav-item dropdown dropdown-language" *ngIf="(coreConfig.layout.type==='admin')">
+      <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle>
+        <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i><span
+          class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a>
+      <div ngbDropdownMenu aria-labelledby="dropdown-flag">
+        <a *ngFor="let lang of _translateService.getLangs()" ngbDropdownItem (click)="setLanguage(lang)">
+          <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
+        </a>
+      </div>
+    </li> -->
+    <!--/ Language selection -->
+
+    <!-- Toggle skin -->
+    <li class="nav-item d-none d-lg-block" *ngIf="(coreConfig.layout.type==='admin')">
+      <a class="nav-link nav-link-style btn" (click)="toggleDarkSkin()">
+        <span [ngClass]="currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'" class="ficon font-medium-5 feather"></span>
+      </a>
+    </li>
+    <!--/ Toggle skin -->
+
+    <!-- Search -->
+    <!-- <app-navbar-search class="mobile-nav-custom" *ngIf="coreConfig.layout.type==='admin'"></app-navbar-search> -->
+    <!--/ Search -->
+    <!-- <li class="nav-item d-none d-lg-block pl-3 pr-1" *ngIf="!(coreConfig.layout.type==='admin')">
+      <a class="nav-link" tabindex="0" id="navbarCartDropdown"><span [data-feather]="'heart'" [size]="32"></span><span
+          class="badge badge-pill badge-primary badge-up cart-item-count">1</span></a>
+    </li> -->
+
+    <!-- <app-navbar-wishlist class=" px-1" *ngIf="!(coreConfig.layout.type==='admin')"></app-navbar-wishlist> -->
+
+    <!-- Cart -->
+    <!-- <app-navbar-cart class=" px-1" *ngIf="!(coreConfig.layout.type==='admin')"></app-navbar-cart> -->
+    <!--/ Cart -->
+
+    <!-- Notification -->
+    <!-- <app-navbar-notification *ngIf="(coreConfig.layout.type==='admin')"></app-navbar-notification> -->
+    <!--/ Notification -->
+
+    <!-- User Dropdown -->
+    <li ngbDropdown class="nav-item dropdown-user">
+      <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" ngbDropdownToggle
+        id="navbarUserDropdown" aria-haspopup="true" aria-expanded="false">
+        <ng-container *ngIf="this.currentUser">
+          <div class="user-nav d-sm-flex d-none">
+            <span class="user-name font-weight-bolder">{{ this.currentUser.userNameAr }}
+            </span><span class="user-status">{{ this.currentUser.role }}</span>
+          </div>
+          <span class="avatar"><img class="round" src="assets/images/default-personal-photo.svg"
+              alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
+        </ng-container>
+      </a>
+      <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+        <a ngbDropdownItem [routerLink]="['/pages/profile']"><span [data-feather]="'user'" [class]="'mr-50'"></span>
+          الملف الشخصي</a>
+          <a ngbDropdownItem [routerLink]="['/pages/account-settings']"><span [data-feather]="'settings'"
+            [class]="'mr-50'"></span> الاعدادات</a>
+            <a
+          ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span> تسجيل خروج</a>
+      
+      </div>
+    </li>
+    <!--/ User Dropdown -->
+  </ul>
+</div>
